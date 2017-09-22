@@ -1,0 +1,262 @@
+<div class="sideNav sideLight designNavNd designNavDesignLogo">
+	<div class="sideBack">
+		<span>LOGO</span>
+	</div>
+	<div id="accordionDesignLogo">
+		<div class="group logo">
+			<h3 class="home"><span class="columnName">图标</span><span class="arrowUp icon"></span></h3>
+
+			<div class="imgList">
+				<div class="imgListFrame imgListItem imgListItemLogo ">
+					<div class="imgListCover">
+						<div class="imgListCoverTitle">更换图片</div>
+						<input type="file" class="upload_image" name="upload_image" multiple> 
+					</div>
+				</div>
+				<div class="imgListFrame imgListItem imgListItemLogoPreview imgUploadPreview">
+					<div class="imgListUploadCover">
+						<input type="file" class="upload_image" name="upload_image" multiple> 
+						<div class="coverPercent">
+							0%
+						</div>
+						<div class="coverPercentBar">
+							<div class="coverPercentBarProgress">
+								
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="imgListFrame imgUpload">
+					<div class="imgListBorder">
+						<input type="file" class="upload_image" name="upload_image" multiple>  
+						<div class="imgUploadTitle ">
+							点击上传图片、视频
+						</div>
+						<div class="imgUploadTitleNd ">
+							或将文件拖至此处
+						</div>
+					</div>
+				</div>
+				<div class="imgListTips">
+					<p>
+						文件格式为JPEG或PNG。
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="group logo">
+			<h3 class="home">
+				<span class="columnName">一级标题</span>
+
+				<span class="arrowUp icon"></span>
+				<!-- 暂时取消显示开关 -->
+				<!-- <div class="buttonToggle"><input class="mui-switch mui-switch-animbg" type="checkbox" checked></div> -->
+			</h3>
+
+				<div class="columnItem">
+					<input type="text" class="input Title1st" placeholder="输入网站名称">
+				</div>
+		</div>
+		<div class="group logo">
+			<h3 class="home">
+				<span class="columnName">二级标题</span>
+				<span class="arrowUp icon"></span>
+				<!-- <div class="buttonToggle"><input class="mui-switch mui-switch-animbg" type="checkbox" checked></div> -->
+			</h3>
+			
+
+				<div class="columnItem">
+					<textarea type="text" class="textarea Title2nd" placeholder="输入网站简介" rows="3" maxlength="20"></textarea>
+				</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	$(function() {
+		/*侧边栏栏目 accordion*/
+		$("#accordionDesignLogo").accordion({
+				header: "> div > h3",
+				heightStyle: "content",
+				icons: null, 
+		});
+		$( ".logo" ).accordion({
+			active: false,
+			collapsible: true, 
+			icons: null, 
+			beforeActivate: function() {
+		        $(this).find('.arrowUp').toggleClass("rightAngle");
+		    },
+		});
+
+		/*点击返回按钮 sideBack */
+		$(".sideBack").click(function() {
+
+				$(".designNavDesignLogo").animate({
+					left: '-200px',
+				},300);
+			
+		});
+
+		
+
+		/*点击删除按钮执行 imgListDelete*/
+		$(".imgListDelete").click(function() {
+
+					$(".designNavModal").fadeIn(400);
+					$(".designNavMenu").animate({
+							left: '200px',
+					},400);
+					MenuConfirm();
+			
+		});
+		/*图片上传*/
+		$(function() {  
+			/*点击上传区域执行 imgUpload */
+			$(".imgUpload").click(function() {
+				$(".imgListItemLogo").hide();
+				$(".imgUploadPreview").fadeIn();
+			});
+			$(".imgListCover").click(function() {
+				$(".imgListItemLogo").hide();
+				$(".imgUploadPreview").fadeIn();
+			});
+		    $(".upload_image").fileupload({  
+		            url: '{:U('Common/uploadImg')}',  
+		            sequentialUploads: true,
+		            autoUpload: true,
+					disableImageResize: false, 
+		            previewMaxWidth: 140,
+		            previewMaxHeight: 90,
+		            previewCrop: true,
+		            add: function (e, data) {
+					    if (data.files && data.files[0]) {
+					        var reader = new FileReader();
+					        reader.onload = function(e) {;
+					            $('.imgUploadPreview').css('background-image', 'url(' + e.target.result +')');
+					        }
+					        reader.readAsDataURL(data.files[0]);
+					        data.submit();
+					    }
+					}
+		        }).bind('fileuploadadd', function (e, data) {
+		        	$(".imgUploadPreview").fadeIn();
+		        }).bind('fileuploadprogress', function (e, data) {
+		            var progress = parseInt(data.loaded / data.total * 100, 10);  
+		            $(".coverPercentBarProgress").css('width',progress + '%'); 
+		            $(".coverPercent").html(progress + '%');  
+				}).bind('fileuploaddone', function(e, data) {        
+		            if (data.result == 0) {
+		                $.snackbar({
+		                    content: '上传失败，文件格式不正确或大小超过5MB'
+		                });
+		            } else {
+		                $.post('/Design/editLogo', {
+		                        logo_path: data.result
+		                    },
+		                    function(data) {
+		                        if (data['status'] == 1) {
+		                            $.snackbar({
+		                                content: '修改网站LOGO成功'
+		                            });
+			                        setTimeout(function() {
+			                            $(".side").load('designNavDesignLogo.html', function() {
+			                                $(".designNavDesignLogo").animate({
+			                                    left: '0',
+			                                }, 0);
+			                                $(".designNavDesignLogo").css('height', height - 120 + "px");
+			                                $(".logo:first").accordion("option", "active", 0);
+			                            });
+			                            $(".content").load("designIndexDesign.html", function() {
+			                                $(".designIndex").fadeIn(200);
+			                            });
+			                            /*生成网站快照*/
+			                            $.ajaxSetup({
+			                                async: false
+			                            });
+			                            $.post('/Design/ajaxGetNewestIndexPic', function(data) {
+			                                newestIndexPic = data[0]["path"];
+			                            });
+			                            $.post('/Design/getCurWebsiteInfo', function(data) {
+			                                if (data[0]["logo_path"]) {
+			                                    websiteLogo = data[0]["logo_path"];
+			                                } else {
+			                                    websiteLogo = '/Public/Home/svg/demoAvator.svg';
+			                                }
+			                                websiteName = data[0]["name"];
+			                                websiteDesc = data[0]["sub_title"];
+			                            });
+			                            console.log(websiteName)
+			                            console.log(websiteDesc)
+
+			                            function snapshot() {
+			                                var pic = this;
+			                                $.post('/Design/saveSnapshot', {
+			                                    snapshot: pic
+			                                }, function(data) {
+			                                    if (data) {
+			                                        //alert("snapshot created");
+			                                    } else {
+			                                        //alert("snapshot failed");
+			                                    }
+			                                });
+			                            }
+			                            createSnapshot(websiteLogo, newestIndexPic, 720, snapshot, [websiteName, websiteDesc], ["首页", "画廊", "博客"]);
+			                        }, 300);
+		                        } else {
+		                            $.snackbar({
+		                                content: '修改网站LOGO失败'
+		                            });
+		                        }
+		                    });
+		            }
+				}).bind('fileuploadfail', function (e, data) {
+		            $(".side").load('designNavDesignLogo.html', function() {
+		                $(".designNavDesignLogo").animate({
+		                    left: '0',
+		                });
+		                $(".designNavDesignLogo").css('height', height - 120 + "px");
+		            });
+				});
+	    }); 
+	    $.post('/Design/getCurWebsiteInfo', function(data) {
+	    	if (data[0]["logo_path"]) {
+				$(".imgListItemLogo").css('background-image', 'url(' + data[0]["logo_path"] + ')' );
+				$(".imgUpload").hide(); 
+	    	}
+	    	else {
+	    		$(".imgListItemLogo").hide();
+	    	}
+			$(".Title1st").val(data[0]["name"]);
+	    	$(".Title2nd").val(data[0]["sub_title"]);
+	    });
+	    $(".Title1st").blur(function() {
+	    	$.post('/Design/editTitle', { title: $(this).val() },
+	    		function (data) {
+					if (data == 1) {
+		    			$.snackbar({content: '修改网站名称成功'});
+		    			$(".content").load("designIndexDesign.html", function(){
+				            $(".designIndex").fadeIn(200);
+				        });
+			    	}
+			        else {
+			        	$.snackbar({content: '修改网站名称失败'});
+			        }	
+	    		});   
+	    });
+	    $(".Title2nd").blur(function() {
+	    	$.post('/Design/editSubTitle', { sub_title: $(this).val() },
+	    		function (data) {
+	    			if (data == 1) {
+		    			$.snackbar({content: '修改网站简介成功'});
+				    	$(".content").load("designIndexDesign.html", function(){
+				            $(".designIndex").fadeIn(200);
+				        });	
+			        }
+			        else {
+			        	$.snackbar({content: '修改网站简介失败'});
+			        }			
+	    		});
+	    });
+	});
+</script>

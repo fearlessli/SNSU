@@ -1,0 +1,268 @@
+
+<div  id="masonry" class="userWebsite userContent">
+	<volist name="list" id="vo">
+		<div class="floatItem websiteItem">
+			<div class="websiteItemArea" alt="">
+				<notempty name="vo['snapshot']">
+				<img id="websiteImg-id-{$vo.id}" class="websiteImg" src="{$vo.snapshot}" alt="">
+				<else/>
+				<img id="websiteImg-id-{$vo.id}" class="websiteImg" src="__IMG__/demo.png" alt="">
+				</notempty>
+				<div class="websiteDelete" name="{$vo.id}" ></div>
+				<a class="websiteItemLink" href="/Design/index?wid={$vo.id}">
+					<div id="websiteImgBlur-id-{$vo.id}" class="websiteImgBlur" >	
+					</div>
+					<div class="websiteItemEdit">编辑网站</div>
+				</a>
+			</div>
+			<div class="websiteName textTitle">{$vo.name} <a href="http://{$vo.domain}.snsu.me" target="_blank" class="websiteDomain">({$vo.domain}.snsu.me)</a></div>
+		</div>
+	</volist>
+
+
+	<!-- 删除站点模态框 -->
+	<div id="dialog-confirm" >
+		<div class="modalConfirm">
+			<div class="textTitleLarge">确认删除站点？</div>
+			<div class="textTitle">删除后站点数据将不可恢复，是否确认删除。</div>
+			<input type="password" class="input adminPassword" placeholder="输入管理员账号密码确认删除">
+			<div class="checkTips">管理密码错误，请重新输入</div>
+		</div>
+	</div>
+	<!-- 新建站点模块 -->
+	<div class="floatItem websiteItem">
+		<div class="websiteAdd">
+			<img class="websiteAddIcon" src="__SVG__/addBold.svg" width="50" height="50" alt="">
+			<div class="websiteAddTitle textTitle">新建站点</div>
+		</div>
+	</div>
+	<!-- 新建站点模态框modal -->
+	<div id="modal">
+		<div class="modalContent">
+			<img src="__IMG__/templateImg.png" alt="" class="templateImg">
+			<div class="templateDescription">
+				<div class="textTitle">首页／画廊／博客</div>
+				<div class="textTips">设计师 · 艺术家 · 摄影师</div>
+				<div class="templateIcon">
+					<span class="iconDesktop"></span>
+					<span class="iconMobile"></span>
+				</div>
+			</div>
+		</div>
+		<div class="modalConfirm">
+			<div class="textTitleLarge">欢迎来到向素</div>
+			
+			<div class="modalConfirmName">
+				<input type="text" class="input inputWebsiteName" placeholder="网站名称">
+			</div>
+			<div class="modalConfirmDomain">
+				<input type="text" class="input inputWebsiteDomain" maxlength="14" placeholder="个性域名，请输入2-14位数字、字母组合"><div class="textTitle">.snsu.me</div>
+			</div>
+			
+			<!-- <div class="checkTips">管理密码错误，请重新输入</div> -->
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	function floatItemSizing() {
+		//var containerWidth = $("#masonry").width();
+		var containerWidth = width - 60;
+			if (containerWidth >= 1640) {
+				var itemWidth = (containerWidth - 50*4) / 5;
+			}
+			else if ( containerWidth >= 1300 ) {
+				var itemWidth = (containerWidth - 50*3) / 4;
+			}
+			else if (containerWidth >= 960) {
+				var itemWidth = (containerWidth - 50*2) / 3;
+			}
+			else if (containerWidth >= 550) {
+				var itemWidth = (containerWidth - 50) / 2;
+			}
+			else {
+				var itemWidth = containerWidth - 50;
+			}
+			var itemHeight = itemWidth/280*190;
+			$(".websiteItem , .websiteImg").width(itemWidth);
+			$(".websiteItem , .websiteImg").height(itemHeight);
+			
+	};
+	$(window).resize(function() {
+		floatItemSizing();
+	});
+	floatItemSizing();
+	/*  瀑布流 masonry  */
+	$(function () {
+		var $container = $('#masonry');
+		$container.imagesLoaded().progress(function () {
+			$container.masonry({
+				itemSelector: '.floatItem',
+				gutter: 50,
+				/*各个对象间距*/
+				isAnimated: true,
+				
+			});
+		});
+	});
+	
+	/*删除站点模态框*/
+	$("#dialog-confirm").dialog({
+	    resizable: false,
+	    draggable: false,
+	    dialogClass: "no-close",
+	    buttons: {
+	        "取消": function() {
+	            $(this).dialog("close");
+	        },
+	        "确认": function() {
+	            $.post('/Design/deleteSite', {wid: websiteID});
+	            $.post('/Design/deleteSite', {
+	            	wid: websiteID,
+	            	password: $(".adminPassword").val()
+	            }, function(data) {
+	            	if (data == 1) {
+		            	$("#dialog-confirm").dialog("close");
+		        		$.snackbar({content: '删除网站成功'});
+		        		setTimeout(function() {
+		                    $(".content").load("userWebsite.html", function() {
+		                        $(".userWebsite").fadeIn();
+		                    });
+		        		}, 300);
+		        	}
+		        	else {
+						$(".checkTips").fadeIn();
+		        	}
+	            }).fail(function () {
+	            	$(".checkTips").fadeIn();
+	            });
+	        },
+	    },
+	    autoOpen: false,
+	    show: {
+	        effect: "fade",
+	        duration: 200,
+	    },
+	    hide: {
+	        effect: "fade",
+	        duration: 200,
+	    },
+	    height: 360,
+	    width: 540,
+	    modal: true,
+	});
+	$(".websiteDelete").click(function() {
+		websiteID = $(this).attr('name');
+		$(".checkTips").hide();
+	    $("#dialog-confirm").dialog("open");
+	    $(".modalConfirm").show();
+	    $(".adminPassword").val("");
+	    $(".ui-widget-overlay").click(function() {
+	        $("#dialog-confirm").dialog("close");
+	    });
+	});
+
+	/*新建站点模态框*/
+
+	$("#modal").dialog({
+	    resizable: false,
+	    draggable: false,
+	    dialogClass: "no-close",
+	    buttons: [{
+	        text: "开始使用",
+	        click: function() {
+	        	var websiteName = $(".inputWebsiteName").val();
+	        	var websiteDomain = $(".inputWebsiteDomain").val();
+	        	if( $(this).find('.modalContent').css('display') == 'none') {
+	        		$(".checkTips").remove();
+	        		if (websiteName == "") {
+						$(".modalConfirmName").append('<div class="checkTips">请输入网站名称</div>');
+	        		}
+	        		else if (websiteDomain == ""){
+
+	        			$(".modalConfirmDomain").append('<div class="checkTips">请输入网站域名</div>');
+	        		}
+	        		else {
+		        		$.post('/Design/addNewSite', {
+		        			name: websiteName , /*网站名称*/
+		        			domain: websiteDomain ,  /*网站域名*/
+		        			templete_id: 1  /*网站模板 默认为1 */
+		        		},function (data) {
+		        			if (data == 3) {
+		        				$(".inputWebsiteDomain").val("");
+	                             $(".modalConfirmDomain").append('<div class="checkTips">域名不合法，请重新输入</div>');
+
+		        			}
+		        			if (data == 2) {
+		        				$(".inputWebsiteDomain").val("");
+	                            $(".modalConfirmDomain").append('<div class="checkTips">域名已经存在</div>');
+
+		        			}
+
+		        			if (data == 1) {
+	                            $("#modal").dialog("close");
+	                            $.snackbar({
+	                                content: '创建网站成功！'
+	                            });
+	                            setTimeout(function() {
+	                                $(".content").load("userWebsite.html", function() {
+	                                    $(".userWebsite").fadeIn();
+	                                });
+	                            }, 300);
+	                        }
+	                        if (data == 0) {
+	                        	$("#modal").dialog("close");
+	                        	$.snackbar({
+	                                content: '创建网站失败'
+	                            });
+	                            setTimeout(function() {
+	                                $(".content").load("userWebsite.html", function() {
+	                                    $(".userWebsite").fadeIn();
+	                                });
+	                            }, 300);
+	                        }
+		        		});
+
+	        		}
+	        	}
+	        	else{
+		        	$(".modalContent").fadeOut(function() {
+		        		$(".modalConfirm").fadeIn();
+		        	});
+	       		}
+	        }
+	    }],
+	    autoOpen: false,
+	    show: {
+	        effect: "fade",
+	        duration: 200,
+	    },
+	    hide: {
+	        effect: "fade",
+	        duration: 200,
+	    },
+	    height: 450,
+	    width: 540,
+	    modal: true,
+	});
+
+	$(".websiteAdd").click(function() {
+	    $("#modal").dialog("open");
+	    $(".modalConfirm").hide();
+	    $(".modalContent").show();
+	    $(".ui-widget-overlay").click(function() {
+	        $("#modal").dialog("close");
+	    });
+	});
+
+	/*图片高斯模糊*/
+/*	$(".websiteItemArea").mouseover(function () {
+		var img = $(this).find('.websiteImg').attr('id');
+		var canvas = $(this).find('.websiteImgBlur').attr('id');
+		stackBlurImage(img, canvas, 16, true);
+	});*/
+	/*滚动条*/
+	$('.content').perfectScrollbar({suppressScrollX: true});
+
+
+</script>

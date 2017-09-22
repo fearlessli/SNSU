@@ -1,0 +1,324 @@
+
+<div class="sideNav sideLight designNav">
+	<div id="accordion">
+		<div class="group">
+			<h3 class="home">
+				<div class="iconDelete iconDeleteUnable icon"></div>
+				<span class="columnName"><span class="iconHome icon"></span><span
+						>首页</span></span>
+
+				<div class="arrowRight icon"></div>
+				<div class="eye icon viewDark"></div>
+			</h3>
+		</div>
+
+		<volist name="column" id="vo">
+		<div class="group">
+			<if condition="$vo.type eq 2">
+				<h3 class="accordionItem blog" id="col{$vo.id}" name="{$vo.id}">
+					<elseif condition="$vo.type eq 1"/>
+
+					<h3 class="accordionItem gallery" id="col{$vo.id}" name="{$vo.id}">
+			</if>
+
+				<if condition="$vo.default eq 1">
+					<div class="iconDelete iconDeleteUnable icon" name="{$vo.id}"></div>
+					<else/>
+					<div class="iconDelete columnDelete icon" name="{$vo.id}"></div>
+				</if>
+
+				<span class="columnName">
+					<if condition="$vo.type eq 2">
+						<span class="iconBlog icon"></span>
+						<elseif condition="$vo.type eq 1"/>
+						<span class="iconGallery icon"></span>
+					</if>
+
+					<span class="columnNameText" 
+						 ondblclick="ShowElement(this)">{$vo.name}</span></span>
+			
+				<div class="arrowRight icon" id="arrow{$vo.id}"></div>
+				<if condition="$vo.visible eq 0">
+					<div class="eye visible icon viewLight" name="{$vo.id}"></div>
+					<elseif condition="$vo.visible eq 1"/>
+					<div class="eye visible icon viewDark" name="{$vo.id}"></div>
+				</if>
+			</h3>
+		</div>
+		</volist>
+		<div class="group addPage">
+			<h3 class="addPageTitle"><span class="columnName">新增页面</span>
+
+				<div class="addIcon icon"></div>
+			</h3>
+			<div class="addPageContent">
+				<div class="addGallery">
+					<div class="iconGallery icon"></div>
+					画廊
+				</div>
+				<div class="addBlog">
+					<div class="iconBlog icon"></div>
+					博客
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+<script type="text/javascript" src="__JS__/ModalResetting.js"></script>
+<script>
+	$(function() {
+		$("#accordion")
+			.accordion({
+				header: "> div > h3",
+				heightStyle: "content",
+				icons: null,
+
+			})
+			.sortable({
+				axis: "y",
+				handle: ".accordionItem",
+				stop: function(event, ui) {
+					// 当排序时，IE 不能注册 blur，所以触发 focusout 处理程序来移除 .ui-state-focus
+					ui.item.children("h3").triggerHandler("focusout");
+				}
+			});
+			$( ".addPage" ).accordion({
+				active: false,
+				collapsible: true, 
+				icons: null, 
+				beforeActivate: function() {
+			        $(".addIcon").toggleClass("angle");
+			    },
+			});
+		$("h3").click(function() {
+			var content = $(".content").children(".designIndex").attr("class");
+			var contentBlog = $(".content").children(".designBlog").attr("name");
+			var contentGallery = $(".content").children(".designGallery").attr("name");
+			var classname = $(this).attr("class");
+			cur_id = this.id.substr(3);//当前栏目的id
+			var active = $("#accordion").accordion("option", "active");
+			if (active == 0 && content != "design designIndex") {
+				$(".design").fadeOut(400);
+				$(".addIcon").removeClass("angle");
+				clearContent();
+
+				$(".content").load('designIndex.html', function () {
+
+					$(".designIndex").fadeIn(400)
+				});
+
+			}
+			if (classname.indexOf("gallery") != -1 && contentGallery != cur_id ) {
+				$(".design").fadeOut(400);
+				$(".addIcon").removeClass("angle");
+				clearContent();
+				$(".content").load('designGallery.html?cid=' + cur_id, function () {
+					$(".designGallery").fadeIn(400)
+				});
+			}
+			if (classname.indexOf("blog") != -1 && contentBlog != cur_id ) {
+				$(".design").fadeOut(400);
+				$(".addIcon").removeClass("angle");
+				clearContent();
+				$(".content").load('designBlog.html', function() {
+					$(".designBlog").fadeIn(400)
+				});
+			}
+			$("#accordion").accordion("option", "active", active);
+		});
+
+		$(".arrowRight").click(function() {
+			var classname = $(this).parent("h3").attr("class");
+			cur_id = this.id.substr(5);//当前栏目的id
+			var content = $(".content").children(".design").attr("class");
+			var arrowNumber = $(this).parent("h3").parent(".group").index();
+			if (arrowNumber == 0) {
+				$(".side").load('designNavIndex.html', function() {
+					$(".designNavIndex").animate({
+						left: '0',
+					});
+					$(".designNavIndex").css('height', height - 120 + "px");
+				});
+			};
+			if (classname.indexOf("gallery") != -1) {
+				$(".side").load('designNavGallery.html?cid=' + cur_id, function() {
+					$(".designNavGallery").animate({
+						left: '0',
+					});
+					$(".designNavGallery").css('height', height - 120 + "px");
+				});
+			};
+			if (classname.indexOf("blog") != -1) {
+				$(".design").fadeOut(400);
+				clearContent();
+				$(".content").load('designBlog.html?cid=' + cur_id, function() {
+					$(".designBlog").fadeIn(0);
+					$(".designNavModal").fadeIn(400);
+					$(".designNavMenu").animate({
+						left: '200px',
+					}, 400);
+				});
+			};
+			$("#accordion").accordion("option", "active", arrowNumber);
+		});
+	});
+	/* 双击重命名 */
+	function ShowElement(element) {
+		var oldhtml = element.innerHTML;
+		var newobj = document.createElement('input');
+		//创建新的input元素
+		newobj.type = 'text';
+		newobj.placeholder = '1-5个字符';
+		newobj.setAttribute("class", "inputSmall");
+		//为新增元素添加类型
+		newobj.onblur = function() {
+			element.innerHTML = this.value ? this.value : oldhtml;
+			//当触发时判断新增元素值是否为空，为空则不修改，并返回原有值
+		};
+/*		newobj.keydown  = function () {
+			if(event.keyCode==13) {
+				this.blur();
+				return false;
+			}
+			
+		};*/
+		element.innerHTML = '';
+		element.appendChild(newobj);
+		newobj.focus();
+	};
+	$(".columnNameText").on("change",function() {
+		var columnID =  $(this).parent("span").parent("h3").attr('name');
+		var columnName =  $(this).find('input').val();
+		$.post('/Design/setColumnName', {
+			cid: columnID,
+			name: columnName
+		}, function(data) {
+			if (data) {
+				$.snackbar({content: '修改栏目成功'});
+			}
+			else{
+				$.snackbar({content: '修改栏目失败'});
+			}
+		});
+		setTimeout(function() {
+		    if ($(this).parent(".columnName").find('.icon').attr('class') == "iconGallery icon") {
+		        $(".content").load('designGallery.html?cid=' + cur_id, function() {
+		            $(".designGallery").fadeIn(400)
+		        });
+		    } else {
+		        $(".content").load('designBlog.html?cid=' + cur_id, 
+		        	function() {
+		            $(".designBlog").fadeIn(400)
+		        });
+		    };
+	    }, 300);
+	});
+	/*删除栏目*/
+	$(".columnDelete").click(function () {
+		col_id = $(this).attr('name');
+		col_type = $(this).parent("h3").attr('class');
+		if (col_type.indexOf("gallery") != -1){
+			$(".content").load('designGallery.html', function() {
+				$(".designGallery").fadeIn(0);
+				$(".designNavModal").fadeIn(400);
+				$(".designNavMenu").animate({
+					left: '200px',
+				}, 400);
+				MenuConfirm();
+			});
+		}
+		if (col_type.indexOf("blog") != -1){
+			$(".content").load('designBlog.html', function() {
+				$(".designBlog").fadeIn(0);
+				$(".designNavModal").fadeIn(400);
+				$(".designNavMenu").animate({
+					left: '200px',
+				}, 400);
+				MenuConfirm();
+			});
+		}
+		clearContent();
+
+	});
+
+	/*是否可见切换*/ 
+	$(".visible").click(function() {
+		var clsname = $(this).attr('class');
+		var columnid = $(this).attr('name');
+		/*栏目设为不可见*/
+		if(clsname.indexOf("viewDark") != -1 ){
+			$(this).removeClass('viewDark');
+			$(this).addClass('viewLight');
+		}
+		/*栏目设为可见*/
+		if(clsname.indexOf("viewLight") != -1 ){
+			$(this).removeClass('viewLight');
+			$(this).addClass('viewDark');
+		};
+		$.post('/Design/setVisible', {cid: columnid});
+		setTimeout(function() {
+		    if ($(this).parent(".accordionItem").attr('class') == "accordionItem gallery") {
+		        $(".content").load('designGallery.html?cid=' + cur_id, function() {
+		            $(".designGallery").fadeIn(400)
+		        });
+		    } else {
+		        $(".content").load('designBlog.html?cid=' + cur_id, 
+		        	function() {
+		            $(".designBlog").fadeIn(400)
+		        });
+		    };
+	    }, 300);
+	});
+	/*增加栏目*/
+	$(".addGallery").click(function() {
+		$.post('/Design/addColumn', {
+			type: 1,
+		},function (data) {
+			if (data) {
+				$.snackbar({content: '增加画廊成功'});
+			}
+			else {
+				$.snackbar({content: '增加画廊失败'});
+			}
+		});
+		setTimeout(function() {
+			$(".sidebar").load("designNav.html", function() {
+				$(".designNav").fadeIn();
+				$(".sideNav").animate({
+					left: '0px'
+				},0);
+			});
+		}, 300);
+		    $(".content").load('designIndex.html', function() {
+		        $(".designIndex").fadeIn(400)
+		    });
+
+	});
+	$(".addBlog").click(function() {
+		$.post('/Design/addColumn', {
+			type: 2,
+		},function (data) {
+			if (data) {
+				$.snackbar({content: '增加博客成功'});
+			}
+			else {
+				$.snackbar({content: '增加博客失败'});
+			}
+		});
+		setTimeout(function() {
+			$(".sidebar").load("designNav.html", function() {
+				$(".designNav").fadeIn();
+				$(".sideNav").animate({
+					left: '0px'
+				},0);
+			});
+	        $(".content").load('designIndex.html', function() {
+	            $(".designIndex").fadeIn(400)
+	        });
+		}, 300);
+	});
+	/*滚动条*/
+	$('.designNav').perfectScrollbar({suppressScrollX: true});
+	
+</script>

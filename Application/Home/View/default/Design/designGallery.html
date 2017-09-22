@@ -1,0 +1,524 @@
+<div class="designNavMenu">
+	<div class="MenuButton">
+		<div class="buttonCancel">
+			取消
+		</div>
+		<div class="buttonSave">
+			保存
+		</div>
+		<div class="buttonConfirm">
+			确认
+		</div>
+	</div>
+	<div class="designNavMenuEdit">
+		<div class="MenuItem">
+			<div class="MenuTitle">图片名称</div>
+			<input type="text" class="input MenuInput picName">
+		</div>
+		<div class="MenuItem">
+			<div class="MenuTitle">图片描述</div>
+			<textarea type="text" class="textarea MenuInput picDescription" rows="3" placeholder="140个字以内"/>
+		</div>
+		<div class="MenuItem">
+			<div class="MenuTitle">图片链接</div>
+			<input type="url" class="input MenuInput picLink"  value="http://">
+			<div class="MenuTips">点击该图片将会链接到该图片设置的链接地址</div>
+		</div>
+<!-- 		<div class="MenuItem">
+	<div class="MenuTitle">链接信息</div>
+	<input type="url" class="input MenuInput" placeholder="http://">
+	<div class="MenuTips">此链接地址不可更改</div>
+</div> -->
+	</div>
+	<div class="designNavMenuConfirm">
+		<div class="MenuItem">
+			<div class="MenuTitle">确认删除？</div>
+		</div>
+		<div class="MenuText">
+			删除后该项目将不可恢复，
+		</div>
+		<div class="MenuText">
+			确认是否删除。
+		</div>
+	</div>
+</div>
+
+<div class="designNavModal">
+
+</div>
+<div class="design designGallery">
+	<div class="websiteHeader">
+		<div class="websiteTitle">
+			<div class="websiteTitleImg">
+				
+			</div>
+			<div class="websiteTitleArea">
+				<div class="websiteTitle1St"></div>
+				<div class="websiteTitle2nd">
+					<div class="websiteSubTitle">还未添加网站简介</div>
+				</div>
+			</div>
+		</div>
+		<div class="columnRight">
+			<ul>
+				<li><a href="" class="rightNavIndex">首页</a></li>
+				<volist name="column" id="vo">
+					<if condition="$vo.visible eq 1 AND $vo.status eq 1">
+						<li><a class="columnLink" typename="{$vo.type}" name="{$vo.id}" href="">{$vo.name}</a></li>
+					<else/>
+					</if>
+				</volist>
+			</ul>
+		</div>
+	</div>
+	<div  id="masonry">
+		<volist name="list" id="vo">
+			<div class="floatItem galleryItem" >
+				<a class="fancybox-gallery" href="{$vo.path}" data-fancybox-group="thumb" title="{$vo.name}" data-description="{$vo.description}">
+					<div class="galleryImg" name="{$vo.id}"  alt="" style="background-image: url({$vo.path});">
+						<notempty name="vo['name']">
+							<div class="galleryImgCover">
+								<div class="galleryImgTitle">
+									{$vo.name}
+								</div>
+								<div class="galleryImgDisc">
+									{$vo.description}
+								</div>	
+							</div>
+						</notempty>
+					</div>
+				</a>
+				<img name="{$vo.id}" class="galleryDelete" src="__SVG__/delete.svg" width="15" height="15" alt=""></img>
+			</div>
+		</volist>
+		<!--<div class="floatItem galleryItem">-->
+		<!--<div class="galleryImg" alt="">-->
+		<!--<img class="galleryDelete" src="__SVG__/delete.svg" width="15" height="15" alt=""></img>-->
+		<!--</div>-->
+		<!--</div>-->
+		<!--<div class="floatItem galleryItem">-->
+		<!--<div class="galleryImg" alt="">-->
+		<!--<img class="galleryDelete" src="__SVG__/delete.svg" width="15" height="15" alt=""></img>-->
+		<!--</div>-->
+		<!--</div>-->
+		<!--<div class="floatItem galleryItem">-->
+		<!--<div class="galleryImg" alt="">-->
+		<!--<img class="galleryDelete" src="__SVG__/delete.svg" width="15" height="15" alt=""></img>-->
+		<!--</div>-->
+		<!--</div>-->
+		<!--<div class="floatItem galleryItem">-->
+		<!--<div class="galleryImg" alt="">-->
+		<!--<img class="galleryDelete" src="__SVG__/delete.svg" width="15" height="15" alt=""></img>-->
+		<!--</div>-->
+		<!--</div>-->
+		<!--<div class="floatItem galleryItem">-->
+		<!--<div class="galleryImg" alt="">-->
+		<!--<img class="galleryDelete" src="__SVG__/delete.svg" width="15" height="15" alt=""></img>-->
+		<!--</div>-->
+		<!--</div>-->
+		<!--<div class="floatItem galleryItem">-->
+		<!--<div class="galleryImg" alt="">-->
+		<!--<img class="galleryDelete" src="__SVG__/delete.svg" width="15" height="15" alt=""></img>-->
+		<!--</div>-->
+		<!--</div>-->
+		<!--<div class="floatItem galleryItem">-->
+		<!--<div class="galleryImg" alt="">-->
+		<!--<img class="galleryDelete" src="__SVG__/delete.svg" width="15" height="15" alt=""></img>-->
+		<!--</div>-->
+		<!--</div>-->
+		<!--<div class="floatItem galleryItem">-->
+		<!--<div class="galleryImg" alt="">-->
+		<!--<img class="galleryDelete" src="__SVG__/delete.svg" width="15" height="15" alt=""></img>-->
+		<!--</div>-->
+		<!--</div>-->
+		<!--<div class="floatItem galleryItem">-->
+		<!--<div class="galleryImg" alt="">-->
+		<!--<img class="galleryDelete" src="__SVG__/delete.svg" width="15" height="15" alt=""></img>-->
+		<!--</div>-->
+		<!--</div>-->
+		<!--<div class="floatItem galleryItem">-->
+		<!--<div class="galleryImg" alt="">-->
+		<!--<img class="galleryDelete" src="__SVG__/delete.svg" width="15" height="15" alt=""></img>-->
+		<!--</div>-->
+		<!--</div>-->
+		<!--<div class="floatItem galleryItem">-->
+		<!--<div class="galleryImg" alt="">-->
+		<!--<img class="galleryDelete" src="__SVG__/delete.svg" width="15" height="15" alt=""></img>-->
+		<!--</div>-->
+		<!--</div>-->
+		<!--<div class="floatItem galleryItem">-->
+		<!--<div class="galleryImg" alt="">-->
+		<!--<img class="galleryDelete" src="__SVG__/delete.svg" width="15" height="15" alt=""></img>-->
+		<!--</div>-->
+		<!--</div>-->
+		<!--<div class="floatItem galleryItem">-->
+		<!--<div class="galleryImg" alt="">-->
+		<!--<img class="galleryDelete" src="__SVG__/delete.svg" width="15" height="15" alt=""></img>-->
+		<!--</div>-->
+		<!--</div>-->
+		<!--<div class="floatItem galleryItem">-->
+		<!--<div class="galleryImg" alt="">-->
+		<!--<img class="galleryDelete" src="__SVG__/delete.svg" width="15" height="15" alt=""></img>-->
+		<!--</div>-->
+		<!--</div>	-->
+		<!--<div class="floatItem galleryItem">-->
+		<!--<div class="galleryImg" alt="">-->
+		<!--<img class="galleryDelete" src="__SVG__/delete.svg" width="15" height="15" alt=""></img>-->
+		<!--</div>-->
+		<!--</div>-->
+		<!--<div class="floatItem galleryItem">-->
+		<!--<div class="galleryImg" alt="">-->
+		<!--<img class="galleryDelete" src="__SVG__/delete.svg" width="15" height="15" alt=""></img>-->
+		<!--</div>-->
+		<!--</div>-->
+		<!--<div class="floatItem galleryItem">-->
+		<!--<div class="galleryImg" alt="">-->
+		<!--<img class="galleryDelete" src="__SVG__/delete.svg" width="15" height="15" alt=""></img>-->
+		<!--</div>-->
+		<!--</div>-->
+		<!--<div class="floatItem galleryItem">-->
+		<!--<div class="galleryImg" alt="">-->
+		<!--<img class="galleryDelete" src="__SVG__/delete.svg" width="15" height="15" alt=""></img>-->
+		<!--</div>-->
+		<!--</div>-->
+		<!--<div class="floatItem galleryItem">-->
+		<!--<div class="galleryImg" alt="">-->
+		<!--<img class="galleryDelete" src="__SVG__/delete.svg" width="15" height="15" alt=""></img>-->
+		<!--</div>-->
+		<!--</div>	-->
+
+		<!-- 删除图片模态框 -->
+		<div id="dialog-confirm-pic" class="dialog-confirm" >
+			<div class="modalConfirm">
+				<div class="textTitleLarge">确认删除图片？</div>
+				<br>
+				<div class="textTitle">删除后图片将不可恢复，是否确认删除。</div>
+				
+			</div>
+		</div>
+<!-- 		<div id="dialog-pic">
+
+	<div class="picBack"></div>
+	<a class="picLink" target="_blank"><img src="" alt="" class="picPreview"></a>
+	<div class="picTitle"></div>
+	<div class="picDescription"></div>
+</div> -->
+	</div>
+</div>
+
+<script type="text/javascript" src="__JS__/ModalResetting.js"></script>
+<script type="text/javascript">
+	/*部分模态框窗体调整 依赖 WindowSizing.js*/
+	$(".designGallery").css('height', height - 180 + "px");
+	$(".carousel-inner").css('max-height', height - 210 + "px");
+	$(".designNavModal").css('height', height - 120 + "px");
+	$(".designNavModal").css('width', width - 185 + "px");
+	$(".designNavMenu").css('height', height - 120 + "px");
+	/*瀑布流砖块大小调整*/
+	function floatItemSizing() {
+		//var containerWidth = $("#masonry").width();
+		var containerWidth = width - 242;
+			if (containerWidth >= 1678) {
+				var itemWidth = (containerWidth - 80) / 5;
+			}
+			else if ( containerWidth >= 1340 ) {
+				var itemWidth = (containerWidth - 60) / 4;
+			}
+			else if (containerWidth >= 1052) {
+				var itemWidth = (containerWidth - 40) / 3;
+			}
+			else if (containerWidth >= 450) {
+				var itemWidth = (containerWidth - 20) / 2;
+			}
+			else {
+				var itemWidth = containerWidth - 20;
+			}
+			var itemHeight = itemWidth/320*217;
+			$(".galleryImg").width(itemWidth);
+			$(".galleryImg").height(itemHeight);
+			
+	};
+	$(window).resize(function() {
+		floatItemSizing();
+	});
+	floatItemSizing();
+
+
+
+	/*  瀑布流 masonry  */
+	$(function () {
+		var $container = $('#masonry');
+		$container.imagesLoaded(function () {
+			$container.masonry({
+				itemSelector: '.floatItem',
+				gutter: 20,
+				/*各个对象间距*/
+				isAnimated: true,
+				
+			});
+		});
+	});
+	/* 图片预览模态框 */
+/*	$("#dialog-pic").dialog({
+		resizable: false,
+		draggable: false,
+		dialogClass: "no-close",
+		autoOpen: false,
+		show: {
+			effect: "fade",
+			duration: 200,
+		},
+		hide: {
+			effect: "fade",
+			duration: 200,
+		},
+		height: 768,
+		width: 1024,
+		modal: true,
+	});
+	$(".galleryImg").click(function() {
+		var cur_pid = $(this).attr('name');
+		$("#dialog-pic").dialog("open");
+		$(".ui-widget-overlay, .picBack").click(function () {
+			$("#dialog-pic").dialog("close");
+		});
+		$.post('/Design/getOneGalleryInfo', {
+			id: cur_pid
+		}, function(data) {
+			$(".picPreview").attr('src', '/Public/' + data[0]["path"]);
+			if(data[0]["link"] != "http://" && data[0]["link"] != ""){
+				$(".picLink").attr('href', data[0]["link"] );
+			}
+			else {
+				$(".picLink").removeAttr('href');
+			}
+			$(".picTitle").html(data[0]["name"]);
+    		$(".picDescription").html(data[0]["description"]);
+			
+		});
+	});*/
+	/* 删除图片模态框 */
+	$("#dialog-confirm-pic").dialog({
+		resizable: false,
+		draggable: false,
+		dialogClass: "no-close",
+		buttons: {
+			"取消": function () {
+				$(this).dialog("close");
+			},
+			"确认": function () {
+				$.post('/Design/deleteOnePic', {pid: imgid},
+					function (data) {
+						if (data) {
+							$.snackbar({content: '删除图片成功'});
+						}
+						else {
+							$.snackbar({content: '删除图片失败'});
+						}
+					});
+				$(this).dialog("close");
+				setTimeout(function() {
+				$(".content").load('designGallery.html?cid=' + cur_id , function () {
+						$(".designGallery").fadeIn(400)
+					});
+				}, 300);
+				if ($(".designNavGallery").css('display') != "none") {
+					setTimeout(function() {
+		                $(".side").load('designNavGallery.html?cid=' + cur_id, function() {
+		                    $(".designNavGallery").animate({
+		                        left: '0',
+		                    }, 0);
+		                    $(".designNavGallery").css('height', height - 120 + "px");
+		                });
+		            }, 300);
+				};	
+			},
+		},
+		autoOpen: false,
+		show: {
+			effect: "fade",
+			duration: 200,
+		},
+		hide: {
+			effect: "fade",
+			duration: 200,
+		},
+		height: 360,
+		width: 540,
+		modal: true,
+	});
+	$(".galleryDelete").click(function () {
+		imgid = $(this).attr('name');
+		$("#dialog-confirm-pic").dialog("open");
+		$(".modalConfirm").show();
+		$(".ui-widget-overlay").click(function () {
+			$("#dialog-confirm-pic").dialog("close");
+		});
+	});
+    /*url正则验校*/
+     function IsURL(str_url) {
+		var strRegex = /^((https|http|ftp|rtsp|mms)?:\/\/)?(([0-9a-z_!~*'().&=+$%-]+: )?[0-9a-z_!~*'().&=+$%-]+@)?((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5]$)|([0-9a-z_!~*'()-]+\.)*([0-9a-z][0-9a-z-]{0,61})?[0-9a-z]\.[a-z]{2,6})(:[0-9]{1,4})?((\/?)|(\/[0-9a-zA-Z_!~*'().;?:@&=+$,%#-]+)+\/?)$/;
+         var re = new RegExp(strRegex);
+         //re.test()
+         if (re.test(str_url)) {
+             return (true);
+         } else {
+             return (false);
+         }
+     };
+     /*保存图片信息确认*/
+	$(".buttonSave").click(function() {
+		var picName = $(".picName").val();
+		var picDescription = $(".picDescription").val();
+		var picLink = $(".picLink").val();
+		var flag = IsURL(picLink);
+		if (flag == true || picLink == "http://") {
+			if(picLink == "http://"){
+				picLink = "";
+			}
+			$.post('/Design/editGalleryPic', {
+				pid: pic_id,
+				gid: cur_id,
+				name: picName,
+				description: picDescription,
+				link: picLink
+
+			}, function(data) {
+				if (data) {
+					$.snackbar({content: '图片设置成功'});
+				}
+				else {
+					$.snackbar({content: '图片设置失败'});
+				}
+			});
+			setTimeout(function() {
+				$(".content").load('designGallery.html?cid=' + cur_id , function () {
+						$(".designGallery").fadeIn(400)
+					});
+			}, 300);
+		}
+		else {
+			$(".picLink").val("");
+	        $.snackbar({
+	            content: '图片链接格式不正确，请重新输入'
+	        });
+		}
+	});
+	/*滚动条*/
+	$('.content').perfectScrollbar({suppressScrollX: true});
+	/*获取当前网站信息*/
+    $.post('/Design/getCurWebsiteInfo', function(data) {
+    	if (data[0]["logo_path"]) {
+    		$(".websiteTitleImg").css('background-image', 'url(' + data[0]["logo_path"] +')');
+    	}
+    	if (data[0]["name"]) {
+    		$(".websiteTitle1St").text(data[0]["name"]);
+    	}
+    	if (data[0]["sub_title"]) {
+    		$(".websiteSubTitle").text(data[0]["sub_title"]);
+    	}
+    });
+    $(".designGallery").attr('name', cur_id);
+    /*删除当前栏目*/
+    $(".buttonConfirm").click(function() {
+    	$.post('/Design/deleteGallery', {cid: col_id},
+    		function (data) {
+    			if (data) {
+    				$.snackbar({content: '删除画廊成功'});
+    			}
+    			else {
+    				$.snackbar({content: '删除画廊失败'});
+    			}
+    		});
+		setTimeout(function() {
+			$(".sidebar").load("designNav.html", function() {
+				$(".designNav").fadeIn();
+				$(".sideNav").animate({
+					left: '0px'
+				},0);
+			});
+			$(".content").load('designIndex.html', function() {
+	            $(".designIndex").fadeIn(400)
+	        });
+		}, 300);
+
+    });
+    /*点击遮罩返回*/
+    $(".designNavModal").click(function() {
+		$(".designNavModal").fadeOut(400);
+		$(".designNavMenu").animate({
+		        left: '-400px',
+		    }, 300);
+    });
+	/*点击右导航栏进行跳转*/
+	$(".columnLink").click(function() {
+		cur_id = $(this).attr('name');
+		if ($(this).attr('typename') == 1) {
+	        $(".content").load('designGallery.html?cid=' + cur_id, function() {
+	            $(".designGallery").fadeIn(400)
+	        });
+		}
+		else {
+			$(".content").load('designBlog.html?cid=' + cur_id, 
+				function() {
+	            $(".designBlog").fadeIn(400)
+	        });
+		}
+		setTimeout(function() {
+			$(".sidebar").load("designNav.html", function() {
+				$(".designNav").fadeIn();
+				$(".sideNav").animate({
+					left: '0px'
+				},0);
+			});
+		}, 300);
+		return false;
+	});
+	/*获取封面是否显示信息*/
+	$.post('/Design/ajaxGetOneColumn', {
+		cid: cur_id
+	}, function(data) {
+		if(data[0]["pic_name_visible"] == 0){
+			$(".galleryImgTitle").hide();
+		}
+		if(data[0]["pic_des_visible"] == 0){
+			$(".galleryImgDisc").hide();
+		}
+	});
+
+	$(".columnLink[name="+cur_id+"]").addClass('active');
+
+	/*图片画廊 LightBox*/
+	$(document).ready(function() {
+	    $('.fancybox').fancybox();
+	    $(".fancybox-gallery").fancybox({
+	        wrapCSS: 'fancybox-custom',
+
+	        openEffect: 'elastic',
+	        openSpeed: 150,
+
+	        closeEffect: 'elastic',
+	        closeSpeed: 150,
+	        closeClick: true,
+
+	        helpers: {
+	            title: {
+	                type: 'inside'
+	            },
+	            overlay: {
+	                css: {
+	                    'background': 'rgba(238,238,238,0.85)'
+	                }
+	            },
+	            thumbs: {
+	                width: 75,
+	                height: 50
+	            },
+	        },
+	        afterLoad: function() {
+	        	var desc = this.element.attr('data-description');
+	            this.title = '<div class="picInfoTitle">' + this.title + '</div><div class="picInfoDescription">' + desc + '</div>';
+	        },
+	    });
+	});
+</script>

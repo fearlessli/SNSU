@@ -1,0 +1,823 @@
+/* 依赖于main.less */
+//@import url(main.less);
+/* 颜色规范 */
+@colorDark: #4A4A4A;
+
+/* 深色背景、导航字体颜色 */
+@colorNormal: #9B9B9B;
+
+/* 导航常态颜色、二态加粗颜色 */
+@colorText: #B1B1B1;
+
+/* 说明性文字颜色 */
+@colorWhite: #FFFFFF;
+@colorFirst: #CCCCCC;
+@colorSecond: #E6E6E6;
+@colorThird: #F8F8F8;
+
+/* 字号规范 */
+@large: 18px;
+@medium: 14px;
+@tiny: 12px;
+
+/* design header */
+.headerLight {
+	box-shadow: 1px 1px 2px @colorFirst;
+	background-color: @colorWhite;
+
+	.avator {
+		.avatorImg {
+			border: 2px solid @colorWhite;
+			&:hover {
+				border: 2px solid @colorDark;
+			}
+		}
+		color: @colorDark;
+	}
+	.column {
+		.active {
+			color: @colorDark !important;
+			font-weight: bold;
+		}
+	}
+}
+.icon {
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+/* design侧边栏 sideLight */
+.sideLight {
+	overflow: hidden;
+	background-color: @colorWhite;
+	box-shadow: 1px 1px 2px @colorFirst;
+	position: absolute !important;
+	z-index: 50;
+	left: -200px;
+
+	.columnSide {
+		position: relative;
+		float: left;
+		left: 40px;
+		top: 50px;
+
+		li {
+			list-style-type: none;
+			font-size: @medium;
+			margin-bottom: 27px;
+			cursor: pointer;
+			color: @colorNormal;
+			text-decoration: none;
+
+			&:hover {
+				color: @colorText;
+				font-weight: bold;
+			}
+		}
+	}
+	.active {
+		color: @colorDark !important;
+		font-weight: bold;
+	}
+}
+.columnNameDesign {
+	margin-left: 11px;
+}
+.columnNameText {
+	display: inline-block;
+	height: 18px;
+	width: 75px;
+	overflow: hidden;
+}
+.ui-state-default {
+	&:active {
+		background-color: @colorFirst;
+	}
+}
+.ui-state-active {
+	background-color: @colorSecond;
+}
+.ui-accordion {
+	font-size: @medium;
+	width: 200px;
+
+	.ui-accordion-header {
+		padding-top: 11px;
+		padding-bottom: 11px;
+
+		.arrowRight {
+			float: right;
+			margin-right: 15px;
+			background-image: url(/Public/Home/svg/arrowRight.svg);
+			background-size: 8px;
+			width: 15px;
+			height: 18px;
+		}
+		.iconDelete {
+			float: left;
+			margin-right: 15px;
+			background-image: url(/Public/Home/svg/deleteDark.svg);
+			background-size: 10px;
+			width: 15px;
+			height: 18px;
+		}
+		.iconDeleteUnable {
+			background-image: url(/Public/Home/svg/deleteLight.svg);
+		}
+		.iconHome {
+			float: left;
+			margin-right: 4px;
+			background-image: url(/Public/Home/svg/home.svg);
+			background-size: 15px;
+			width: 15px;
+			height: 18px;
+		}
+		.iconGallery {
+			float: left;
+			margin-right: 4px;
+			background-image: url(/Public/Home/svg/gallery.svg);
+			background-size: 15px;
+			width: 15px;
+			height: 18px;
+		}
+		.iconBlog {
+			float: left;
+			margin-right: 4px;
+			background-image: url(/Public/Home/svg/blog.svg);
+			background-size: 15px;
+			width: 15px;
+			height: 18px;
+		}
+		.arrowUp {
+			float: right;
+			margin-right: 15px;
+			background-image: url(/Public/Home/svg/arrowRight.svg);
+			background-size: 8px;
+			width: 15px;
+			height: 18px;
+		}
+		.addIcon {
+			float: right;
+			margin-right: 15px;
+			background-image: url(/Public/Home/svg/add.svg);
+			background-size: 16px;
+			width: 16px;
+			height: 18px;
+		}
+		.angle {
+			-webkit-transition: all .25s;
+			-moz-transition: all .25s;
+			-ms-transition: all .25s;
+			-o-transition: all .25s;
+			transition: all .25s;
+			-webkit-transform: rotate(45deg);
+			-moz-transform: rotate(45deg);
+			-ms-transform: rotate(45deg);
+			-o-transform: rotate(45deg);
+			transform: rotate(45deg);
+		}
+		.rightAngle {
+			-webkit-transition: all .25s;
+			-moz-transition: all .25s;
+			-ms-transition: all .25s;
+			-o-transition: all .25s;
+			transition: all .25s;
+			transform: rotate(-90deg);
+			-o-transform: rotate(-90deg);
+			-webkit-transform: rotate(-90deg);
+			-moz-transform: rotate(-90deg);
+		}
+		.eye {
+			float: right;
+			margin-right: 5px;
+			background-size: 16px;
+			width: 16px;
+			height: 18px;
+		}
+		.viewDark {
+			background-image: url(/Public/Home/svg/viewDark.svg);
+		}
+		.viewLight {
+			background-image: url(/Public/Home/svg/viewLight.svg);
+		}
+		.addModuleIcon {
+			float: right;
+			margin-right: 15px;
+		}
+	}
+	.ui-accordion-content {
+		padding: 0;
+		border: 0;
+	}
+}
+.addPageContent {
+	.addGallery:hover {
+		.iconGallery {
+			background-image: url(/Public/Home/svg/galleryLight.svg);
+		}
+	}
+	.addBlog:hover {
+		.iconBlog {
+			background-image: url(/Public/Home/svg/blogLight.svg);
+		}
+	}
+	.addGallery, .addBlog {
+		cursor: pointer;
+		float: left;
+		width: 100px;
+		height: 60px;
+		background-color: @colorThird;
+		color: @colorDark;
+		text-align: center;
+		font-size: @tiny;
+		font-weight: bold;
+		text-decoration: none;
+
+		.iconGallery {
+			width: 20px;
+			height: 20px;
+			margin-top: 15px;
+			margin-right: auto;
+			margin-left: auto;
+			margin-bottom: 2px;
+			background-image: url(/Public/Home/svg/gallery.svg);
+			background-size: 19px;
+			width: 20px;
+			height: 20px;
+		}
+		.iconBlog {
+			width: 20px;
+			height: 20px;
+			margin-top: 15px;
+			margin-right: auto;
+			margin-left: auto;
+			margin-bottom: 2px;
+			background-image: url(/Public/Home/svg/blog.svg);
+			background-size: 19px;
+			width: 20px;
+			height: 20px;
+		}
+		&:hover {
+			background-color: @colorDark;
+			color: @colorWhite;
+		}
+	}
+}
+
+/* design侧边栏 次级菜单 designNavNd */
+.designNavNd {
+	z-index: 60;
+	left: -200px;
+	overflow: hidden;
+
+	.sideBack {
+		height: 28px;
+		cursor: pointer;
+		text-align: center;
+		font-weight: bold;
+		padding-top: 10px;
+		color: @colorDark;
+		font-size: @medium;
+		background-image: url(/Public/Home/svg/backLight.svg);
+		background-repeat: no-repeat;
+		background-size: 45px;
+		background-position: 18px 16px;
+
+		&:hover {
+			background-image: url(/Public/Home/svg/backDark.svg);
+		}
+		&:active {
+			background-color: @colorSecond;
+		}
+	}
+	.ui-accordion .ui-accordion-header .columnName {
+		padding-left: 10px;
+	}
+}
+
+/* design侧边栏 LOGO次级菜单 designNavDesignLogo */
+.designNavDesignLogo {
+	.columnItem {
+		padding: 15px 20px 5px;
+	}
+	.buttonToggle {
+		float: right;
+		margin-right: 8px;
+		margin-top: 2px;
+	}
+}
+
+/* 网页设计-首页 designNav */
+.content {
+	display: block;
+	padding-left: 202px;
+	overflow: hidden;
+	position: relative;
+}
+
+/* 网页logo 一级标题 二级标题 */
+@logoSize: 50px;
+.websiteHeader{
+	height: @logoSize;
+	position: relative;
+	margin-bottom: 15px;
+	width: 100%;
+	.websiteTitle {
+		height: @logoSize;
+		position: relative;
+		display: table;
+		float: left;
+
+		.websiteTitleImg {
+			float: left;
+			width: @logoSize;
+			height: @logoSize;
+			background-image: url(/Public/Home/svg/demoAvator.svg);
+			background-position: center;
+			background-size: cover;
+			background-repeat: no-repeat;
+			margin-right: 10px;
+			display: inline-block;
+		}
+		.websiteTitleArea{
+				display: table-cell;
+				vertical-align: middle;
+			.websiteTitle1St {
+				color: @colorDark;
+				font-size: 16px;
+				font-weight: bold;
+				margin-bottom: 5px;
+			}
+			.websiteTitle2nd {
+				color: @colorDark;
+				font-size: @tiny;
+				.websiteSubTitle {
+					display: inline;
+				}
+			}
+		}
+
+	}
+	.columnRight {
+		font-size: @tiny;
+		position: absolute;
+		float: right;
+		right: 0;
+		bottom: 0;
+		ul {
+			margin: 0 !important;
+		}
+		li {
+			float: left;
+			list-style-type: none;
+			margin-right: 20px;
+
+			a {
+				color: @colorNormal;
+				text-decoration: none;
+
+				&:hover {
+					color: @colorText;
+					font-weight: bold;
+				}
+			}
+		}
+		.active {
+			color: @colorDark !important;
+			font-weight: bold;
+		}
+	}
+}
+
+.design {
+	display: none;
+}
+.designIndex {
+	padding: 20px;
+
+	.carousel {
+		width: 100%;
+	}
+}
+.carouselImg {
+	width: 100%;
+}
+
+/* 画廊 designGallery */
+.designGallery {
+	padding: 20px 20px 0px 20px;
+
+	.galleryItem {
+		float: left;
+		margin-bottom: 23px;
+
+		.galleryImg {
+			max-width: 100%;
+			box-shadow: 1px 1px 3px @colorDark;
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-position: center;
+			width: 280px;
+			height: 190px;
+			cursor: pointer;
+
+
+			.galleryImgCover {
+				width: 100%;
+				background-color: rgba(0, 0, 0, 0.35);
+				bottom: 0;
+				position: absolute;
+				color: @colorWhite;
+				box-sizing: border-box;
+				padding: 4px 10px 2px;
+				//min-height: 40px;
+
+				.galleryImgTitle {
+					font-weight: bold;
+					font-size: @medium;
+					width: 100%;
+					max-height: 19px;
+					overflow: hidden;
+				}
+				.galleryImgDisc {
+					font-size: @tiny;
+					width: 90%;
+					max-height: 32px;
+					overflow: hidden;
+				}
+			}
+		}
+		.galleryDelete {
+			position: absolute;
+			right: 7px;
+			bottom: 8px;
+			z-index: 10;
+			cursor: pointer;
+		}
+		//@media screen and (min-width:1800px) {
+			.galleryImg {
+				width: 320px;
+				height: 217px;
+			}
+		//}
+/* 		@media screen and (max-width:1600px) {
+	.galleryImg {
+		width: 320px;
+		height: 217px;
+	}
+}
+@media screen and (max-width:1440px) {
+	.galleryImg {
+		width: 280px;
+		height: 190px;
+	}
+}
+@media screen and (max-width:1366px) {
+	.galleryImg {
+		width: 260px;
+		height: 176px;
+	}
+}
+@media screen and (max-width:1024px) {
+	.galleryImg {
+		width: 245px;
+		height: 166px;
+	}
+} */
+	}
+}
+
+/* 博客 designBlogArea */
+.designBlog, .designBlogArea {
+	padding: 20px 20px 0px 20px;
+
+	.article {
+		display: block;
+		max-width: 800px;
+   		margin: 0 auto;
+		font-size: @medium;
+		color: @colorNormal;
+		.articleFrame{
+			min-height: 570px;
+			.articleCover{
+				display: block;
+				margin: 0 auto;
+				height: 200px;
+				width: 100%;
+				border-radius: 8px;
+				background-repeat: no-repeat;
+				background-size: cover;
+				background-position: center;
+			}
+			.articleTitle{
+				color: @colorDark;
+				margin: 20px 0 15px;
+				font-size: 36px;
+				font-weight: bold;
+			}
+			.articleContent{
+				width: 100%;
+				min-height: 320px;
+			}
+		}
+		.articlePage{
+			width: 100%;
+			
+			.pageUp{
+				margin: 50px 0 30px;
+				cursor: pointer;
+				float: left;
+				text-align: left;
+				.pageUpFlag{
+					color: @colorDark;
+					font-size: 16px;
+					font-weight: bold;
+					margin-bottom: 3px;
+				}
+
+			}
+			.pageDown{
+				margin: 50px 0 30px;
+				cursor: pointer;
+				float: right;
+				text-align: right;
+				.pageDownFlag{
+					color: @colorDark;
+					font-size: 16px;
+					font-weight: bold;
+					margin-bottom: 3px;
+				}
+			}
+		}
+	}
+}
+
+/* 页面模态框 designModal */
+.designNavModal {
+	display: none;
+	position: absolute;
+	background-color: @colorDark;
+	z-index: 20;
+	opacity: .28;
+	height: 100%;
+	width: 100%;
+}
+
+/* 三级菜单 designNavMenu */
+.designNavMenu {
+	position: absolute;
+	left: -400px;
+	z-index: 30;
+	width: 400px;
+	box-shadow: 1px 1px 2px @colorNormal;
+	background-color: @colorWhite;
+	overflow: hidden;
+
+	.MenuButton {
+		.buttonSave, .buttonCancel, .buttonConfirm {
+			box-sizing: border-box;
+			padding-top: 11px;
+			float: left;
+			width: 50%;
+			height: 40px;
+			color: @colorNormal;
+			text-align: center;
+			font-size: @medium;
+			text-decoration: none;
+			cursor: pointer;
+		}
+		.buttonCancel {
+			background-color: @colorThird;
+
+			&:hover {
+				font-weight: bold;
+				color: @colorDark;
+			}
+			&:active {
+				background-color: @colorSecond;
+			}
+		}
+		.buttonSave, .buttonConfirm {
+			background-color: @colorSecond;
+
+			&:hover {
+				font-weight: bold;
+				color: @colorDark;
+			}
+			&:active {
+				background-color: @colorFirst;
+			}
+		}
+		.buttonConfirm {
+			display: none;
+		}
+	}
+	.designNavMenuEdit, .designNavMenuConfirm {
+		margin: 65px 40px 0px 20px;
+
+		.MenuItem {
+			margin-bottom: 20px;
+		}
+		.MenuTitle {
+			font-size: @medium;
+			color: @colorDark;
+			margin-bottom: 5px;
+			font-weight: bold;
+		}
+		.MenuInput {
+			padding-left: 10px;
+			font-size: @medium;
+			margin-bottom: 2px;
+		}
+		#setDomain {
+			width: 78%;
+			float: left;
+		}
+		.setDomain {
+			color: @colorDark;
+			font-size: @large;
+			font-weight: bold;
+			line-height: 40px;
+		}
+		.MenuTips {
+			font-size: @tiny;
+			color: @colorText;
+		}
+		.MenuText {
+			font-size: @medium;
+			color: @colorNormal;
+		}
+	}
+	.designNavMenuConfirm {
+		display: none;
+	}
+	.designNavMenuData {
+		margin: 40px 40px 0px 40px;
+
+		.MenuItem {
+			margin-bottom: 20px;
+		}
+		.MenuIcon {
+			float: left;
+			margin-right: 10px;
+		}
+		.MenuTitle {
+			font-size: @medium;
+			color: @colorDark;
+			margin-left: 5px;
+		}
+		.MenuCount {
+			font-size: 28px;
+			color: @colorDark;
+			margin-left: 5px;
+			font-weight: bold;
+		}
+	}
+}
+
+/* 博客二级菜单 blogArticle */
+.blogMenu {
+	margin: 65px 0px 0px 0px !important;
+	overflow: hidden;
+
+	.blogArticle {
+		cursor: pointer;
+		box-sizing: border-box;
+		height: 120px;
+		margin-bottom: 3px !important;
+		background-color: @colorThird;
+		width: 100%;
+
+		.blogArticleItem {
+			display: block;
+
+			.blogArticleImg {
+				float: left;
+				width: 100px;
+				height: 100px;
+				background-image: url(/Public/Home/img/demo.jpg);
+				background-size: cover;
+				background-repeat: no-repeat;
+				margin: 10px;
+				-webkit-transition: all .1s;
+				-moz-transition: all .1s;
+				-ms-transition: all .1s;
+				-o-transition: all .1s;
+				transition: all .1s;
+			}
+			.blogArticleTitle {
+				display: block;
+				float: left;
+				font-size: @large;
+				color: @colorDark;
+				width: 180px;
+				margin: 20px 0 12px 8px;
+			}
+			.blogArticleContent {
+				position: relative;
+				left: 8px;
+				font-size: @medium;
+				color: @colorNormal;
+				width: 260px;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				display: -webkit-box;
+				-webkit-line-clamp: 2;
+				-webkit-box-orient: vertical;
+			}
+			&:hover {
+				.blogArticleImg {
+					padding: 10px;
+					margin: 0px;
+				}
+				.blogArticleTitle, .blogArticleContent {
+					font-weight: bold;
+				}
+			}
+		}
+		.blogArticleFunction {
+			width: 200px;
+			height: 120px;
+			position: absolute;
+			right: -100px;
+			z-index: 100;
+			opacity: 0;
+			-webkit-transition: all .2s;
+			-moz-transition: all .2s;
+			-ms-transition: all .2s;
+			-o-transition: all .2s;
+			transition: all .2s;
+
+			.blogArticleFunc {
+				width: 100px;
+				height: 120px;
+				position: absolute;
+				right: 0px;
+				-webkit-transition: all .25s;
+				-moz-transition: all .25s;
+				-ms-transition: all .25s;
+				-o-transition: all .25s;
+				transition: all .25s;
+
+				.blogArticleEdit, .blogArticleDelete {
+					box-sizing: border-box;
+					text-align: center;
+					font-size: @medium;
+					padding: 20px;
+					font-weight: bold;
+					background-color: @colorSecond;
+					color: @colorNormal;
+					height: 50%;
+					width: 100%;
+				}
+			}
+
+			.blogArticleDelete:hover {
+				background-color: @colorDark;
+				color: @colorWhite;
+			}
+			.blogArticleEdit:hover {
+				background-color: @colorDark;
+				color: @colorWhite;
+			}
+		}
+		&:hover {
+			.blogArticleFunction{
+				opacity: 1;
+
+				.blogArticleFunc {
+					right: 100px;
+				}
+			}
+		}
+	}
+	.blogArticleAdd {
+		margin: 0px 20px;
+		box-sizing: border-box;
+		width: 360px;
+		height: 40px;
+		text-align: center;
+		padding: 8px 0;
+		color: @colorNormal;
+		border: 1px solid @colorNormal;
+		cursor: pointer;
+
+		&:hover {
+			color: @colorWhite;
+			background-color: @colorDark;
+			font-weight: bold;
+		}
+	}
+	.MenuItemLink {
+		margin-left: 20px;
+		margin-right: 40px;
+	}
+}
+
+/* 编辑器插件 .simditor */
+.simditor {
+	border: 0 !important;
+
+	.simditor-wrapper {
+	}
+}

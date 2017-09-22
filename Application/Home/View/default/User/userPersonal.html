@@ -1,0 +1,100 @@
+<div class="userContent userPersonal">
+	<div class="avatorField">
+		<div class="avatorView">
+			<div class="imgCover">
+				<div class="imgCoverTitle">更换图片</div>
+				<input type="file" class="upload_image" name="upload_image" multiple>
+			</div>
+		</div>
+		<div class="avatorPreview">
+			<div class="imgListUploadCover">
+				
+				<div class="coverPercent">
+					0%
+				</div>
+				<div class="coverPercentBar">
+					<div class="coverPercentBarProgress">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="uploadAvator">
+		<input type="file" class="upload_image" name="upload_image" multiple> 
+		<div class="uploadIcon">
+			<img src="__SVG__/add.svg" width="25" height="25" alt="">
+		</div>
+		<div class="uploadText">
+			上传头像
+		</div>
+	</div>
+	<div class="clear"></div>
+	<input class="input inputUsername" type="text" placeholder="用户名">
+</div>
+<script type="text/javascript">
+	/*头像图片上传*/
+		$(function() {  
+			$(".uploadAvator").click(function() {
+				$(".avatorView").hide();
+				$(".avatorPreview").fadeIn();
+
+			});
+		    $(".upload_image").fileupload({  
+		            url: '/Common/uploadImg',  
+		            sequentialUploads: true,
+		            autoUpload: true,
+					disableImageResize: false, 
+		            previewMaxWidth: 140,
+		            previewMaxHeight: 90,
+		            previewCrop: true,
+		            add: function (e, data) {
+					    if (data.files && data.files[0]) {
+					        var reader = new FileReader();
+					        reader.onload = function(e) {;
+					            $('.avatorPreview').css('background-image', 'url(' + e.target.result +')');
+					        }
+					        reader.readAsDataURL(data.files[0]);
+					        data.submit();
+					    }
+					}
+		        }).bind('fileuploadadd', function (e, data) {
+		        	$(".avatorPreview").fadeIn();
+		        }).bind('fileuploadprogress', function (e, data) {
+		            var progress = parseInt(data.loaded / data.total * 100, 10);  
+		            $(".coverPercentBarProgress").css('width',progress + '%'); 
+		            $(".coverPercent").html(progress + '%');  
+		        }).bind('fileuploaddone', function (e, data) {  
+					$.post('/User/accountInfoAvator', {path: data.result});
+					$(".content").load("userPersonal.html", function() {
+	                    $(".userPersonal").fadeIn(200);
+
+	                });
+					$.snackbar({
+					content: '修改网站LOGO成功'
+					});
+	                $(".header").load("userHeader.html");
+		    });       
+	    });
+	/*获取个人信息*/
+	$.post('/User/getAccountInfo', function(data) {
+		if (data[0]["avator"]) {
+			$(".avatorView").css('background-image','url(' + data[0]["avator"] + ')' );
+			$(".uploadAvator").hide();  
+		}
+
+			$(".inputUsername").val(data[0]['name']);
+	});
+	$(".inputUsername").blur(function () {
+		var userName = $(this).val();
+		if (userName == "" ){
+			$.snackbar({content: '用户名不能为空'});
+		}
+		else {
+			$.post('/User/accountInfoName', {username: userName });
+			$(".header").load("userHeader.html");
+		}
+	});
+
+
+</script>

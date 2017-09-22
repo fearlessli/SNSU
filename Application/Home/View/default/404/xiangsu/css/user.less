@@ -1,0 +1,200 @@
+/* 依赖于main.less */
+@import url(main.less);
+
+/* user header */
+.headerDark {
+	box-shadow: 1px 1px 1px @colorDark;
+	background-color: @colorDark;
+
+	.avator {
+		color: @colorWhite;
+
+		.avatorImg {
+			&:hover {
+				border: 2px solid @colorWhite;
+			}
+		}
+	}
+	.column {
+		.active {
+			color: @colorWhite !important;
+			font-weight: bold;
+		}
+	}
+}
+
+/* user sideDark 侧边栏 */
+
+.sideDark {
+	background-color: @colorDark;
+	box-shadow: 1px 0px 1px @colorDark;
+	display: none;    
+	position: relative;
+    left: -200px;
+    	.columnSide {
+		position: relative;
+		float: left;
+		left: 40px;
+		top: 50px;
+
+		li {
+			list-style-type: none;
+			font-size: @medium;
+			margin-bottom: 27px;
+
+			a {
+				color: @colorNormal;
+				text-decoration: none;
+
+				&:hover {
+					color: @colorText;
+					font-weight: bold;
+				}
+			}
+		}
+		.active {
+			color: @colorWhite;
+			font-weight: bold;
+		}
+	}
+}
+
+/* user Password */
+.inputUsername {
+	position: relative;
+	top: 20px;
+	width: 340px;
+}
+.inputList {
+	margin-bottom: 20px;
+
+	.inputPassword {
+		margin-bottom: 10px;
+	}
+}
+.buttonLong {
+	width: 340px;
+
+}
+/* user */
+.userContent{
+	display: none;
+}
+/* user Personal */
+.userPersonal {
+	float: left;
+	position: relative;
+	top: 40px;
+	left: 40px;
+
+	.uploadAvator {
+		display: block;
+		text-decoration: none;
+		background-color: @colorThird;
+		width: 100px;
+		height: 100px;
+		border: 1px solid @colorText;
+
+		.uploadIcon {
+			position: relative;
+			top: 30px;
+			left: 38px;
+		}
+		.uploadText {
+			text-decoration: none;
+			font-size: @medium;
+			margin-left: 21px;
+			margin-top: 30px;
+			color: @colorNormal;
+		}
+	}
+}
+
+/* user Website */
+.userWebsite {
+	padding: 30px 30px 0px 30px;
+
+	.websiteItem {
+		width: 280px;
+		float: left;
+		margin-bottom: 23px;
+
+		.websiteItemArea {
+			max-width: 100%;
+			box-shadow: 1px 1px 3px @colorDark;
+			width: 280px;
+			height: 190px;
+			cursor: pointer;
+			.websiteImg{
+				position: absolute;
+				z-index: -1;
+			}
+			.websiteItemEdit {
+				position: absolute;
+				color: @colorNormal;
+				font-weight: bold;
+				left: 112px;
+				top: 85px;
+				z-index: 1;
+				opacity: 0;
+				-webkit-transition: all .2s;
+				-moz-transition: all .2s;
+				-ms-transition: all .2s;
+				-o-transition: all .2s;
+				transition: all .2s;
+				&:hover{
+					color: @colorWhite;
+				}
+			}
+			.websiteDelete {
+				position: absolute;
+				right: 2px;
+				bottom: 30px;
+				z-index: 1;
+				opacity: 0;
+				-webkit-transition: all .2s;
+				-moz-transition: all .2s;
+				-ms-transition: all .2s;
+				-o-transition: all .2s;
+				transition: all .2s;
+			}
+			.websiteImgBlur {
+				position: absolute;
+				height: 100%;
+				width: 100%;
+				opacity: 0;
+				-webkit-transition: all .2s;
+				-moz-transition: all .2s;
+				-ms-transition: all .2s;
+				-o-transition: all .2s;
+				transition: all .2s;
+			}
+			&:hover{
+				.websiteImgBlur , .websiteDelete ,.websiteItemEdit {
+					opacity: 1;
+				}
+			}
+		}
+		.websiteAdd {
+			display: block;
+			box-shadow: 1px 1px 1px @colorSecond;
+			border: 1px solid @colorFirst;
+			width: 280px;
+			height: 190px;
+			text-align: center;
+			background-color: @colorWhite;
+			cursor: pointer;
+
+			.websiteAddIcon {
+				margin-top: 55px;
+			}
+			.websiteAddTitle {
+				margin-top: 15px;
+				font-weight: bold;
+			}
+		}
+	}
+	.websiteName {
+		margin-top: 6px;
+	}
+}

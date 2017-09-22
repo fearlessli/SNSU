@@ -1,0 +1,761 @@
+/* 依赖于main.less */
+/* 颜色规范 */
+/* 深色背景、导航字体颜色 */
+/* 导航常态颜色、二态加粗颜色 */
+/* 说明性文字颜色 */
+/* 字号规范 */
+/* design header */
+.headerLight {
+  box-shadow: 1px 1px 2px #cccccc;
+  background-color: #ffffff;
+}
+.headerLight .avator {
+  color: #4a4a4a;
+}
+.headerLight .avator .avatorImg {
+  border: 2px solid #ffffff;
+}
+.headerLight .avator .avatorImg:hover {
+  border: 2px solid #4a4a4a;
+}
+.headerLight .column .active {
+  color: #4a4a4a !important;
+  font-weight: bold;
+}
+.icon {
+  background-repeat: no-repeat;
+  background-position: center;
+}
+/* design侧边栏 sideLight */
+.sideLight {
+  overflow: hidden;
+  background-color: #ffffff;
+  box-shadow: 1px 1px 2px #cccccc;
+  position: absolute !important;
+  z-index: 50;
+  left: -200px;
+}
+.sideLight .columnSide {
+  position: relative;
+  float: left;
+  left: 40px;
+  top: 50px;
+}
+.sideLight .columnSide li {
+  list-style-type: none;
+  font-size: 14px;
+  margin-bottom: 27px;
+  cursor: pointer;
+  color: #9b9b9b;
+  text-decoration: none;
+}
+.sideLight .columnSide li:hover {
+  color: #b1b1b1;
+  font-weight: bold;
+}
+.sideLight .active {
+  color: #4a4a4a !important;
+  font-weight: bold;
+}
+.columnNameDesign {
+  margin-left: 11px;
+}
+.columnNameText {
+  display: inline-block;
+  height: 18px;
+  width: 75px;
+  overflow: hidden;
+}
+.ui-state-default:active {
+  background-color: #cccccc;
+}
+.ui-state-active {
+  background-color: #e6e6e6;
+}
+.ui-accordion {
+  font-size: 14px;
+  width: 200px;
+}
+.ui-accordion .ui-accordion-header {
+  padding-top: 11px;
+  padding-bottom: 11px;
+}
+.ui-accordion .ui-accordion-header .arrowRight {
+  float: right;
+  margin-right: 15px;
+  background-image: url(/Public/Home/svg/arrowRight.svg);
+  background-size: 8px;
+  width: 15px;
+  height: 18px;
+}
+.ui-accordion .ui-accordion-header .iconDelete {
+  float: left;
+  margin-right: 15px;
+  background-image: url(/Public/Home/svg/deleteDark.svg);
+  background-size: 10px;
+  width: 15px;
+  height: 18px;
+}
+.ui-accordion .ui-accordion-header .iconDeleteUnable {
+  background-image: url(/Public/Home/svg/deleteLight.svg);
+}
+.ui-accordion .ui-accordion-header .iconHome {
+  float: left;
+  margin-right: 4px;
+  background-image: url(/Public/Home/svg/home.svg);
+  background-size: 15px;
+  width: 15px;
+  height: 18px;
+}
+.ui-accordion .ui-accordion-header .iconGallery {
+  float: left;
+  margin-right: 4px;
+  background-image: url(/Public/Home/svg/gallery.svg);
+  background-size: 15px;
+  width: 15px;
+  height: 18px;
+}
+.ui-accordion .ui-accordion-header .iconBlog {
+  float: left;
+  margin-right: 4px;
+  background-image: url(/Public/Home/svg/blog.svg);
+  background-size: 15px;
+  width: 15px;
+  height: 18px;
+}
+.ui-accordion .ui-accordion-header .arrowUp {
+  float: right;
+  margin-right: 15px;
+  background-image: url(/Public/Home/svg/arrowRight.svg);
+  background-size: 8px;
+  width: 15px;
+  height: 18px;
+}
+.ui-accordion .ui-accordion-header .addIcon {
+  float: right;
+  margin-right: 15px;
+  background-image: url(/Public/Home/svg/add.svg);
+  background-size: 16px;
+  width: 16px;
+  height: 18px;
+}
+.ui-accordion .ui-accordion-header .angle {
+  -webkit-transition: all .25s;
+  -moz-transition: all .25s;
+  -ms-transition: all .25s;
+  -o-transition: all .25s;
+  transition: all .25s;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.ui-accordion .ui-accordion-header .rightAngle {
+  -webkit-transition: all .25s;
+  -moz-transition: all .25s;
+  -ms-transition: all .25s;
+  -o-transition: all .25s;
+  transition: all .25s;
+  transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+}
+.ui-accordion .ui-accordion-header .eye {
+  float: right;
+  margin-right: 5px;
+  background-size: 16px;
+  width: 16px;
+  height: 18px;
+}
+.ui-accordion .ui-accordion-header .viewDark {
+  background-image: url(/Public/Home/svg/viewDark.svg);
+}
+.ui-accordion .ui-accordion-header .viewLight {
+  background-image: url(/Public/Home/svg/viewLight.svg);
+}
+.ui-accordion .ui-accordion-header .addModuleIcon {
+  float: right;
+  margin-right: 15px;
+}
+.ui-accordion .ui-accordion-content {
+  padding: 0;
+  border: 0;
+}
+.addPageContent .addGallery:hover .iconGallery {
+  background-image: url(/Public/Home/svg/galleryLight.svg);
+}
+.addPageContent .addBlog:hover .iconBlog {
+  background-image: url(/Public/Home/svg/blogLight.svg);
+}
+.addPageContent .addGallery,
+.addPageContent .addBlog {
+  cursor: pointer;
+  float: left;
+  width: 100px;
+  height: 60px;
+  background-color: #f8f8f8;
+  color: #4a4a4a;
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  text-decoration: none;
+}
+.addPageContent .addGallery .iconGallery,
+.addPageContent .addBlog .iconGallery {
+  margin-top: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 2px;
+  background-image: url(/Public/Home/svg/gallery.svg);
+  background-size: 19px;
+  width: 20px;
+  height: 20px;
+}
+.addPageContent .addGallery .iconBlog,
+.addPageContent .addBlog .iconBlog {
+  margin-top: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 2px;
+  background-image: url(/Public/Home/svg/blog.svg);
+  background-size: 19px;
+  width: 20px;
+  height: 20px;
+}
+.addPageContent .addGallery:hover,
+.addPageContent .addBlog:hover {
+  background-color: #4a4a4a;
+  color: #ffffff;
+}
+/* design侧边栏 次级菜单 designNavNd */
+.designNavNd {
+  z-index: 60;
+  left: -200px;
+  overflow: hidden;
+}
+.designNavNd .sideBack {
+  height: 28px;
+  cursor: pointer;
+  text-align: center;
+  font-weight: bold;
+  padding-top: 10px;
+  color: #4a4a4a;
+  font-size: 14px;
+  background-image: url(/Public/Home/svg/backLight.svg);
+  background-repeat: no-repeat;
+  background-size: 45px;
+  background-position: 18px 16px;
+}
+.designNavNd .sideBack:hover {
+  background-image: url(/Public/Home/svg/backDark.svg);
+}
+.designNavNd .sideBack:active {
+  background-color: #e6e6e6;
+}
+.designNavNd .ui-accordion .ui-accordion-header .columnName {
+  padding-left: 10px;
+}
+/* design侧边栏 LOGO次级菜单 designNavDesignLogo */
+.designNavDesignLogo .columnItem {
+  padding: 15px 20px 5px;
+}
+.designNavDesignLogo .buttonToggle {
+  float: right;
+  margin-right: 8px;
+  margin-top: 2px;
+}
+/* 网页设计-首页 designNav */
+.content {
+  display: block;
+  padding-left: 202px;
+  overflow: hidden;
+  position: relative;
+}
+/* 网页logo 一级标题 二级标题 */
+.websiteHeader {
+  height: 50px;
+  position: relative;
+  margin-bottom: 15px;
+  width: 100%;
+}
+.websiteHeader .websiteTitle {
+  height: 50px;
+  position: relative;
+  display: table;
+  float: left;
+}
+.websiteHeader .websiteTitle .websiteTitleImg {
+  float: left;
+  width: 50px;
+  height: 50px;
+  background-image: url(/Public/Home/svg/demoAvator.svg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-right: 10px;
+  display: inline-block;
+}
+.websiteHeader .websiteTitle .websiteTitleArea {
+  display: table-cell;
+  vertical-align: middle;
+}
+.websiteHeader .websiteTitle .websiteTitleArea .websiteTitle1St {
+  color: #4a4a4a;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.websiteHeader .websiteTitle .websiteTitleArea .websiteTitle2nd {
+  color: #4a4a4a;
+  font-size: 12px;
+}
+.websiteHeader .websiteTitle .websiteTitleArea .websiteTitle2nd .websiteSubTitle {
+  display: inline;
+}
+.websiteHeader .columnRight {
+  font-size: 12px;
+  position: absolute;
+  float: right;
+  right: 0;
+  bottom: 0;
+}
+.websiteHeader .columnRight ul {
+  margin: 0 !important;
+}
+.websiteHeader .columnRight li {
+  float: left;
+  list-style-type: none;
+  margin-right: 20px;
+}
+.websiteHeader .columnRight li a {
+  color: #9b9b9b;
+  text-decoration: none;
+}
+.websiteHeader .columnRight li a:hover {
+  color: #b1b1b1;
+  font-weight: bold;
+}
+.websiteHeader .columnRight .active {
+  color: #4a4a4a !important;
+  font-weight: bold;
+}
+.design {
+  display: none;
+}
+.designIndex {
+  padding: 20px;
+}
+.designIndex .carousel {
+  width: 100%;
+}
+.carouselImg {
+  width: 100%;
+}
+/* 画廊 designGallery */
+.designGallery {
+  padding: 20px 20px 0px 20px;
+}
+.designGallery .galleryItem {
+  float: left;
+  margin-bottom: 23px;
+  /* 		@media screen and (max-width:1600px) {
+	.galleryImg {
+		width: 320px;
+		height: 217px;
+	}
+}
+@media screen and (max-width:1440px) {
+	.galleryImg {
+		width: 280px;
+		height: 190px;
+	}
+}
+@media screen and (max-width:1366px) {
+	.galleryImg {
+		width: 260px;
+		height: 176px;
+	}
+}
+@media screen and (max-width:1024px) {
+	.galleryImg {
+		width: 245px;
+		height: 166px;
+	}
+} */
+}
+.designGallery .galleryItem .galleryImg {
+  max-width: 100%;
+  box-shadow: 1px 1px 3px #4a4a4a;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 280px;
+  height: 190px;
+  cursor: pointer;
+}
+.designGallery .galleryItem .galleryImg .galleryImgCover {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.35);
+  bottom: 0;
+  position: absolute;
+  color: #ffffff;
+  box-sizing: border-box;
+  padding: 4px 10px 2px;
+}
+.designGallery .galleryItem .galleryImg .galleryImgCover .galleryImgTitle {
+  font-weight: bold;
+  font-size: 14px;
+  width: 100%;
+  max-height: 19px;
+  overflow: hidden;
+}
+.designGallery .galleryItem .galleryImg .galleryImgCover .galleryImgDisc {
+  font-size: 12px;
+  width: 90%;
+  max-height: 32px;
+  overflow: hidden;
+}
+.designGallery .galleryItem .galleryDelete {
+  position: absolute;
+  right: 7px;
+  bottom: 8px;
+  z-index: 10;
+  cursor: pointer;
+}
+.designGallery .galleryItem .galleryImg {
+  width: 320px;
+  height: 217px;
+}
+/* 博客 designBlogArea */
+.designBlog,
+.designBlogArea {
+  padding: 20px 20px 0px 20px;
+}
+.designBlog .article,
+.designBlogArea .article {
+  display: block;
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 14px;
+  color: #9b9b9b;
+}
+.designBlog .article .articleFrame,
+.designBlogArea .article .articleFrame {
+  min-height: 570px;
+}
+.designBlog .article .articleFrame .articleCover,
+.designBlogArea .article .articleFrame .articleCover {
+  display: block;
+  margin: 0 auto;
+  height: 200px;
+  width: 100%;
+  border-radius: 8px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.designBlog .article .articleFrame .articleTitle,
+.designBlogArea .article .articleFrame .articleTitle {
+  color: #4a4a4a;
+  margin: 20px 0 15px;
+  font-size: 36px;
+  font-weight: bold;
+}
+.designBlog .article .articleFrame .articleContent,
+.designBlogArea .article .articleFrame .articleContent {
+  width: 100%;
+  min-height: 320px;
+}
+.designBlog .article .articlePage,
+.designBlogArea .article .articlePage {
+  width: 100%;
+}
+.designBlog .article .articlePage .pageUp,
+.designBlogArea .article .articlePage .pageUp {
+  margin: 50px 0 30px;
+  cursor: pointer;
+  float: left;
+  text-align: left;
+}
+.designBlog .article .articlePage .pageUp .pageUpFlag,
+.designBlogArea .article .articlePage .pageUp .pageUpFlag {
+  color: #4a4a4a;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 3px;
+}
+.designBlog .article .articlePage .pageDown,
+.designBlogArea .article .articlePage .pageDown {
+  margin: 50px 0 30px;
+  cursor: pointer;
+  float: right;
+  text-align: right;
+}
+.designBlog .article .articlePage .pageDown .pageDownFlag,
+.designBlogArea .article .articlePage .pageDown .pageDownFlag {
+  color: #4a4a4a;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 3px;
+}
+/* 页面模态框 designModal */
+.designNavModal {
+  display: none;
+  position: absolute;
+  background-color: #4a4a4a;
+  z-index: 20;
+  opacity: .28;
+  height: 100%;
+  width: 100%;
+}
+/* 三级菜单 designNavMenu */
+.designNavMenu {
+  position: absolute;
+  left: -400px;
+  z-index: 30;
+  width: 400px;
+  box-shadow: 1px 1px 2px #9b9b9b;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+.designNavMenu .MenuButton .buttonSave,
+.designNavMenu .MenuButton .buttonCancel,
+.designNavMenu .MenuButton .buttonConfirm {
+  box-sizing: border-box;
+  padding-top: 11px;
+  float: left;
+  width: 50%;
+  height: 40px;
+  color: #9b9b9b;
+  text-align: center;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.designNavMenu .MenuButton .buttonCancel {
+  background-color: #f8f8f8;
+}
+.designNavMenu .MenuButton .buttonCancel:hover {
+  font-weight: bold;
+  color: #4a4a4a;
+}
+.designNavMenu .MenuButton .buttonCancel:active {
+  background-color: #e6e6e6;
+}
+.designNavMenu .MenuButton .buttonSave,
+.designNavMenu .MenuButton .buttonConfirm {
+  background-color: #e6e6e6;
+}
+.designNavMenu .MenuButton .buttonSave:hover,
+.designNavMenu .MenuButton .buttonConfirm:hover {
+  font-weight: bold;
+  color: #4a4a4a;
+}
+.designNavMenu .MenuButton .buttonSave:active,
+.designNavMenu .MenuButton .buttonConfirm:active {
+  background-color: #cccccc;
+}
+.designNavMenu .MenuButton .buttonConfirm {
+  display: none;
+}
+.designNavMenu .designNavMenuEdit,
+.designNavMenu .designNavMenuConfirm {
+  margin: 65px 40px 0px 20px;
+}
+.designNavMenu .designNavMenuEdit .MenuItem,
+.designNavMenu .designNavMenuConfirm .MenuItem {
+  margin-bottom: 20px;
+}
+.designNavMenu .designNavMenuEdit .MenuTitle,
+.designNavMenu .designNavMenuConfirm .MenuTitle {
+  font-size: 14px;
+  color: #4a4a4a;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+.designNavMenu .designNavMenuEdit .MenuInput,
+.designNavMenu .designNavMenuConfirm .MenuInput {
+  padding-left: 10px;
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+.designNavMenu .designNavMenuEdit #setDomain,
+.designNavMenu .designNavMenuConfirm #setDomain {
+  width: 78%;
+  float: left;
+}
+.designNavMenu .designNavMenuEdit .setDomain,
+.designNavMenu .designNavMenuConfirm .setDomain {
+  color: #4a4a4a;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 40px;
+}
+.designNavMenu .designNavMenuEdit .MenuTips,
+.designNavMenu .designNavMenuConfirm .MenuTips {
+  font-size: 12px;
+  color: #b1b1b1;
+}
+.designNavMenu .designNavMenuEdit .MenuText,
+.designNavMenu .designNavMenuConfirm .MenuText {
+  font-size: 14px;
+  color: #9b9b9b;
+}
+.designNavMenu .designNavMenuConfirm {
+  display: none;
+}
+.designNavMenu .designNavMenuData {
+  margin: 40px 40px 0px 40px;
+}
+.designNavMenu .designNavMenuData .MenuItem {
+  margin-bottom: 20px;
+}
+.designNavMenu .designNavMenuData .MenuIcon {
+  float: left;
+  margin-right: 10px;
+}
+.designNavMenu .designNavMenuData .MenuTitle {
+  font-size: 14px;
+  color: #4a4a4a;
+  margin-left: 5px;
+}
+.designNavMenu .designNavMenuData .MenuCount {
+  font-size: 28px;
+  color: #4a4a4a;
+  margin-left: 5px;
+  font-weight: bold;
+}
+/* 博客二级菜单 blogArticle */
+.blogMenu {
+  margin: 65px 0px 0px 0px !important;
+  overflow: hidden;
+}
+.blogMenu .blogArticle {
+  cursor: pointer;
+  box-sizing: border-box;
+  height: 120px;
+  margin-bottom: 3px !important;
+  background-color: #f8f8f8;
+  width: 100%;
+}
+.blogMenu .blogArticle .blogArticleItem {
+  display: block;
+}
+.blogMenu .blogArticle .blogArticleItem .blogArticleImg {
+  float: left;
+  width: 100px;
+  height: 100px;
+  background-image: url(/Public/Home/img/demo.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: 10px;
+  -webkit-transition: all .1s;
+  -moz-transition: all .1s;
+  -ms-transition: all .1s;
+  -o-transition: all .1s;
+  transition: all .1s;
+}
+.blogMenu .blogArticle .blogArticleItem .blogArticleTitle {
+  display: block;
+  float: left;
+  font-size: 18px;
+  color: #4a4a4a;
+  width: 180px;
+  margin: 20px 0 12px 8px;
+}
+.blogMenu .blogArticle .blogArticleItem .blogArticleContent {
+  position: relative;
+  left: 8px;
+  font-size: 14px;
+  color: #9b9b9b;
+  width: 260px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.blogMenu .blogArticle .blogArticleItem:hover .blogArticleImg {
+  padding: 10px;
+  margin: 0px;
+}
+.blogMenu .blogArticle .blogArticleItem:hover .blogArticleTitle,
+.blogMenu .blogArticle .blogArticleItem:hover .blogArticleContent {
+  font-weight: bold;
+}
+.blogMenu .blogArticle .blogArticleFunction {
+  width: 200px;
+  height: 120px;
+  position: absolute;
+  right: -100px;
+  z-index: 100;
+  opacity: 0;
+  -webkit-transition: all .2s;
+  -moz-transition: all .2s;
+  -ms-transition: all .2s;
+  -o-transition: all .2s;
+  transition: all .2s;
+}
+.blogMenu .blogArticle .blogArticleFunction .blogArticleFunc {
+  width: 100px;
+  height: 120px;
+  position: absolute;
+  right: 0px;
+  -webkit-transition: all .25s;
+  -moz-transition: all .25s;
+  -ms-transition: all .25s;
+  -o-transition: all .25s;
+  transition: all .25s;
+}
+.blogMenu .blogArticle .blogArticleFunction .blogArticleFunc .blogArticleEdit,
+.blogMenu .blogArticle .blogArticleFunction .blogArticleFunc .blogArticleDelete {
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 14px;
+  padding: 20px;
+  font-weight: bold;
+  background-color: #e6e6e6;
+  color: #9b9b9b;
+  height: 50%;
+  width: 100%;
+}
+.blogMenu .blogArticle .blogArticleFunction .blogArticleDelete:hover {
+  background-color: #4a4a4a;
+  color: #ffffff;
+}
+.blogMenu .blogArticle .blogArticleFunction .blogArticleEdit:hover {
+  background-color: #4a4a4a;
+  color: #ffffff;
+}
+.blogMenu .blogArticle:hover .blogArticleFunction {
+  opacity: 1;
+}
+.blogMenu .blogArticle:hover .blogArticleFunction .blogArticleFunc {
+  right: 100px;
+}
+.blogMenu .blogArticleAdd {
+  margin: 0px 20px;
+  box-sizing: border-box;
+  width: 360px;
+  height: 40px;
+  text-align: center;
+  padding: 8px 0;
+  color: #9b9b9b;
+  border: 1px solid #9b9b9b;
+  cursor: pointer;
+}
+.blogMenu .blogArticleAdd:hover {
+  color: #ffffff;
+  background-color: #4a4a4a;
+  font-weight: bold;
+}
+.blogMenu .MenuItemLink {
+  margin-left: 20px;
+  margin-right: 40px;
+}
+/* 编辑器插件 .simditor */
+.simditor {
+  border: 0 !important;
+}

@@ -1,0 +1,150 @@
+
+<div class="design designIndex">
+	<div class="websiteHeader">
+		<div class="websiteTitle">
+			<div class="websiteTitleImg">
+				
+			</div>
+			<div class="websiteTitleArea">
+				<div class="websiteTitle1St"></div>
+				<div class="websiteTitle2nd">
+					<div class="websiteSubTitle">还未添加网站简介</div>
+				</div>
+			</div>
+		</div>
+		<div class="columnRight">
+			<ul>
+				<li><a href="" class="rightNavIndex active">首页</a></li>
+				<volist name="column" id="vo">
+					<if condition="$vo.visible eq 1 AND $vo.status eq 1">
+						<li><a class="columnLink" typename="{$vo.type}" name="{$vo.id}" href="">{$vo.name}</a></li>
+					<else/>
+					</if>
+				</volist>
+			</ul>
+		</div>
+	</div>
+<div id="index" class="vp_body main_page">
+		<div class="vp_btn_group">
+			<button id="pre" class="vp_pre">
+			<!-- <svg width="20" height="70" version="1.1" xmlns="http://www.w3.org/2000/svg">
+					<polyline points="20,0 0,35 20,70"/>
+				</svg> -->
+				</button>
+				<button id="next" class="vp_next">
+				<!-- <svg width="20" height="70" version="1.1" xmlns="http://www.w3.org/2000/svg">
+						<polyline points="0,0 20,35 0,70"/>
+					</svg> -->
+					</button>
+				</div>
+				<div id="item_group" class="vp_item_group">
+					<!-- You can add any number of groups of items here -->
+					<volist name="list" id="vo">
+					<div class="vp_item">
+						<notempty name="vo['link']">
+						<a class="vp_link"href="">
+							</notempty>
+							<div class="vp_img" name="{$vo.id}" style="background-image: url({$vo.path});">
+								
+							</div>
+							<notempty name="vo['link']">
+						</a>
+						</notempty>
+						<div class="vp_words">
+							<h1 class="vp_title">
+							{$vo.name}
+							</h1>
+							<p class="vp_desc">
+								{$vo.description}
+							</p>
+						</div>
+					</div>
+					</volist>
+					<!-- 		<volist name="list" id="vo">
+					<div class="vp_item">
+						<notempty name="vo['link']">
+						<a href="{$vo.link}" target="_blank">
+								</notempty>
+								<img class="vp_img"  src="">
+								<notempty name="vo['link']">
+						</a>
+						</notempty>
+						
+						<div class="vp_words">
+								<h1>{$vo.name}</h1>
+								<p>{$vo.description}</p>
+						</div>
+					</div>
+					</volist> -->
+					
+					</div> <!-- vp_item_group -->
+					<div id="vp_item_btn_group" class="vp_item_btn_group"></div>
+					<div id="show_info_btn" class="show_info_btn btn_towhite">
+						<svg width="30" height="30" version="1.1" xmlns="http://www.w3.org/2000/svg">
+							<polyline points="5,20 15,10 25,20"/>
+							</svg>
+						</div>
+						</div> <!-- vp_body -->
+</div>
+
+<link rel="stylesheet" type="text/css" href="__CSS__/carousel.css">
+<script type="text/javascript" src="__JS__/carousel.js"></script>
+<script type="text/javascript" src="__JS__/ModalResetting.js"></script>
+<script type="text/javascript">
+	$(".designIndex").css('height', height - 180 + "px");
+	$(".carousel-inner").css('max-height', height - 210 + "px");
+	$(".designNavModal").css('height', height - 120 + "px");
+	$(".designNavModal").css('width', width - 185 + "px");
+	$(".designNavMenu").css('height', height - 120 + "px");
+	$(".vp_body").css('height', height - 220 + "px");
+	/*获取当前网站信息*/
+    $.post('/Design/getCurWebsiteInfo', function(data) {
+    	if (data[0]["logo_path"]) {
+    		$(".websiteTitleImg").css('background-image', 'url(' + data[0]["logo_path"] +')');
+    	}
+    	if (data[0]["name"]) {
+    		$(".websiteTitle1St").text(data[0]["name"]);
+    	}
+    	if (data[0]["sub_title"]) {
+    		$(".websiteSubTitle").text(data[0]["sub_title"]);
+    	}
+    });
+   	/*开启轮播图*/
+	setTimeout(function() {
+	    $().viewpager({
+			auto: true,
+			speed: 5000
+	    });
+	}, 100);
+    /*点击遮罩返回*/
+    $(".designNavModal").click(function() {
+		$(".designNavModal").fadeOut(400);
+		$(".designNavMenu").animate({
+		        left: '-400px',
+		    }, 300);
+    });
+	/*点击右导航栏进行跳转*/
+	$(".columnLink").click(function() {
+		cur_id = $(this).attr('name');
+		if ($(this).attr('typename') == 1) {
+	        $(".content").load('designGallery.html?cid=' + cur_id, function() {
+	            $(".designGallery").fadeIn(400)
+	        });
+		}
+		else {
+			$(".content").load('designBlog.html?cid=' + cur_id, 
+				function() {
+	            $(".designBlog").fadeIn(400)
+	        });
+		}
+		setTimeout(function() {
+			$(".sidebar").load("designNav.html", function() {
+				$(".designNav").fadeIn();
+				$(".sideNav").animate({
+					left: '0px'
+				},0);
+			});
+		}, 300);
+		return false;
+	});
+</script>

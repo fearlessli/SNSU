@@ -1,0 +1,284 @@
+
+<div class="designNavMenu">
+	<div class="MenuButton">
+		<div class="buttonCancel">
+			取消
+		</div>
+		<div class="buttonSave">
+			保存
+		</div>
+		<div class="buttonConfirm">
+			确认
+		</div>
+	</div>
+	<div class="designNavMenuEdit blogMenu">
+		<volist name="list" id="vo">
+			<div class="MenuItem blogArticle">
+				<div class="blogArticleFunction">
+					<div class="blogArticleFunc">
+						<div class="blogArticleEdit" name="{$vo.id}">
+							编辑
+						</div>
+						<div class="blogArticleDelete" name="{$vo.id}">
+							删除
+						</div>
+					</div>
+				</div>
+				<div class="blogArticleItem" name="{$vo.id}">
+					<div class="blogArticleImg">
+
+					</div>
+					<div class="blogArticleTitle">
+						{$vo.title}
+					</div>
+					<div class="blogArticleContent">
+						{$vo.sub_title}
+					</div>
+				</div>
+			</div>
+		</volist>
+		<div class="MenuItem">
+			<div class="blogArticleAdd">
+				新增博客
+			</div>
+		</div>
+<!-- 		<div class="MenuItem MenuItemLink">
+	<div class="MenuTitle">链接信息</div>
+	<input type="url" class="input MenuInput" placeholder="http://">
+	<div class="MenuTips">此链接地址不可更改</div>
+</div> -->
+	</div>
+	<div class="designNavMenuConfirm">
+		<div class="MenuItem">
+			<div class="MenuTitle">确认删除？</div>
+		</div>
+		<div class="MenuText">
+			删除后该项目将不可恢复，
+		</div>
+		<div class="MenuText">
+			确认是否删除。
+		</div>
+	</div>
+</div>
+<div class="designNavModal">
+</div>
+
+<!-- 编辑博客模态框 dialog-edit -->
+<div id="dialog-edit" >
+	<div class="modalBlogEdit">
+		<div class="modalBlogEditContent">
+			<textarea id="editor" class="editTextarea" placeholder="在此输入你的内容"></textarea>
+		</div>
+	</div>
+
+</div>
+
+<!-- 删除博客模态框 dialog-confirm-blog -->
+<div id="dialog-confirm-blog" >
+	<div class="modalConfirm">
+		<div class="textTitleLarge">确认删除博客？</div>
+		<br>
+		<div class="textTitle">删除后博客将不可恢复，是否确认删除。</div>
+		
+	</div>
+</div>
+
+<div class="design designBlog">
+	<div class="websiteTitle">
+		<div class="websiteTitleImg">
+			
+		</div>
+		<div class="websiteTitle1St"></div>
+		<div class="websiteTitle2nd">
+			<div class="websiteSubTitle">还未添加网站简介</div>
+			<div class="columnRight">
+				<ul>
+					<li><a href="">首页</a></li>
+					<li><a href="">画廊</a></li>
+					<li><a href="" class="active">博客</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="designBlogArea">
+		<div class="blogContent">
+			文本内容，图文内容
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" src="__JS__/ModalResetting.js"></script>
+<script type="text/javascript">
+	$(".designGallery").css('height', height - 180 + "px");
+	$(".carousel-inner").css('max-height', height - 210 + "px");
+	$(".designNavModal").css('height', height - 120 + "px");
+	$(".designNavModal").css('width', width - 185 + "px");
+	$(".designNavMenu").css('height', height - 120 + "px");
+
+	/*编辑博客模态框 blogArticleEdit*/
+	$("#dialog-edit").dialog({
+		resizable: false,
+		draggable: false,
+		dialogClass: "no-close",
+		buttons: {
+			"预览": function () {
+				$(this).dialog("");
+			},
+			"取消": function () {
+				$(this).dialog("close");
+			},
+			"确认": function () {
+				$(this).dialog("");
+/*				$.post('/Design/addBlog', {
+					param1: 'value1'
+				}, function(data) {
+				});*/
+			},
+		},
+		autoOpen: false,
+		show: {
+			effect: "fade",
+			duration: 200,
+		},
+		hide: {
+			effect: "fade",
+			duration: 200,
+		},
+		height: 600,
+		width: 820,
+		modal: true,
+	});
+	/*点击编辑&添加博客按钮 blogArticleEdit blogArticleAdd*/
+	$(".blogArticleAdd").click(function () {
+		$("#dialog-edit").dialog("open");
+		$(".modalBlogEdit").show();
+		$(".ui-widget-overlay").click(function () {
+			$("#dialog-edit").dialog("close");
+		});
+	});
+
+	/* 删除博客模态框 blogArticleDelete */
+	$("#dialog-confirm-blog").dialog({
+		resizable: false,
+		draggable: false,
+		dialogClass: "no-close",
+		buttons: {
+			"取消": function () {
+				$(this).dialog("close");
+			},
+			"确认": function () {
+				$(this).dialog("");
+			},
+		},
+		autoOpen: false,
+		show: {
+			effect: "fade",
+			duration: 200,
+		},
+		hide: {
+			effect: "fade",
+			duration: 200,
+		},
+		height: 360,
+		width: 540,
+		modal: true,
+	});
+	$(".blogArticleDelete").click(function () {
+		$("#dialog-confirm-blog").dialog("open");
+		$(".modalConfirm").show();
+		$(".ui-widget-overlay").click(function () {
+			$("#dialog-confirm-blog").dialog("close");
+		});
+	});
+	/*	文本编辑器*/	
+	var editor = new Simditor({
+		textarea: $('#editor'),
+		pasteImage: true,
+		upload: {
+			url: '/Common/simditorUploadImg',
+			fileKey: 'fileDataFileName',
+			connectionCount: 3,
+		},
+	});
+	$(".ui-dialog-titlebar").append('<input class="editInput" type="text" placeholder="编辑博客名称">');
+	$("[aria-describedby='dialog-edit']").find(".ui-dialog-buttonpane").prepend('<div class="modalBlogEditCover"><div class="coverField"><div class="coverView"></div><div class="coverPreview"><div class="imgListUploadCover"><div class="coverPercent">0%</div><div class="coverPercentBar"><div class="coverPercentBarProgress"></div></div></div></div></div><div class="coverUpload"><input type="file" id="upload_image" name="upload_image" multiple> <div class="coverUploadIcon"><img src="__SVG__/add.svg" width="25" height="25" alt=""></div><div class="coverUploadTitle">上传封面</div></div><div class="coverTemplate">选择模板</div></div>');
+	/*滚动条*/
+	$('#dialog-edit').perfectScrollbar({suppressScrollX: true});
+	$('.designNavMenu').perfectScrollbar({suppressScrollX: true});
+	/*获取当前网站信息*/
+    $.post('/Design/getCurWebsiteInfo', function(data) {
+    	if (data[0]["logo_path"]) {
+    		$(".websiteTitleImg").css('background-image', 'url(' + data[0]["logo_path"] +')');
+    	}
+    	if (data[0]["name"]) {
+    		$(".websiteTitle1St").text(data[0]["name"]);
+    	}
+    	if (data[0]["sub_title"]) {
+    		$(".websiteSubTitle").text(data[0]["sub_title"]);
+    	}
+    });
+
+    $(".designBlog").attr('name', cur_id);
+    /*删除当前栏目*/
+    $(".buttonConfirm").click(function() {
+    	$.post('/Design/deleteGallery', {cid: col_id},
+    		function (data) {
+    			if (data) {
+    				$.snackbar({content: '删除博客成功'});
+    			}
+    			else {
+    				$.snackbar({content: '删除博客失败'});
+    			}
+    		});
+    	
+		setTimeout(function() {
+			$(".sidebar").load("designNav.html", function() {
+				$(".designNav").fadeIn();
+				$(".sideNav").animate({
+					left: '0px'
+				},0);
+			});
+		}, 300);
+		asdf
+
+    });
+	/*头像图片上传*/
+	$(function() {  
+		$(".coverUpload").click(function() {
+			
+			$(".coverPreview").fadeIn();
+
+		});
+	    $("#upload_image").fileupload({  
+	            url: '/Common/uploadImg',  
+	            sequentialUploads: true,
+	            autoUpload: true,
+				disableImageResize: false, 
+	            previewMaxWidth: 100,
+	            previewMaxHeight: 100,
+	            previewCrop: true,
+	            add: function (e, data) {
+				    if (data.files && data.files[0]) {
+				        var reader = new FileReader();
+				        reader.onload = function(e) {;
+				            $('.coverPreview').css('background-image', 'url(' + e.target.result +')');
+				        }
+				        reader.readAsDataURL(data.files[0]);
+				        data.submit();
+				    }
+				}
+	        }).bind('fileuploadadd', function (e, data) {
+	        	$(".coverPreview").fadeIn();
+	        }).bind('fileuploadprogress', function (e, data) {
+	            var progress = parseInt(data.loaded / data.total * 100, 10);  
+	            $(".coverPercentBarProgress").css('width',progress + '%'); 
+	            $(".coverPercent").html(progress + '%');  
+	        }).bind('fileuploaddone', function (e, data) {  
+				$.post('/User/', {path: data.result});
+				$(".content").load("userPersonal.html", function() {
+                    $(".userPersonal").fadeIn(200);
+                });
+                $(".header").load("userHeader.html");
+	    });       
+    });
+</script>

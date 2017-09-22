@@ -1,0 +1,102 @@
+
+
+
+<div class="avator">
+	<a class="avatorImg" href="index.html"></a>
+	<div class="avatorArea">
+		<div class="avatorName">用户名</div>
+		<div class="avatorEmail">邮箱</div>
+	</div>
+</div>
+	<div class="column">
+		<div class="columnLeft">
+			<ul>
+				<li><a value="myWebsite" class="columnItem myWebsite" href="#myWebsite">我的网站</a></li>
+				<li><a value="userCenter" class="columnItem userCenter"  href="#userCenter">个人中心</a></li>
+				<li><a value="securitySetting" class="columnItem securitySetting"  href="#securitySetting">安全设置</a></li>
+			</ul>
+		</div>
+		<div class="columnRight">
+			<ul>
+				<li><a onclick="quit()">退出登录</a></li>
+			</ul>
+		</div>
+	</div>
+
+<script type="text/javascript">
+	var loadPage = function(pageName) {
+
+	    $(".side").empty();
+	    $(".content").empty();
+	    if (pageName == "myWebsite") {
+	        $(".side").fadeOut();
+	        $(".content").load("userWebsite.html", function() {
+	            $(".userWebsite").fadeIn();
+	        });
+	        clearContent();
+	    };
+
+	    if (pageName == "userCenter") {
+	        $(".side").fadeIn();
+	        $(".side").load("userNavUser.html", function() {
+	            $(".userNavUser").show();
+	            $(".sideNav").animate({
+	                left: '0px'
+	            }, function() {
+	                $(".content").load("userPersonal.html", function() {
+	                    $(".userPersonal").fadeIn(200);
+	                });
+	            });
+	        });
+	    };
+
+	    if (pageName == "securitySetting") {
+	        $(".side").fadeIn();
+	        $(".side").load("userNavSecurity.html", function() {
+	            $(".sideNav").show();
+	            $(".sideNav").animate({
+	                left: '0px'
+	            }, function() {
+	                $(".content").load("userSecurityPassword.html", function() {
+	                    $(".userSecurityPassword").fadeIn(200);
+	                });
+	            });
+	        });
+	    };
+	};
+
+	/*读取url*/
+	var currentUrl = window.location.href;
+	var poundSign = currentUrl.indexOf("#");
+	var urlName = currentUrl.substring(poundSign + 1);
+	/*当页面加载时 默认加载userWebsite*/
+	if (urlName == "myWebsite" || poundSign == -1 ) {
+		$(".side").fadeOut();
+			$(".content").load("userWebsite.html", function() {
+			    $(".userWebsite").fadeIn();
+			});
+			$(".myWebsite").addClass('active');
+			clearContent();
+	}
+	else {
+		$("."+urlName).addClass('active');
+	}
+	loadPage(urlName);
+
+	/*当点击栏目按钮时*/
+	$(".columnItem").click(function() {
+	    var idName = $(this).attr('value');
+	    $(".columnItem").removeClass('active');
+	    $(this).addClass('active');
+	    loadPage(idName);
+	});
+	/*获取用户信息 from cookie*/
+	$(".avatorName").html(getCookie("user_name"));
+	$(".avatorEmail").html(getCookie("user_email"));
+	$(".avatorImg").css('background-image','url(' + getCookie("user_avator_path") + ')' ); 
+	/*退出登录*/
+	function quit() {
+		$.post('/User/quit');
+		window.location = "/index";
+	}
+</script>

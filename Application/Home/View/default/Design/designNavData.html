@@ -1,0 +1,22 @@
+<div class="sideNav sideLight designNavData">
+	<div class="columnSide">
+		<li class="designNavData">访问数据</li>
+	</div>
+</div>
+
+
+<script type="text/javascript" src="__JS__/ModalResetting.js"></script>
+<script>
+	$(function() {
+	    /*点击访问数据执行 designNavData */
+	    $(".designNavData").click(function() {
+	        /*$(".columnSide").find("li").removeClass('active');*/
+	        $(this).addClass('active');
+	        $(".designNavModal").fadeIn(400);
+	        $(".designNavMenu").animate({
+	            left: '200px',
+	        }, 400);
+	        MenuEdit();
+	    });
+	});
+</script>

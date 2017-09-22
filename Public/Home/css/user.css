@@ -1,0 +1,287 @@
+/* 依赖于main.less */
+/* 颜色规范 */
+/* 深色背景、导航字体颜色 */
+/* 导航常态颜色、二态加粗颜色 */
+/* 说明性文字颜色 */
+/* 字号规范 */
+/* user header */
+.headerDark {
+  box-shadow: 1px 1px 1px #4a4a4a;
+  background-color: #4a4a4a;
+}
+.headerDark .avator {
+  color: #ffffff;
+}
+.headerDark .avator .avatorImg:hover {
+  border: 2px solid #ffffff;
+}
+.headerDark .column .active {
+  color: #ffffff !important;
+  font-weight: bold;
+}
+/* user sideDark 侧边栏 */
+.sideDark {
+  background-color: #4a4a4a;
+  box-shadow: 1px 0px 1px #4a4a4a;
+  display: none;
+  position: relative;
+  left: -200px;
+}
+.sideDark .columnSide {
+  position: relative;
+  float: left;
+  left: 40px;
+  top: 50px;
+}
+.sideDark .columnSide li {
+  list-style-type: none;
+  font-size: 14px;
+  margin-bottom: 27px;
+}
+.sideDark .columnSide li a {
+  color: #9b9b9b;
+  text-decoration: none;
+}
+.sideDark .columnSide li a:hover {
+  color: #b1b1b1;
+  font-weight: bold;
+}
+.sideDark .columnSide .active {
+  color: #ffffff !important;
+  font-weight: bold;
+}
+/* user Password */
+.inputUsername {
+  position: relative;
+  top: 20px;
+  width: 340px;
+}
+.userSecurityPassword .inputList {
+  margin-bottom: 20px;
+}
+.userSecurityPassword .inputList .textTips {
+  color: #F44336;
+  float: right;
+  display: none;
+  margin-bottom: 10px;
+}
+.userSecurityPassword .inputList .inputPassword {
+  margin-bottom: 10px;
+  margin-top: 10px;
+  -webkit-transition: all .25s;
+  -moz-transition: all .25s;
+  -ms-transition: all .25s;
+  -o-transition: all .25s;
+  transition: all .25s;
+}
+.userSecurityPassword .textTips {
+  color: #8BC34A;
+  display: none;
+}
+.buttonLong {
+  width: 340px;
+}
+/* user */
+.userContent {
+  display: none;
+}
+/* user Personal */
+.userPersonal {
+  float: left;
+  position: relative;
+  top: 40px;
+  left: 40px;
+}
+.userPersonal .avatorView {
+  float: left;
+  display: block;
+  width: 100px;
+  height: 100px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-right: 20px;
+  box-shadow: 1px 1px 3px #ccc;
+}
+.userPersonal .avatorPreview {
+  float: left;
+  display: none;
+  width: 100px;
+  height: 100px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-right: 20px;
+  box-shadow: 1px 1px 3px #ccc;
+}
+.userPersonal .avatorPreview .imgListUploadCover {
+  opacity: .8;
+  color: #cccccc;
+  box-sizing: border-box;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  padding-top: 40px;
+  font-size: 18px;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.userPersonal .avatorPreview .imgListUploadCover .coverPercent {
+  margin-bottom: 25px;
+}
+.userPersonal .avatorPreview .imgListUploadCover .coverPercentBar {
+  width: 80px;
+  height: 2px;
+  margin: 0 auto;
+  background-color: #9b9b9b;
+}
+.userPersonal .avatorPreview .imgListUploadCover .coverPercentBarProgress {
+  height: 2px;
+  width: 0%;
+  background-color: #ffffff;
+}
+.userPersonal .uploadAvator {
+  cursor: pointer;
+  display: block;
+  float: left;
+  text-decoration: none;
+  background-color: #f8f8f8;
+  width: 100px;
+  height: 100px;
+  border: 1px solid #b1b1b1;
+}
+.userPersonal .uploadAvator #upload_image {
+  cursor: pointer;
+  opacity: 0;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  z-index: 10;
+}
+.userPersonal .uploadAvator .uploadIcon {
+  position: relative;
+  top: 30px;
+  left: 38px;
+}
+.userPersonal .uploadAvator .uploadText {
+  text-decoration: none;
+  font-size: 14px;
+  margin-left: 21px;
+  margin-top: 30px;
+  color: #9b9b9b;
+}
+/* user Website */
+.userWebsite {
+  padding: 30px 30px 0px 30px;
+}
+.userWebsite .websiteItem {
+  float: left;
+  margin-bottom: 50px;
+}
+.userWebsite .websiteItem .websiteItemArea {
+  max-width: 100%;
+  box-shadow: 1px 1px 3px #4a4a4a;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+.userWebsite .websiteItem .websiteItemArea .websiteImg {
+  position: absolute;
+  z-index: 1;
+}
+.userWebsite .websiteItem .websiteItemArea .websiteItemLink {
+  text-decoration: none;
+}
+.userWebsite .websiteItem .websiteItemArea .websiteItemEdit {
+  outline: none;
+  position: relative;
+  text-align: center;
+  font-size: 16px;
+  color: #9b9b9b;
+  font-weight: bold;
+  padding-top: 32%;
+  z-index: 1;
+  opacity: 0;
+  -webkit-transition: all .2s;
+  -moz-transition: all .2s;
+  -ms-transition: all .2s;
+  -o-transition: all .2s;
+  transition: all .2s;
+}
+.userWebsite .websiteItem .websiteItemArea .websiteItemEdit:hover {
+  color: #ffffff;
+}
+.userWebsite .websiteItem .websiteItemArea .websiteDelete {
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  right: 3px;
+  bottom: 5px;
+  z-index: 1;
+  opacity: 0;
+  -webkit-transition: all .2s;
+  -moz-transition: all .2s;
+  -ms-transition: all .2s;
+  -o-transition: all .2s;
+  transition: all .2s;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url(/Public/Home/svg/deleteLight.svg);
+  background-size: 12px;
+}
+.userWebsite .websiteItem .websiteItemArea .websiteImgBlur {
+  position: absolute;
+  height: 100% !important;
+  width: 100% !important;
+  opacity: 0;
+}
+.userWebsite .websiteItem .websiteItemArea:hover .websiteImgBlur,
+.userWebsite .websiteItem .websiteItemArea:hover .websiteDelete,
+.userWebsite .websiteItem .websiteItemArea:hover .websiteItemEdit {
+  opacity: 1;
+}
+.userWebsite .websiteItem .websiteItemArea:hover .websiteImg {
+  -webkit-transition: all .2s;
+  -moz-transition: all .2s;
+  -ms-transition: all .2s;
+  -o-transition: all .2s;
+  transition: all .2s;
+  -webkit-filter: blur(2px) brightness(0.7);
+  -moz-filter: blur(2px) brightness(0.7);
+  -o-filter: blur(2px) brightness(0.7);
+  -ms-filter: blur(2px) brightness(0.7);
+  filter: blur(2px) brightness(0.7);
+}
+.userWebsite .websiteItem .websiteAdd {
+  display: block;
+  box-shadow: 1px 1px 1px #e6e6e6;
+  border: 1px solid #cccccc;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+.userWebsite .websiteItem .websiteAdd .websiteAddIcon {
+  margin-top: 20%;
+}
+.userWebsite .websiteItem .websiteAdd .websiteAddTitle {
+  margin-top: 15px;
+  font-weight: bold;
+}
+.userWebsite .websiteItem:hover .websiteDomain {
+  opacity: 1;
+}
+.userWebsite .websiteName {
+  margin-top: 6px;
+}
+.userWebsite .websiteName .websiteDomain {
+  color: #9b9b9b;
+  opacity: 0;
+  -webkit-transition: all .25s ;
+  -moz-transition: all .25s ;
+  -ms-transition: all .25s ;
+  -o-transition: all .25s ;
+  transition: all .25s ;
+}

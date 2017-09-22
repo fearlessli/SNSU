@@ -1,0 +1,283 @@
+<div class="sideNav sideLight designNavNd designNavGallery">
+	<div class="sideBack">
+		<span>画廊</span>
+	</div>
+	<div id="accordionGallery">
+		<div class="group">
+			<h3 class="home">
+				<span class="columnName">添加图片</span>
+				<div class="arrowUp icon"></div>
+			</h3>
+			<div class="imgList">
+				<div class="imgListFrame imgListItem imgUploadPreview">
+					<div class="imgListUploadCover" name="{$vo.id}">
+						
+						<div class="coverPercent">
+							0%
+						</div>
+						<div class="coverPercentBar">
+							<div class="coverPercentBarProgress">
+								
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="imgListFrame imgUpload">
+					<div class="imgListBorder">
+						<input type="file" id="upload_image" name="upload_image" multiple>
+						<div class="imgUploadTitle ">
+							点击上传图片、视频
+						</div>
+						<div class="imgUploadTitleNd ">
+							或将文件拖至此处
+						</div>
+					</div>
+				</div>
+				<div class="imgListTips">
+					<p>
+						-图片
+					</p>
+					<p>
+						最多上传20张，格式为JPEG、PNG，每张不大于5MB。
+					</p>
+				</div>
+				<div class="imgListOptions">
+					<div class="imgListOptionsItem">
+						<div class="imgListOptionsName">封面显示图片名称 </div>
+						<div class="buttonToggle"><input class="mui-switch mui-switch-animbg toggleName" type="checkbox" checked></div>
+					</div>
+					<div class="imgListOptionsItem">
+						<div class="imgListOptionsDesc">封面显示图片描述</div>
+						<div class="buttonToggle"><input class="mui-switch mui-switch-animbg toggleDescr" type="checkbox" checked> </div>
+					</div>
+					<!-- <div><input class="mui-switch mui-switch-animbg" type="checkbox"> 默认未选中</div> -->
+					
+				</div>
+				<volist name="list" id="vo">
+				<div class="imgListFrame imgListItem" style="background-image: url({$vo.path});">
+					<div class="imgListCover" name="{$vo.id}">
+						<div class="imgListCoverTitle">编辑图片</div>
+					</div>
+					<div class="imgListIcon">
+						<div class="imgListEdit" name="{$vo.id}"></div>
+						<div class="imgListDelete" name="{$vo.id}"></div>
+					</div>
+				</div>
+				</volist>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	$(function() {
+		/*侧边栏栏目 accordion*/
+		$("#accordionGallery")
+			.accordion({
+				header: "> div > h3",
+				heightStyle: "content",
+				icons: null,
+			})
+			.sortable({
+				axis: "y",
+				handle: "h3",
+				stop: function(event, ui) {
+					// 当排序时，IE 不能注册 blur，所以触发 focusout 处理程序来移除 .ui-state-focus
+					ui.item.children("h3").triggerHandler("focusout");
+				}
+		});
+
+		/* 添加模块 addModule */
+		$(".addModule").hover(function() {
+			$(this).addClass('ui-state-hover');
+		}, function() {
+			$(this).removeClass('ui-state-hover');
+		});
+
+		/*置为编辑状态 designNavMenuEdit*/
+		var MenuEdit = function () {
+			$(".buttonConfirm").hide();
+			$(".buttonSave").fadeIn(400);
+			$(".designNavMenuConfirm").hide();
+			$(".designNavMenuEdit").fadeIn(400);
+		};
+
+		/*置为删除确认状态 designNavMenuConfirm*/
+		var MenuConfirm = function () {
+			$(".buttonSave").hide();
+			$(".buttonConfirm").fadeIn(400);
+			$(".designNavMenuEdit").hide();
+			$(".designNavMenuConfirm").fadeIn(400);
+		};
+
+		/*点击返回按钮 sideBack */
+		$(".sideBack").click(function() {
+	        if ($(".designNavModal").css('display') == "block") {
+	            $(".designNavModal").fadeOut(400);
+	            $(".designNavMenu").animate({
+	                    left: '-400px',
+	                }, 300,
+	                function () {
+	                    $(".designNavGallery").animate({
+	                            left: '-200px',
+	                        }, 300,
+	                        function() {
+	                            $(this).hide();
+	                        });
+	                }
+	            );
+	        }
+			else {
+				$(".designNavGallery").animate({
+					left: '-200px',
+				},300,
+				function () {
+					$(this).hide()
+				});
+			}
+		});
+
+		/*点击图片编辑区域执行 imgListEdit */
+		$(".imgListEdit , .imgListCover").click(function() {
+			pic_id = $(this).attr('name');
+			$(".designNavModal").fadeIn(400);
+			$(".designNavMenu").animate({
+					left: '200px',
+			},400);
+			MenuEdit();
+			$.post('/Design/getOneGalleryInfo', {id: pic_id}, 
+				function(data) {
+					var link = data[0]["link"];
+					if(link == ""){
+						var link = "http://"
+					}
+					$(".picName").val(data[0]["name"]);
+					$(".picDescription").val(data[0]["description"]);
+					$(".picLink").val(link);
+			});
+
+		});
+
+		/*点击删除按钮执行 imgListDelete*/
+/*		$(".imgListDelete").click(function() {
+
+					$(".designNavModal").fadeIn(400);
+					$(".designNavMenu").animate({
+							left: '200px',
+					},400);
+					MenuConfirm();
+			
+		});*/
+		$(".imgListDelete").click(function () {
+			imgid = $(this).attr('name');
+			$("#dialog-confirm-pic").dialog("open");
+			$(".modalConfirm").show();
+			$(".ui-widget-overlay").click(function () {
+				$("#dialog-confirm-pic").dialog("close");
+			});
+		});
+		/*获取封面是否显示信息*/
+		$.post('/Design/ajaxGetOneColumn', {
+			cid: cur_id
+		}, function(data) {
+			if(data[0]["pic_name_visible"] == 1){
+				$(".toggleName").prop('checked', true);
+			}
+			else {
+				$(".toggleName").prop('checked', false);
+			};
+			if(data[0]["pic_des_visible"] == 1){
+				$(".toggleDescr").prop('checked', true);
+			}
+			else {
+				$(".toggleDescr").prop('checked', false);
+			};
+		});
+		/*封面是否显示图片名称*/
+		$(".toggleName").click(function() {
+			$.post('/Design/setPicNameVisible', {
+				cid: cur_id
+			}, function(data) {
+				if (data) {
+	                $(".content").load('designGallery.html?cid=' + cur_id, function() {
+	                    $(".designGallery").fadeIn(400)
+	                });
+				}
+			});
+
+		});
+		/*封面是否显示图片描述*/
+		$(".toggleDescr").click(function() {
+			$.post('/Design/setPicDesVisible', {
+				cid: cur_id
+			}, function(data) {
+				if (data) {
+	                $(".content").load('designGallery.html?cid=' + cur_id, function() {
+	                    $(".designGallery").fadeIn(400)
+	                });
+				}
+			});
+
+		});
+		/*滚动条*/
+		$('.designNavNd').perfectScrollbar({suppressScrollX: true});
+		/*图片上传*/
+		$(function() {  
+			$(".imgUpload").click(function() {
+				$(".imgUploadPreview").fadeIn();
+			});
+		    $("#upload_image").fileupload({  
+		            url: '{:U('Common/uploadImg')}',  
+		            sequentialUploads: true,
+		            autoUpload: true,
+					disableImageResize: false, 
+		            previewMaxWidth: 140,
+		            previewMaxHeight: 90,
+		            previewCrop: true,
+		            add: function (e, data) {
+						if (data.files && data.files[0]) {
+					        var reader = new FileReader();
+					        reader.onload = function(e) {;
+					            $('.imgUploadPreview').css('background-image', 'url(' + e.target.result +')');
+					        }
+					        reader.readAsDataURL(data.files[0]);
+					        data.submit();
+					    }
+					}
+		        }).bind('fileuploadadd', function (e, data) {
+		        	$(".imgUploadPreview").fadeIn();
+		        }).bind('fileuploadprogress', function (e, data) {
+		            var progress = parseInt(data.loaded / data.total * 100, 10);  
+		            $(".coverPercentBarProgress").css('width',progress + '%'); 
+		            $(".coverPercent").html(progress + '%');  
+		        }).bind('fileuploaddone', function (e, data) {
+		            	if (data.result == 0) {
+		            		$.snackbar({content: '上传失败，文件格式不正确或大小超过5MB'});
+		            	}
+					    else{  
+							$.post('/Design/addGalleryPic', {path: data.result ,gid: cur_id},function (data) {
+								if (data) {
+									$.snackbar({content: '上传图片成功'});
+								}
+								else{
+									$.snackbar({content: '上传图片失败'});
+								}
+							});
+						}
+					setTimeout(function() {
+		                $(".side").load('designNavGallery.html?cid=' + cur_id, function() {
+		                    $(".designNavGallery").animate({
+		                        left: '0',
+		                    },0);
+		                    $(".designNavGallery").css('height', height - 120 + "px");
+		                });
+		                $(".content").load('designGallery.html?cid=' + cur_id, function() {
+		                    $(".designGallery").fadeIn(400)
+		                });
+					}, 300);
+
+
+		    });       
+	    }); 
+	});
+</script>

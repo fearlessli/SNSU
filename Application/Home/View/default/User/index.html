@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="cn">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<!-- <script type="text/javascript" src="__JS__/require.js" data-main="js/main"></script> -->
+	<link rel="stylesheet" type="text/css" href="__CSS__/jquery-ui.min.css">
+	<link rel="stylesheet" type="text/css" href="__CSS__/main.css">
+	<link rel="stylesheet" type="text/css" href="__CSS__/user.css">
+	<link rel="stylesheet" type="text/css" href="__CSS__/switch.css">
+	<link rel="stylesheet" type="text/css" href="__CSS__/simditor.css"/>
+	<link rel="stylesheet" type="text/css" href="__CSS__/perfect-scrollbar.css"/>
+	<link rel="stylesheet" type="text/css" href="__CSS__/nprogress.css">
+	<link rel="stylesheet" type="text/css" href="__CSS__/jquery.fileupload.css">  
+	<link rel="stylesheet" type="text/css" href="__CSS__/jquery.fileupload-ui.css">  
+	<link rel="stylesheet" type="text/css" href="__CSS__/snackbar.css">  
+
+
+	</head>
+	<body>
+		<!-- 头 -->
+		<div class="header headerDark"></div>
+		<!-- 侧导航栏 当内容部分为userWebsite时隐藏侧导航栏 -->
+		<!-- <link rel="import" href="userNav.html?__inline"> -->
+		<div class="side">
+			
+		</div>
+		<!-- content 内容部分 -->
+		<div class="content">
+			
+		</div>
+	</body>
+	<script type="text/javascript" src="__JS__/jquery.min.js"></script>
+	<script type="text/javascript" src="__JS__/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="__JS__/imagesloaded.pkgd.min.js"></script>
+	<script type="text/javascript" src="__JS__/masonry.pkgd.min.js"></script>
+	<script type="text/javascript" src="__JS__/unslider.min.js"></script>
+	<script type="text/javascript" src="__JS__/module.min.js"></script>
+	<script type="text/javascript" src="__JS__/hotkeys.min.js"></script>
+	<script type="text/javascript" src="__JS__/uploader.min.js"></script>
+	<script type="text/javascript" src="__JS__/simditor.min.js"></script>
+	<script type="text/javascript" src="__JS__/WindowSizing.js"></script>
+	<script type="text/javascript" src="__JS__/ModalResetting.js"></script>
+	<script type="text/javascript" src="__JS__/jquery.mousewheel.js"></script>
+	<script type="text/javascript" src="__JS__/perfect-scrollbar.js"></script>
+	<script type="text/javascript" src="__JS__/StackBlur.js"></script>
+	<script type="text/javascript" src="__JS__/nprogress.js"></script>
+	<script type="text/javascript" src="__JS__/jquery.iframe-transport.js"></script>
+	<script type="text/javascript" src="__JS__/jquery.fileupload.js"></script>
+	<script type="text/javascript" src="__JS__/jquery.fileupload-image.js"></script>
+	<script type="text/javascript" src="__JS__/snackbar.min.js"></script>
+	<script type="text/javascript" src="__JS__/jquery.viewpager.js"></script>
+	<script type="text/javascript" src="__JS__/jquery.validate.min.js"></script>	
+	<script type="text/javascript">
+		$(window).ajaxStart(function(){
+			NProgress.start();
+		});
+		
+		$(".header").load("userHeader.html");
+		$(window).ajaxStop(function(){
+			NProgress.done();
+		});
+		function getCookie(name) 
+		{ 
+		    var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+		 
+		    if(arr=document.cookie.match(reg))
+		 
+		        return decodeURIComponent(arr[2]); 
+		    else 
+		        return null; 
+		};
+		$("title").html(getCookie("user_name")+"的个人中心 - 向素");
+		 /*开启轮播图*/
+/*		$().viewpager({
+	        auto: true,
+	        speed: 4000
+	    });*/
+	</script>
+</html>

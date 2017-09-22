@@ -1,0 +1,675 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="icon" href="../../favicon.ico"> -->
+
+    <title>向素后台</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <!-- <link href="／__CSS__/dashboard.css" rel="stylesheet"> -->
+
+    <style type="text/css">
+        body {
+          padding-top: 50px;
+        }
+        .sub-header {
+          padding-bottom: 10px;
+          border-bottom: 1px solid #eee;
+        }
+        .navbar-fixed-top {
+          border: 0;
+        }
+        .sidebar {
+          display: none;
+        }
+        @media (min-width: 768px) {
+          .sidebar {
+            position: fixed;
+            top: 51px;
+            bottom: 0;
+            left: 0;
+            z-index: 1000;
+            display: block;
+            padding: 20px;
+            overflow-x: hidden;
+            overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+            background-color: #f5f5f5;
+            border-right: 1px solid #eee;
+          }
+        }
+        .nav-sidebar {
+          margin-right: -21px; /* 20px padding + 1px border */
+          margin-bottom: 20px;
+          margin-left: -20px;
+        }
+        .nav-sidebar > li > a {
+          padding-right: 20px;
+          padding-left: 20px;
+        }
+        .nav-sidebar > .active > a,
+        .nav-sidebar > .active > a:hover,
+        .nav-sidebar > .active > a:focus {
+          color: #fff;
+          background-color: #428bca;
+        }
+
+        .main {
+          padding: 20px;
+        }
+        @media (min-width: 768px) {
+          .main {
+            padding-right: 40px;
+            padding-left: 40px;
+          }
+        }
+        .main .page-header {
+          margin-top: 0;
+        }
+
+        .placeholders {
+          margin-bottom: 30px;
+          text-align: center;
+        }
+        .placeholders h4 {
+          margin-bottom: 0;
+        }
+        .placeholder {
+          margin-bottom: 20px;
+        }
+        .placeholder img {
+          display: inline-block;
+          border-radius: 50%;
+        }
+
+        .basicInfo h4 {
+            padding-bottom: 8px;
+        }
+
+        .feedback-container,
+        .uncheckeduser-container,
+        .analytics, 
+        .thumb-container {
+          display: none;
+        }
+
+        iframe {
+          width: 100%;
+          height: 700px;
+        }
+    </style>
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">向素</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="/Admin/quit">登出</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="#" data-to="overview">总览 <span class="sr-only">(current)</span></a></li>
+            <li><a href="#" data-to="uncheckeduser-container">审核</a></li>
+            <li><a href="#" data-to="feedback-container">反馈</a></li>
+            <li><a href="#" data-to="thumb-container">图片管理</a></li>
+            <li><a href="#" data-to="analytics">站点数据</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+          </ul>
+        </div>
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <div class="overview">
+            <h1 class="page-header">数据面板</h1>
+
+            <div class="row placeholders basicInfo">
+              <div class="col-xs-6 col-sm-3 placeholder">
+                <h4>用户数</h4>
+                <span class="text-muted h1">Something else</span>
+              </div>
+              <div class="col-xs-6 col-sm-3 placeholder">
+                <h4>用户网站数</h4>
+                <span class="text-muted h1">Something else</span>
+              </div>
+              <div class="col-xs-6 col-sm-3 placeholder">
+                <h4>图片</h4>
+                <span class="text-muted h1">Something else</span>
+              </div>
+              <div class="col-xs-6 col-sm-3 placeholder">
+                <h4>博客</h4>
+                <span class="text-muted h1">Something else</span>
+              </div>
+            </div>
+
+            <h2 class="sub-header">用户</h2>
+            <div class="table-responsive">
+              <table class="website-table table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>昵称</th>
+                    <th>用户邮箱</th>
+                    <th>网站数量</th>
+                    <th>登录IP</th>
+                    <th>最后一次登陆时间</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+              <div style="text-align:center;"><ul class="pagination user-pagination"></ul></div>
+          </div>
+        </div>
+
+        <div class="feedback-container">
+          <div class="feedback">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                from:TITLE
+              </div>
+              <div class="panel-body">
+                Basic panel example
+              </div>
+              <div class="panel-footer">
+                <time></time>
+              </div>
+            </div>
+          </div>
+          <div style="text-align:center;"><ul class="pagination feedback-pagination"></ul></div>
+        </div>
+
+        <div class="uncheckeduser-container">
+          <table class="uncheckuser-table table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>用户邮箱</th>
+                <th>申请理由</th>
+                <th>申请时间</th>
+                <th>状态</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+          <!-- Button trigger modal -->
+          <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#denyReason">
+            Launch demo modal
+          </button> -->
+
+          <!-- deny reason Modal -->
+          <div class="modal fade" id="denyModal" tabindex="-1" role="dialog" aria-labelledby="denyModalLabel">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="denyModalLabel">拒绝理由</h4>
+                </div>
+                <div class="modal-body">
+                  <textarea rows="10" style="width:100%;height:100%;" placeholder="您的的个人描述不足以完成注册申请，为了给更多的用户提供优质的服务，我们决定暂时驳回您的注册请求。"></textarea>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger deny" data-dismiss="modal">确定</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Modal End -->
+          <div style="text-align:center;"><ul class="pagination uncheckuser-pagination"></ul></div>
+        </div>
+
+        <div class="thumb-container">
+          <div class="thumb row">
+
+            <div class="col-xs-6 col-md-3">
+              <a href="#" class="thumbnail" data-target="#myModal" data-toggle="modal">
+                <!-- <img src="..." alt="..."> -->
+              </a>
+            </div>
+            <!-- <div class="col-xs-6 col-md-3">
+              <a href="#" class="thumbnail">
+                <img src="..." alt="...">
+              </a>
+            </div> -->
+          </div>
+
+          <!-- img preview Modal -->
+          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="myModalLabel">原图浏览</h4>
+                </div>
+                <div class="modal-body">
+                  <!-- 原图 -->
+                  <img class="img-responsive center-block" id="modal-pic" src="" alt="#">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger delete-pic" data-dismiss="modal">删除</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Modal End -->
+
+          <div style="text-align:center;"><ul class="pagination picture-pagination"></ul></div>
+        </div>
+
+        <div class="analytics">
+          <iframe src="http://tongji.baidu.com/web/welcome/login"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+    (function(){
+        // 每页多少个用户
+        var user_page_items = 15;
+        var user_start_index = 0;
+        var unchecked_user_page_items = 10;
+        var unchecked_user_start_index = 0;
+        var feedback_page_items = 10;
+        var feedback_start_index = 0;
+        var picture_start_index = 0;
+        var picture_page_items = 20;
+
+        // 获取网站基本信息
+        function getWebsiteInfo() {
+            $.post('/Admin/getInfo', {start:user_start_index, items:user_page_items}, function(data) {
+                // console.log("website : ");
+                // console.log(data);
+                updateBasicInfo(data);
+                updateTable(data);
+                updatePagination(data, 'user');
+                pagination_click('user');
+            }, 'json');
+        }
+
+        // 更新overview基本信息
+        function updateBasicInfo(data) {
+            var content_arr = ['user_count', 'user_website_count', 'pic_count', 'blog_count'];
+            var nodes = $('.basicInfo').children();
+            var tmp;
+            for (var i = 0, len = nodes.length; i < len; i++) 
+            {
+                for (var j = 0, c_len = nodes[i].childNodes.length; j < c_len; j++) 
+                {
+                    if (nodes[i] != undefined) 
+                    {
+                        tmp = nodes[i].childNodes[j];
+                        if (tmp.tagName == 'SPAN' || tmp.tagName == 'span') 
+                        {
+                            tmp.innerHTML = data[content_arr[i]];
+                        }
+                    }
+                }
+            }
+        }
+
+        // 更新用户列表
+        function updateTable(data) {
+            var date = new Date();
+            var tbody = $('.website-table tbody');
+            var content = '';
+            var data = data['user_map'];
+
+            for (var i = 0, len = data.length; i < len; i++) {
+                date.setTime(parseInt(data[i]['last_login_time'] * 1000));
+
+                // 用户网站子表格collapse
+                var w_content = '<table class="table table-bordered"><thead><tr><th>#</th><th>网站名称</th><th>域名</th></tr></thead><tbody>';
+
+                var website_list = data[i]['user_website'];
+                for (var j = 0, w_len = website_list.length; j < w_len; j++) {
+                    w_content = w_content + '<tr><td>' + website_list[j]['wid'] + '</td><td>' + website_list[j]['wname'] + '</td><td><a href="http://' + website_list[j]['domain'] + '.snsu.me" target="_blank">' + website_list[j]['domain'] + '</a></td></tr>';
+                }
+                w_content = w_content + '</tbody></table>';
+                // console.log(w_content);
+                // 子表格结束
+
+                // user table
+                content = content + '<tr><td>' + data[i]['user_id'] + '</td><td>' + data[i]['name'] + '</td>';
+
+                content = content + '<td><div><a data-toggle="collapse" href="#collapseExample' + i + '" aria-expanded="false" aria-controls="collapseExample">' + data[i].email + '</a><div class="collapse" id="collapseExample' + i + '">'+ w_content + '</div></div></td>';
+
+                content = content + '<td>' + website_list.length + '</td><td>' + data[i]['last_login_ip'] + '</td><td>' + date.toLocaleString() + '</td></tr>';
+            }
+
+            content = "<tbody>" + content + "</tbody>";
+            tbody.replaceWith(content);
+        }
+
+
+        // Feedback
+        function getFeedback() {
+            $.post('/Admin/getFeedback', {start:feedback_start_index, items:feedback_page_items}, function(data) {
+                // console.log("feedback : ");
+                // console.log(data);
+                updateFeedBack(data);
+                updatePagination(data, 'feedback');
+                pagination_click('feedback');
+            }, 'json');
+        }
+
+        function updateFeedBack(data) {
+            var date = new Date();
+            var feedback = $('.feedback');
+            var content = '';
+            var data = data['user_map'];
+            for (var i = 0, j = data.length; i < j; i++) {
+                date.setTime(parseInt(data[i].time) * 1000);
+                content = content + "<div class='panel panel-default'><div class='panel-heading'>from:" + data[i].email + "</div><div class='panel-body'>" + data[i].content + "</div><div class='panel-footer'><time>" + date.toLocaleString() + "</time></div></div>";
+            }
+            feedback.empty();
+            feedback.append(content);
+        }
+
+
+
+        // 获取图片列表
+        function getPicture() {
+          $.post('/Admin/getPicture', {start:picture_start_index, items: picture_page_items}, function(data) {
+            // console.log('picture');
+            // console.log(data);
+            updateThumbnail(data);
+            picture_click();
+            updatePagination(data, 'picture');
+            pagination_click('picture');
+          });
+        }
+
+        // 更新缩略图列表
+        function updateThumbnail(data) {
+          var thumbnail = $('.thumb');
+          var content = '';
+          for (var i = 0, j = data['user_map'].length; i < j; i++) {
+              var pic_name = data['user_map'][i]['name'];
+              var raw_pic_path = data['user_map'][i]['path'];
+              var new_pic_path = '';
+              for (var k = raw_pic_path.length - 1; k >= 0; k--) {
+                  // 在图片文件名前加缩略图前缀
+                  if (raw_pic_path[k] == '/') {
+                      var static_path = raw_pic_path.slice(0, k + 1);
+                      var dym_pic = 'thum_' + raw_pic_path.slice(k + 1);
+                      // var dym_pic = pic_path.slice(k + 1);
+                      new_pic_path = static_path.concat(dym_pic);
+                      // console.log(pic_path);
+                      break;
+                  }
+              }
+              content += '<div class="col-xs-6 col-md-3">';
+              // a标签data-raw属性放原图链接
+              content += '<a href="#" class="thumbnail" data-target="#myModal" data-toggle="modal" data-raw="' + raw_pic_path + '" data-name="' + pic_name + '"><img style="height:100px;width:100px" src="' + new_pic_path + '" alt="..."></a>';
+              content += '</div>';
+          }
+          thumbnail.empty();
+          thumbnail.append(content);
+        }
+
+        // thumbnail modal 弹出内容点击
+        function picture_click() {
+          // picture click
+          $('.thumbnail').click(function() {
+              var raw_pic_path = $(this).attr('data-raw');
+              var pic_name = $(this).attr('data-name');
+              $('#modal-pic').attr('src', raw_pic_path);
+              $('#modal-pic').attr('data-name', pic_name);
+          });
+          // Modal delete button click
+          $('.delete-pic').click(function() {
+              var is_del = confirm('确定删除该图片？');
+              if (is_del) {
+                  var email = '';
+                  var username = '';
+                  var pic_name = $('#modal-pic').attr('data-name');
+                  var raw_pic_path = $('#modal-pic').attr('src');
+                  // 删除数据库中对应数据
+                  $.post('/Admin/deletePicture', {path:raw_pic_path}, function(data) {
+                      // console.log(data[0]['name']);
+                      data = data[0];
+                      email = data['email'];
+                      username = data['name'];
+                      // 删除图片的邮件通知
+                      $.post('/Common/delete_pic_mail', {email:email, username:username, picname:pic_name}, function(data) {
+                          // console.log(data);
+                      });
+                  });
+                  // 删除掉对应的缩略图
+                  var thumbnail_list = $('.thumbnail');
+                  var thumbnail_a;
+                  for (var i = 0, j = thumbnail_list.length; i < j; i++) {
+                      thumbnail_a = $(thumbnail_list[i]);
+                      if (thumbnail_a.attr('data-raw') == raw_pic_path) {
+                          $(thumbnail_a.parent()).fadeOut(1000);
+                          break;
+                      }
+                  }
+              }
+          });
+        }
+
+
+        // 审核uncheckeduser
+        function getUncheckedUser() {
+            $.post('/Admin/getUncheckedUser', {start:unchecked_user_start_index, items:unchecked_user_page_items}, function(data) {
+                // console.log('uncheckuser');
+                // console.log(data);
+                updateUncheckUserTable(data);
+                updatePagination(data, 'uncheckuser');
+                checked_button_click();
+                pagination_click('uncheckuser');
+            });
+        }
+
+        // 更新为审核用户列表
+        function updateUncheckUserTable(data) {
+            var data = data['user_map'];
+            var content = '';
+            var table = $('.uncheckuser-table tbody');
+            var date = new Date();
+            for (var i = 0, j = data.length; i < j; i++) {
+                // Button => 
+                //    .deny
+                //    .allow
+                date.setTime(parseInt(data[i]['last_login_time'] * 1000));
+                content += "<tr><td>" + data[i]['id'] + "</td><td class='email'>" + data[i]['email'] + "</td><td>" + data[i]['application'] + "</td><td>" + date.toLocaleString() + "</td><td style='width:100px;'>" + '<div class="btn-group btn-group-xs deny-start-modal" role="group" aria-label="..."><button class="btn btn-xs btn-danger" type="submit" >拒绝</button><button class="btn btn-xs btn-success allow" type="submit">通过</button></div>' + "</td></tr>";
+            }
+          //   <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#denyReason">
+          //   Launch demo modal
+          // </button>
+
+            table.empty();
+            table.append(content);
+        }
+
+        // 通过/拒绝按钮
+        function checked_button_click() {
+            $('.deny-start-modal').click(function() {
+                // console.log(this.parentElement.parentElement);
+                var parent = this.parentElement.parentElement;
+                // data-raw : email
+                $('#denyModal').attr('data-raw', parent.childNodes[1].innerHTML);
+                $('#denyModal').modal('show');
+            });
+            $('.deny').click(function() {
+                // data-raw 从modal指向对应的用户列表项
+                var data_email = $('#denyModal').attr('data-raw');
+                var email_list = $('.email');
+                // 隐藏已被确认的拒绝用户列表项
+                for (var i = 0, j = email_list.length; i < j; i++) {
+                    if (email_list[i].innerHTML == data_email) {
+                        $(email_list[i].parentElement).fadeOut(1000);
+                        break;
+                    }
+                }
+
+                // 拒绝用户邮箱 拒绝理由
+                var email = data_email;
+                var reason = $('#denyModal textarea').text();
+                if (reason == '') {
+                    reason = $('#denyModal textarea').attr('placeholder');
+                }
+                // 更改用户状态
+                $.post('/Admin/checkUser', {email:email, status:4}, function(data) {
+                    // 审核杯具邮件
+                    $.post('/Common/apply_success_mail', {email:email, reason:reason}, function(data) {
+                        console.log(data);
+                    });
+                });
+            });
+            $('.allow').click(function() {
+                var is_allow = confirm('确定允许该用户申请？');
+                if (is_allow) {
+                    var parent = $(this.parentElement.parentElement.parentElement);
+                    parent.fadeOut(1000);
+                    var email = parent.children()[1].innerHTML;
+                    // 更改用户状态
+                    $.post('/Admin/checkUser', {email:email, status:1}, function(data) {
+                        // 审核通过邮件
+                        $.post('/Common/apply_fail_mail', {email:email}, function(data) {
+                            console.log(data);
+                        });
+                    });
+                }
+            });
+        }
+
+        /*
+         *    分页组件
+         */
+
+        // 生成分页按钮
+        function updatePagination(data,prefix) {
+            var class_name = '.' + prefix + '-pagination';
+
+            if (prefix == 'user') {
+                page_items = user_page_items;
+            } else if(prefix == 'feedback') {
+                page_items = feedback_page_items;
+            } else if(prefix == 'picture') {
+                page_items = picture_page_items;
+            } else if (prefix == 'uncheckuser') {
+                page_items = unchecked_user_page_items;
+            }
+
+            var content = '';
+            content += "<li><a href='###' aria-label='Previous'><span aria-hidden='true'>&laquo;</span></a></li>";
+
+            for (var i = 1, j = parseInt(data['user_count']) / page_items + 1; i < j; i++) {
+                content = content + "<li><a href='##'>" + i + "</a></li>";
+            }
+
+            content += "<li><a href='###' aria-label='Next'><span aria-hidden='true'>&raquo;</span></a></li>";
+
+            $(class_name).empty();
+            $(class_name).append(content);
+        }
+
+        // 注册分页按钮点击事件
+        function pagination_click(prefix) {
+          var class_name = '.' + prefix + '-pagination';
+          var start_index, page_items;
+          if (prefix == 'user') {
+            start_index = user_start_index;
+            page_items = user_page_items;
+          } else if (prefix == 'feedback') {
+            start_index = feedback_start_index;
+            page_items = feedback_page_items;
+          } else if (prefix == 'picture') {
+            start_index = picture_start_index;
+            page_items = picture_page_items;
+          } else if (prefix == 'uncheckuser') {
+            start_index = unchecked_user_start_index;
+            page_items = unchecked_user_page_items;
+          }
+
+          $(class_name + ' a').on("click", function() {
+              // console.log(this.text);
+              if (this.text == '»')
+                  start_index += page_items;
+              else if (this.start_index == '«')
+                  start_index -= page_items;
+              else {
+                  start_index = (parseInt(this.text) - 1) * page_items;
+              }
+
+              if (start_index < 0) start_index = 0;
+            
+              $(class_name + ' li').removeClass('active');
+              $(this).parent().addClass('active');
+
+              if (prefix == 'user') {
+                user_start_index = start_index;
+                user_page_items = page_items;
+                getWebsiteInfo();
+              } else if (prefix == 'feedback') {
+                feedback_start_index = start_index;
+                feedback_page_items = page_items;
+                getFeedback();
+              } else if (prefix == 'picture') {
+                picture_start_index = start_index;
+                picture_page_items = page_items;
+                getPicture();
+              } else if (prefix == 'uncheckuser') {
+                unchecked_user_start_index = start_index;
+                unchecked_user_page_items = page_items;
+                getUncheckedUser();
+              }
+          });
+        }
+
+        getWebsiteInfo();
+        getUncheckedUser();
+        getFeedback();
+        getPicture();
+
+        // 侧边栏的点击active状态切换
+        $('.sidebar ul li').click(function() {
+          var sidebar_type = this.childNodes[0].getAttribute('data-to');
+          var class_name = '.' + sidebar_type;
+          $('.sidebar ul li').removeClass('active');
+          $(this).addClass('active');
+          $('.main > div').hide();
+          $(class_name).show();
+        });
+
+    })();
+
+    </script>
+  </body>
+</html>

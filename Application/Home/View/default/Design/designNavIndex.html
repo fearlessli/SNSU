@@ -1,0 +1,253 @@
+<div class="sideNav sideLight designNavNd designNavIndex">
+	<div class="sideBack">
+		<span>首页</span>
+	</div>
+	<div id="accordionIndex">
+		<div class="group">
+			<h3 class="home">
+				<span class="columnName">Banner</span>
+				<div class="arrowUp icon"></div>
+			</h3>
+			<div class="imgList">
+				<volist name="list" id="vo">
+					<div class="imgListFrame imgListItem" style="background-image: url({$vo.path});">
+						<div class="imgListCover" name="{$vo.id}">
+							<div class="imgListCoverTitle">编辑图片</div>
+						</div>
+						<div class="imgListIcon">
+							<div class="imgListEdit" name="{$vo.id}"></div>
+							<div class="imgListDelete" name="{$vo.id}"></div>
+						</div>
+					</div>
+				</volist>
+
+				<div class="imgListFrame imgListItem imgUploadPreview">
+					<div class="imgListUploadCover">
+						
+						<div class="coverPercent">
+							0%
+						</div>
+						<div class="coverPercentBar">
+							<div class="coverPercentBarProgress">
+								
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="imgListFrame imgUpload">
+					<div class="imgListBorder">
+						<input type="file" id="upload_image" name="upload_image" multiple>  
+						<div class="imgUploadTitle ">
+							点击上传图片、视频
+						</div>
+						<div class="imgUploadTitleNd ">
+							或将文件拖至此处
+						</div>
+					</div>
+				</div>
+				<div class="imgListTips">
+					<p>
+						-图片
+					</p>
+
+					<p>
+						最多上传6张，格式为JPEG、PNG，每张不大于5MB。
+					</p>
+				</div>
+			</div>
+		</div>
+<!-- 		<div class="group">
+	<div class="addModule ui-accordion-header ui-state-default ui-corner-all ui-sortable-handle"><span
+			class="columnName">添加模块</span><span class="addModuleIcon">+</span></div>
+</div> -->
+	</div>
+</div>
+
+<script type="text/javascript" src="__JS__/ModalResetting.js"></script>
+<script>
+	$(function() {
+		/*侧边栏栏目 accordion*/
+		$("#accordionIndex")
+			.accordion({
+				header: "> div > h3",
+				heightStyle: "content",
+				icons: null,
+			})
+			.sortable({
+				axis: "y",
+				handle: "h3",
+				stop: function(event, ui) {
+					// 当排序时，IE 不能注册 blur，所以触发 focusout 处理程序来移除 .ui-state-focus
+					ui.item.children("h3").triggerHandler("focusout");
+			}
+		});
+
+		/* 添加模块 addModule */
+		$(".addModule").hover(function() {
+			$(this).addClass('ui-state-hover');
+		}, function() {
+			$(this).removeClass('ui-state-hover');
+		});
+
+		/*点击返回按钮 sideBack */
+		$(".sideBack").click(function() {
+	        if ($(".designNavModal").css('display') == "block") {
+	            $(".designNavModal").fadeOut(400);
+	            $(".designNavMenu").animate({
+	                    left: '-400px',
+	                }, 300,
+	                function () {
+	                    $(".designNavIndex").animate({
+	                            left: '-200px',
+	                        }, 300,
+	                        function() {
+	                            $(this).hide();
+	                        });
+	                }
+	            );
+	        }
+			else {
+				$(".designNavIndex").animate({
+					left: '-200px',
+				},300,
+				function () {
+					$(this).hide()
+				});
+			}
+		});
+
+		/*点击图片编辑区域执行 imgListEdit */
+		$(".imgListEdit , .imgListCover").click(function() {
+			pic_id = $(this).attr('name');
+			$(".designNavModal").fadeIn(400);
+			$(".designNavMenu").animate({
+					left: '200px',
+			},400);
+			MenuEdit();
+			$.post('/Design/getOneIndexPicInfo', {id: pic_id}, 
+				function(data) {
+					var link = data[0]["link"];
+					if(link == ""){
+						var link = "http://"
+					}
+					$(".picName").val(data[0]["name"]);
+					$(".picDescription").val(data[0]["description"]);
+					$(".picLink").val(link);
+			});
+		});
+
+		/*点击删除按钮执行 imgListDelete*/
+		$(".imgListDelete").click(function() {
+			imgid = $(this).attr('name');
+					$(".designNavModal").fadeIn(400);
+					$(".designNavMenu").animate({
+							left: '200px',
+					},400);
+					MenuConfirm();
+			
+		});
+		/*图片上传*/
+		$(function() {  
+			$(".imgUpload").click(function() {
+				$(".imgUploadPreview").fadeIn();
+			});
+		    $("#upload_image").fileupload({  
+		            url: '{:U('Common/uploadImg')}',  
+		            sequentialUploads: true,
+		            autoUpload: true,
+					disableImageResize: false, 
+		            previewMaxWidth: 140,
+		            previewMaxHeight: 90,
+		            previewCrop: true,
+		            add: function (e, data) {
+							if (data.files && data.files[0]) {
+						        var reader = new FileReader();
+						        reader.onload = function(e) {;
+						            $('.imgUploadPreview').css('background-image', 'url(' + e.target.result +')');
+						        }
+						        reader.readAsDataURL(data.files[0]);
+						        data.submit();
+						    }
+
+					}
+		        }).bind('fileuploadadd', function (e, data) {
+		        	$(".imgUploadPreview").fadeIn();
+		        }).bind('fileuploadprogress', function (e, data) {
+		            var progress = parseInt(data.loaded / data.total * 100, 10);  
+		            $(".coverPercentBarProgress").css('width',progress + '%'); 
+		            $(".coverPercent").html(progress + '%');  
+		        }).bind('fileuploaddone', function (e, data) {  
+		        		if (data.result == 0) {
+		            		$.snackbar({content: '上传失败，文件格式不正确或大小超过5MB'});
+		            	}
+						else{
+							$.post('/Design/addIndexPic', {path: data.result},
+								function (data) {
+									if (data['status'] == 1) {
+										$.snackbar({content: '上传图片成功'});
+
+									}
+									else if (data == 2) {
+										$.snackbar({content: '上传失败，图片数量超过最大限制'});
+									}
+									else {
+										$.snackbar({content: '上传图片失败'});
+									}
+							});
+						}
+					setTimeout(function() {
+		                $(".side").load('designNavIndex.html', function() {
+		                    $(".designNavIndex").animate({
+		                        left: '0',
+		                    },0);
+		                    $(".designNavIndex").css('height', height - 120 + "px");
+		                });
+		                $(".content").load('designIndex.html', function() {
+		                    $(".designIndex").fadeIn(400)
+		                });
+		               	/*生成网站快照*/
+		                	$.ajaxSetup({async : false});
+		                	$.post('/Design/ajaxGetNewestIndexPic', function(data) {
+			                	newestIndexPic = data[0]["path"];
+			                });
+			                $.post('/Design/getCurWebsiteInfo', function(data) {
+			                	if (data[0]["logo_path"]) {
+			                		websiteLogo = data[0]["logo_path"];
+			                	}
+			                	else {
+			                		websiteLogo = '/Public/Home/svg/demoAvator.svg';
+			                	}
+			                    websiteName = data[0]["name"];
+			                    websiteDesc = data[0]["sub_title"];
+
+			                });
+			                console.log(websiteName)
+			                console.log(websiteDesc)
+			                function snapshot() {
+			                	var pic = this;
+			                	$.post('/Design/saveSnapshot', {
+			                		snapshot: pic
+			                	}, function(data) {
+			                		if (data) {
+			                			//alert("snapshot created");
+			                		}
+			                		else {
+			                			//alert("snapshot failed");
+			                		}
+			                	});
+			                }
+			                createSnapshot(websiteLogo, newestIndexPic, 720, snapshot, [websiteName, websiteDesc], ["首页" ,"画廊" ,"博客"]);
+
+			                
+		                
+					}, 300);
+
+
+		    });    
+	    }); 
+		/*滚动条*/
+		$('.designNavNd').perfectScrollbar({suppressScrollX: true}); 
+	});
+
+	
+</script>

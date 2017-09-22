@@ -1,0 +1,258 @@
+
+<div class="designNavMenu">
+	<div class="MenuButton">
+		<div class="buttonCancel">
+			取消
+		</div>
+		<div class="buttonSave">
+			保存
+		</div>
+		<div class="buttonConfirm">
+			保存
+		</div>
+	</div>
+	<div class="designNavMenuEdit designNavSettingSecurity">
+		<div class="MenuItem">
+			<div class="MenuTitle">使用访问密码
+				<div class="buttonToggle" style="float: right; margin-bottom: 10px;">
+					<input class="mui-switch mui-switch-animbg" type="checkbox" >
+				</div>
+			</div>
+			<input type="password" id="setVisitPwd" class="input MenuInput" placeholder="" value="{$password}">
+			<div class="MenuTips">设置访问密码后，站点将使用密码才能进入</div>
+			<div class="MenuTips">管理员将自动跳过</div>
+		</div>
+	</div>
+
+	<div class="designNavMenuConfirm designNavSettingDomain">
+		<div class="MenuItem">
+			<div class="MenuTitle">
+				设置域名
+			</div>
+			<input type="text" id="setDomain" class="input MenuInput" placeholder="" value="{$domain}" placeholder="个性域名，请输入2-14位数字、字母组合" maxlength="14">
+			<div class="setDomain">.snsu.me</div>
+		</div>
+	</div>
+</div>
+
+<div class="designNavModal">
+
+</div>
+<div class="design designIndex">
+	<div class="websiteHeader">
+		<div class="websiteTitle">
+			<div class="websiteTitleImg">
+				
+			</div>
+			<div class="websiteTitleArea">
+				<div class="websiteTitle1St"></div>
+				<div class="websiteTitle2nd">
+					<div class="websiteSubTitle">还未添加网站简介</div>
+				</div>
+			</div>
+		</div>
+		<div class="columnRight">
+			<ul>
+				<li><a href="" class="rightNavIndex active">首页</a></li>
+				<volist name="column" id="vo">
+					<if condition="$vo.visible eq 1 AND $vo.status eq 1">
+						<li><a class="columnLink" typename="{$vo.type}" name="{$vo.id}" href="">{$vo.name}</a></li>
+					<else/>
+					</if>
+				</volist>
+			</ul>
+		</div>
+	</div>
+<div id="index" class="vp_body main_page">
+		<div class="vp_btn_group">
+			<button id="pre" class="vp_pre">
+			<!-- <svg width="20" height="70" version="1.1" xmlns="http://www.w3.org/2000/svg">
+					<polyline points="20,0 0,35 20,70"/>
+				</svg> -->
+				</button>
+				<button id="next" class="vp_next">
+				<!-- <svg width="20" height="70" version="1.1" xmlns="http://www.w3.org/2000/svg">
+						<polyline points="0,0 20,35 0,70"/>
+					</svg> -->
+					</button>
+				</div>
+				<div id="item_group" class="vp_item_group">
+					<!-- You can add any number of groups of items here -->
+					<volist name="list" id="vo">
+					<div class="vp_item">
+						<notempty name="vo['link']">
+						<a class="vp_link"href="">
+							</notempty>
+							<div class="vp_img" name="{$vo.id}" style="background-image: url({$vo.path});">
+								
+							</div>
+							<notempty name="vo['link']">
+						</a>
+						</notempty>
+						<div class="vp_words">
+							<h1 class="vp_title">
+							{$vo.name}
+							</h1>
+							<p class="vp_desc">
+								{$vo.description}
+							</p>
+						</div>
+					</div>
+					</volist>
+					<!-- 		<volist name="list" id="vo">
+					<div class="vp_item">
+						<notempty name="vo['link']">
+						<a href="{$vo.link}" target="_blank">
+								</notempty>
+								<img class="vp_img"  src="">
+								<notempty name="vo['link']">
+						</a>
+						</notempty>
+						
+						<div class="vp_words">
+								<h1>{$vo.name}</h1>
+								<p>{$vo.description}</p>
+						</div>
+					</div>
+					</volist> -->
+					
+					</div> <!-- vp_item_group -->
+					<div id="vp_item_btn_group" class="vp_item_btn_group"></div>
+					<div id="show_info_btn" class="show_info_btn btn_towhite">
+						<svg width="30" height="30" version="1.1" xmlns="http://www.w3.org/2000/svg">
+							<polyline points="5,20 15,10 25,20"/>
+							</svg>
+						</div>
+						</div> <!-- vp_body -->
+</div>
+
+<link rel="stylesheet" type="text/css" href="__CSS__/carousel.css">
+<script type="text/javascript" src="__JS__/carousel.js"></script>
+<script type="text/javascript" src="__JS__/ModalResetting.js"></script>
+<script type="text/javascript">
+	$(".designIndex").css('height', height - 180 + "px");
+	$(".carousel-inner").css('max-height', height - 210 + "px");
+	$(".designNavModal").css('height', height - 120 + "px");
+	$(".designNavModal").css('width', width - 185 + "px");
+	$(".designNavMenu").css('height', height - 120 + "px");
+	$(".vp_body").css('height', height - 220 + "px");
+	/*获取当前网站信息*/
+    $.post('/Design/getCurWebsiteInfo', function(data) {
+    	if (data[0]["logo_path"]) {
+    		$(".websiteTitleImg").css('background-image', 'url(' + data[0]["logo_path"] +')');
+    	}
+    	if (data[0]["name"]) {
+    		$(".websiteTitle1St").text(data[0]["name"]);
+    	}
+    	if (data[0]["sub_title"]) {
+    		$(".websiteSubTitle").text(data[0]["sub_title"]);
+    	}
+    });
+
+    $.post('/Design/getAccessPassword', 
+    	function(data) {
+    	if (data == "") {
+    		$(".mui-switch").prop('checked', false);
+    		$("#setVisitPwd").prop('disabled', true);
+    	}
+    	else {
+    		$(".mui-switch").prop('checked', true);
+    	}
+    });
+    $(".mui-switch").click(function() {
+    	var checked = $(".mui-switch").prop('checked');
+    	if (checked == false) {
+    		$("#setVisitPwd").prop('disabled', true);
+    	}
+    	else {
+    		$("#setVisitPwd").prop('disabled', false);
+    	}
+    });
+	$('.buttonSave').on('click', function () {
+		var is_use_password = $(".mui-switch").prop('checked');
+		var password = $('#setVisitPwd').val();
+		if (is_use_password == false) {
+			var password = "";
+		};
+		$.post('/Design/setWebsitePassword', {password: password}, function (data) {
+			$.snackbar({content: '密码修改成功！'});
+			console.log(data);
+		}).fail(function() {
+			$.snackbar({content: '密码修改失败！'});
+			console.log("error");
+		});
+		$(".columnSide").find("li").removeClass('active');
+	});
+
+
+	$('.buttonConfirm').on('click', function () {
+
+		var domain = $('#setDomain').val();
+		if (domain == "") {
+			$.snackbar({content: '域名不能为空'});
+		}
+		else {
+			$.post('/Design/setDomain', {domain: domain}, function (data) {
+				if (data == 1) {
+					$.snackbar({content: '域名修改成功！'});
+				}
+				else if (data == 2){
+					$.snackbar({content: '域名已经存在，请重新设置'});
+				}
+				else if (data == 3){
+					$.snackbar({content: '域名不符合规则，请重新设置'});
+				}
+				else if (data == 0){
+					$.snackbar({content: '域名修改失败'});
+				}
+			});
+		}
+		$(".columnSide").find("li").removeClass('active');
+	});
+	/*点击右导航栏进行跳转*/
+	$(".columnLink").click(function() {
+		cur_id = $(this).attr('name');
+		if ($(this).attr('typename') == 1) {
+	        $(".content").load('designGallery.html?cid=' + cur_id, function() {
+	            $(".designGallery").fadeIn(400)
+	        });
+		}
+		else {
+			$(".content").load('designBlog.html?cid=' + cur_id, 
+				function() {
+	            $(".designBlog").fadeIn(400)
+	        });
+		}
+		setTimeout(function() {
+			$(".sidebar").load("designNav.html", function() {
+				$(".designNav").fadeIn();
+				$(".sideNav").animate({
+					left: '0px'
+				},0);
+			});
+		}, 300);
+		return false;
+	});
+    /*点击遮罩返回*/
+    $(".designNavModal").click(function() {
+		$(".designNavModal").fadeOut(400);
+		$(".designNavMenu").animate({
+		        left: '-400px',
+		    }, 300,function () {
+		    	$(".columnSide").find("li").removeClass('active');
+		    });
+
+    });
+   	/*开启轮播图*/
+	setTimeout(function() {
+	    $().viewpager({
+			auto: true,
+			speed: 5000
+	    });
+	}, 100);
+    	
+
+
+</script>
+
+

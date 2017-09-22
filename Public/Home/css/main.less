@@ -1,0 +1,921 @@
+/* 向素主样式文件 main.less */
+/* 颜色规范 */
+@colorDark: #4A4A4A;
+
+/* 深色背景、导航字体颜色 */
+@colorNormal: #9B9B9B;
+
+/* 导航常态颜色、二态加粗颜色 */
+@colorText: #B1B1B1;
+
+/* 说明性文字颜色 */
+@colorWhite: #FFFFFF;
+@colorFirst: #CCCCCC;
+@colorSecond: #E6E6E6;
+@colorThird: #F8F8F8;
+
+/* 字号规范 */
+@large: 18px;
+@medium: 14px;
+@tiny: 12px;
+
+/* input */
+.input {
+	box-sizing: border-box;
+	display: block;
+	width: 100%;
+	height: 40px;
+	padding-left: 20px;
+	font-size: @medium;
+	line-height: 1.42857143;
+	color: @colorNormal;
+	background-color: @colorThird;
+	background-image: none;
+	border: 1px solid #ccc;
+	border-radius: 4px;/* 	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+		box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075); */
+	-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+	-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+
+	&:focus {
+		background-color: @colorWhite;
+	}
+}
+.textarea {
+	box-sizing: border-box;
+	display: block;
+	width: 100%;
+	padding-left: 10px;
+	padding-top: 10px;
+	font-size: @medium;
+	line-height: 1.42857143;
+	color: @colorNormal;
+	background-color: @colorThird;
+	border: 1px solid #ccc;
+	border-radius: 4px;/* 	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+		box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075); */
+	-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+	-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+
+	&:focus {
+		background-color: @colorWhite;
+	}
+}
+.inputSmall {
+	background-color: transparent;
+	height: 18px;
+	width: 75px;
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+
+/* button */
+.button {
+	box-sizing: border-box;
+	display: inline-block;
+	padding: 6px 12px;
+	height: 40px;
+	margin-bottom: 0;
+	font-size: @medium;
+	background-color: @colorDark;
+	color: @colorWhite;
+	font-weight: 400;
+	line-height: 1.42857143;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	-ms-touch-action: manipulation;
+	touch-action: manipulation;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	background-image: none;
+	border: 1px solid transparent;
+	border-radius: 4px;
+}
+.buttonDisable {
+	background-color: #D8D8D8;
+	color: @colorNormal;
+}
+.buttonToggle {
+	display: block;
+
+	.mui-switch {
+		cursor: pointer;
+	}
+}
+
+/* 瀑布流容器 */
+.container-fluid {
+	padding: 20px;
+}
+
+/* 页面样式 */
+html, body, input, button, textarea {
+	font-family: "Microsoft YaHei Light";
+	margin: 0px;
+	outline: none;
+	font-size: 14px;
+}
+body {
+	overflow: hidden;
+}
+::selection {
+	background: @colorText;
+	color: @colorWhite;
+}
+::-moz-selection {
+	background: @colorText;
+	color: @colorWhite;
+}
+::-webkit-selection {
+	background: @colorText;
+	color: @colorWhite;
+}
+.clear {
+	clear: both;
+}
+.simditor-placeholder, .simditor-body {
+	font-family: "Microsoft YaHei Light" !important;
+}
+
+/* 文本样式 */
+h1, h2, h3, h4, h5, h6 {
+	color: @colorDark;
+	//font-weight: normal;
+	outline: none;
+}
+.textTitleLarge {
+	color: @colorDark;
+	font-size: @large;
+}
+.textTitle {
+	color: @colorDark;
+	font-size: @medium;
+}
+.textTips {
+	color: @colorText;
+	font-size: @medium;
+}
+
+/* header */
+.header {
+	/* 禁止文字选中 */
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+
+	height: 120px;
+	z-index: 100;
+
+	.avator {
+		position: relative;
+		top: 20px;
+		left: 20px;
+		display: table;
+
+		.avatorImg {
+			border-radius: 50%;
+			height: 42px;
+			width: 42px;
+			background-color: @colorNormal;
+			background-image: url(/Public/Home/svg/demoAvator.svg);//默认头像
+			background-size: cover;
+			background-position: center;
+			background-repeat: no-repeat;
+			display: inline-block;
+			float: left;
+			margin-right: 10px;
+			border: 2px solid @colorDark;
+
+			&:hover {
+				border: 2px solid @colorWhite;
+			}
+		}
+		.avatorArea{
+			display: table-cell;
+    		vertical-align: middle;
+			.avatorName {
+				font-weight: bold;
+				font-size: 16px;
+				overflow: hidden;
+			}
+			.avatorEmail {
+				font-size: @tiny;
+				margin-top: 6px;
+			}
+		}
+	}
+	.column {
+		height: 30px;
+
+		.columnLeft {
+			position: relative;
+			top: 20px;
+			left: -20px;
+
+			li {
+				float: left;
+				list-style-type: none;
+				font-size: @medium;
+				margin-right: 20px;
+
+				a {
+					color: @colorNormal;
+					text-decoration: none;
+
+					&:hover {
+						color: @colorText;
+						font-weight: bold;
+					}
+				}
+			}
+			.active {
+			}
+		}
+		.columnRight {
+			position: relative;
+			top: 4px;
+			float: right;
+		
+			li {
+				float: left;
+				list-style-type: none;
+				font-size: @medium;
+				margin-right: 20px;
+
+				a {
+					cursor: pointer;
+					color: @colorNormal;
+					text-decoration: none;
+
+					&:hover {
+						color: @colorText;
+						font-weight: bold;
+					}
+				}
+			}
+		}
+	}
+}
+
+/* 侧边栏 sideNav */
+.sideNav {
+	float: left;
+	width: 200px;
+	height: 100%;
+	/* 禁止文字选中 */
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+/* 404 Page */
+.page404 {
+	margin-left: 5%;
+	margin-top: 9.3%;
+	width: 300px;
+	height: 130px;
+	font-weight: bold;
+
+	h2 {
+		font-weight: bold;
+	}
+}
+
+/* 模态框 modal */
+.modalConfirm, .modalContent, .modalBlogEdit {
+	display: none;
+}
+
+/* modal */
+.no-close {
+	box-shadow: 0px 0px 5px @colorDark;
+	padding: 0;
+	border: 0;
+
+	.ui-widget-content {
+		border: 0;
+	}
+	.ui-dialog-titlebar-close {
+		display: none;
+	}
+	.ui-dialog-titlebar {
+		display: none;
+	}
+	.modalContent {
+		text-align: center;
+
+		.templateImg {
+			margin-top: 78px;
+		}
+		.templateDescription {
+			margin-top: 58px;
+
+			.textTitle {
+				font-weight: bold;
+			}
+			.textTips {
+				font-size: @tiny;
+				margin-top: 7px;
+			}
+		}
+	}
+	.ui-dialog-buttonpane {
+		height: 40px;
+		padding: 0px;
+		margin: 0px;
+	}
+	.ui-dialog-buttonset {
+		width: 100%;
+		height: 100%;
+
+		button {
+			font-size: @medium;
+			width: 100%;
+			height: 100%;
+			border: 0px;
+			background-color: #D8D8D8;
+			color: @colorDark;
+
+			&:hover {
+				background-color: @colorDark !important;
+				color: @colorWhite !important;
+			}
+		}
+	}
+
+}
+/* 初始化站点 #modal */
+[aria-describedby="modal"]{
+		.modalConfirm {
+		.textTitleLarge {
+		    font-weight: bold;
+		    margin-bottom: 65px;
+		    font-size: 36px;
+		}
+		.textTitle {
+		    margin-top: 12px;
+		    float: left;
+		    font-weight: bold;
+		}
+		.input {
+			box-sizing: border-box;
+			float: left;
+			width: 300px;
+			height: 40px;
+			border-radius: 0px;
+			border: 0px;
+			font-size: @medium;
+			box-shadow: inset 0 0 0;
+		}
+		.button {
+			width: 60px;
+			border-radius: 0px;
+			-webkit-transform: rotate(180deg);
+			-moz-transform: rotate(180deg);
+			-ms-transform: rotate(180deg);
+			-o-transform: rotate(180deg);
+			transform: rotate(180deg);
+		}
+		.buttonCheck {
+			float: left;
+			width: 100%;
+			background-size: cover;
+			background-position: center;
+		}
+		.modalConfirmName , .modalConfirmDomain{
+			height: 90px;
+		}
+		.checkTips {
+		    font-size: 12px;
+		    color: #F44336;
+		    width: 200px;
+		    position: relative;
+		    top: 5px;
+		    float: left;
+		    height: 20px;
+		}
+		margin-left: 58px;
+		margin-top: 58px;
+	}
+}
+/* 图片预览 */
+
+.picInfoTitle {
+	font-size: 20px;
+    font-weight: bold;
+}
+.picInfoDescription{
+	width: 33%;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 3;
+	overflow: hidden;
+}
+
+/* 确认删除 #dialog-confirm */
+[aria-describedby="dialog-confirm"], [aria-describedby="dialog-confirm-pic"], [aria-describedby="dialog-confirm-blog"] , [aria-describedby="dialog-confirm-column"] {
+	.modalConfirm {
+		.textTitleLarge {
+			font-weight: bold;
+		}
+		.textTitle {
+			margin-top: 20px;
+			margin-bottom: 25px;
+		}
+		.input {
+			box-sizing: border-box;
+			float: left;
+			width: 300px;
+			height: 40px;
+			border-radius: 0px;
+			border: 0px;
+			font-size: @medium;
+			box-shadow: inset 0 0 0;
+			margin-bottom: 10px;
+		}
+		.button {
+			width: 60px;
+			border-radius: 0px;
+			-webkit-transform: rotate(180deg);
+			-moz-transform: rotate(180deg);
+			-ms-transform: rotate(180deg);
+			-o-transform: rotate(180deg);
+			transform: rotate(180deg);
+		}
+		.buttonCheck {
+			float: left;
+			width: 100%;
+			background-size: cover;
+			background-position: center;
+		}
+		.checkTips {
+			font-size: @tiny;
+			margin-top: 10px;
+			color:#F44336;
+			display: none;
+			width: 200px;
+			margin-top: 20px;
+		}
+		margin-left: 58px;
+		margin-top: 58px;
+	}
+	.ui-dialog-buttonpane {
+		.ui-dialog-buttonset {
+			button {
+				float: left;
+				width: 50%;
+				margin: 0px;
+
+				&:nth-child(1) {
+					background-color: @colorThird;
+				}
+				&:nth-child(2) {
+					background-color: @colorSecond;
+				}
+			}
+		}
+	}
+}
+
+/* 编辑模态框 #dialog-edit */
+[aria-describedby="dialog-edit"] {
+	#dialog-edit {
+		padding: 0;
+	}
+	.ui-dialog-titlebar {
+		display: block !important;
+		box-sizing: border-box;
+		width: 100%;
+		height: 40px;
+		box-shadow: 1px 1px 1px @colorSecond;
+
+		.ui-dialog-titlebar-close, .ui-dialog-title {
+			display: none;
+		}
+		.editInput {
+			box-sizing: border-box;
+			border: 0;
+			background-color: transparent;
+			height: 26px;
+			width: 100%;
+			padding: 0 40px;
+			font-size: @medium;
+			font-weight: bold;				/* color: @colorNormal; */
+		}
+	}
+	.ui-dialog-content {
+		overflow: hidden;
+	}
+	.modalBlogEdit {
+		height: 100%;
+		width: 100%;
+
+		.modalBlogEditContent {
+			box-sizing: border-box;
+			width: 100%;
+			padding: 20px 40px;
+			overflow: hidden;
+
+			.editTextarea {
+				box-sizing: border-box;
+				border: 0;
+				margin: 0;
+				padding: 0px;
+				background-color: transparent;
+				width: 100%;
+				height: 340px;
+				font-size: @medium !important;
+				color: @colorNormal;
+			}
+		}
+	}
+	.ui-dialog-buttonpane {
+		height: 160px;
+		
+		.modalBlogEditCover {
+			box-sizing: border-box;
+			width: 100%;
+			height: 120px;
+			position: absolute;
+			bottom: 40px;
+			box-shadow: 0px -1px 1px @colorFirst inset;
+			background-color: @colorThird;
+			.coverView{
+				float: left;
+				display: none;
+				width: 100px;
+				height: 100px;
+				background-size: cover;
+				background-repeat: no-repeat;
+				background-position: center;
+				margin: 10px;
+				box-shadow: 1px 1px 3px #ccc;
+			}
+			.coverPreview{
+				float: left;
+				display: none;
+				width: 100px;
+				height: 100px;
+				background-size: cover;
+				background-repeat: no-repeat;
+				background-position: center;
+				margin: 10px;
+				box-shadow: 1px 1px 3px #ccc;
+				.imgListUploadCover {
+					opacity: .8;
+					color: @colorFirst;
+					box-sizing: border-box;
+					position: absolute;
+					width: 100px;
+					height: 100px;
+		    		text-align: center;
+		    		padding-top: 40px;
+		    		font-size: @large;
+					background-color: rgba(0, 0, 0, 0.4);
+					.coverPercent {
+						margin-bottom: 25px;
+					}
+
+					.coverPercentBar {
+						width: 80px;
+						height: 2px;
+						margin: 0 auto;
+						background-color: @colorNormal;
+					}
+					.coverPercentBarProgress{
+						height: 2px;
+						width: 0%;
+						background-color: @colorWhite;
+					}
+				}
+			}
+			.coverUpload {
+				box-sizing: border-box;
+				height: 100px;
+				width: 100px;
+				border: 1px solid @colorFirst;
+				margin: 10px;
+				background-color: @colorWhite;
+				text-align: center;
+				padding-top: 34px;
+				color: @colorNormal;
+				cursor: pointer;
+				float: left;
+				box-shadow: 0px 0px 1px @colorSecond;
+				input{
+					cursor: pointer;
+					opacity: 0;
+					position: absolute;
+					width: 100px;
+					height: 100px;
+					z-index: 10;
+					top: 10px;
+				    display: block;
+				}
+				&:hover {
+					border: 1px solid @colorNormal;
+					color: @colorDark;
+					font-weight: bold;
+				}
+			}
+			.coverTemplate {
+				position: absolute;
+				right: 0;
+				top: 0;
+				color: @colorNormal;
+				background-color: @colorSecond;
+				height: 100%;
+				width: 40px;
+				font-size: 16px;
+				cursor: pointer;
+				text-align: center;
+				box-sizing: border-box;
+				padding: 18px 8px;
+
+				&:hover {
+					font-weight: bold;
+					color: @colorWhite;
+					background-color: @colorDark;
+				}
+			}
+		}
+		.ui-dialog-buttonset {
+			position: absolute;
+			bottom: 0px;
+			height: 40px;
+
+			button {
+				float: left;
+				width: 33.33%;
+				margin: 0px;
+				background-color: @colorWhite;
+			}
+		}
+	}
+}
+
+/* 图片列表&上传 imgList */
+.imgList {
+	margin-top: 10px;
+	.imgListFrame {
+		width: 140px;
+		height: 90px;
+		border-radius: 4px;
+		border: 1px solid @colorNormal;
+		margin: 0 5px 5px 20px;
+
+		.imgListIcon {
+			position: relative;
+			float: right;
+			font-size: 16px;
+			left: 30px;
+			top: 43px;
+			color: @colorWhite;
+			div {
+				cursor: pointer;
+				width: 20px;
+				height: 20px;
+				background-color: @colorFirst;
+				text-align: center;
+				border-radius: 3px;
+				margin: 4px;
+
+				&:hover {
+					background-color: @colorDark;
+				}
+			}
+			.imgListEdit{
+				background-image: url(/Public/Home/svg/galleryLight.svg);
+			    background-size: 24px;
+			    background-repeat: no-repeat;
+			    background-position: center;
+
+			}
+			.imgListDelete{
+				background-image: url(/Public/Home/svg/delete.svg);
+			    background-size: 12px;
+			    background-repeat: no-repeat;
+			    background-position: center;	
+				
+			}
+
+		}
+	}
+
+	.imgListItem {
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+		.imgListCover {
+			-webkit-transition: all .25s ;
+			-moz-transition: all .25s ;
+			-ms-transition: all .25s ;
+			-o-transition: all .25s ;
+			transition: all .25s ;
+			cursor: pointer;
+			box-sizing: border-box;
+			position: absolute;
+			opacity: 0;
+			width: 140px;
+    		height: 90px;
+    		text-align: center;
+    		padding-top: 35px;
+			background-color: rgba(0, 0, 0, 0.4);
+			input {
+				display: block;
+				cursor: pointer;
+				position: absolute;
+				width: 140px;
+				height: 90px;
+				opacity: 0;
+				top: 0;
+				left: 0;
+			}
+			.imgListCoverTitle{
+				color: @colorNormal;
+				font-weight: bold;
+				-webkit-transition: all .25s ;
+				-moz-transition: all .25s ;
+				-ms-transition: all .25s ;
+				-o-transition: all .25s ;
+				transition: all .25s ;
+				&:hover {
+					color: @colorWhite;
+				}
+			}
+			&:hover {
+				opacity: 1;
+				.imgListCoverTitle{
+					color: @colorWhite !important;
+				}
+			}
+		}
+		.imgListUploadCover {
+			opacity: .8;
+			color: @colorFirst;
+			box-sizing: border-box;
+			position: absolute;
+			width: 140px;
+    		height: 90px;
+    		text-align: center;
+    		padding-top: 30px;
+    		font-size: @large;
+			background-color: rgba(0, 0, 0, 0.4);
+			input {
+				display: block;
+				position: absolute;
+				cursor: pointer;
+				width: 140px;
+				height: 90px;
+				opacity: 0;
+				top: 0;
+				left: 0;
+			}
+			.coverPercent {
+				margin-bottom: 25px;
+			}
+
+			.coverPercentBar {
+				width: 100px;
+				height: 2px;
+				margin: 0 auto;
+				background-color: @colorNormal;
+			}
+			.coverPercentBarProgress{
+				height: 2px;
+				width: 0%;
+				background-color: @colorWhite;
+			}
+		}
+	}
+	.imgListItemLogo{
+		background-size: contain !important;
+	}
+	.imgUpload {
+		cursor: pointer;
+		height: 65px;
+		background-color: @colorThird;
+		color: @colorNormal;
+		text-align: center;
+
+		.imgListBorder {
+			width: 138px;
+			height: 63px;
+			border-radius: 2px;
+			border: 1px solid transparent;
+
+			&:hover {
+				border: 1px solid @colorNormal;
+			}
+			input {
+				display: block;
+				position: absolute;
+				cursor: pointer;
+				width: 140px;
+				height: 65px;
+				opacity: 0;
+			}
+		}
+		.imgUploadTitle {
+			font-size: @medium;
+			margin-top: 15px;
+		}
+		.imgUploadTitleNd {
+			font-size: @tiny;
+		}
+		&:hover {
+			font-weight: bold;
+		}
+	}
+	.imgUploadPreview {
+		display: none;
+	}
+	.imgListItemLogoPreview {
+		background-size: contain !important;
+	}
+	.imgUploadImg{
+		width: 100%;
+		height: 100%;
+	}
+	.imgListTips {
+		margin: 0 20px 20px 20px;
+		font-size: @tiny;
+		color: @colorText;
+	}
+	.imgListOptions {
+		margin: 0 20px 20px 20px;
+		font-size: @medium;
+		color: @colorNormal;
+		font-weight: bold;
+		height: 50px;
+
+		.imgListOptionsItem {
+			div {
+				float: left;
+				margin-bottom: 10px;
+			}
+			.buttonToggle {
+				margin-top: 2px;
+				margin-left: 15px;
+			}
+		}
+	}
+}
+/* 更换图片遮罩 */
+.imgCover {
+	-webkit-transition: all .25s ;
+	-moz-transition: all .25s ;
+	-ms-transition: all .25s ;
+	-o-transition: all .25s ;
+	transition: all .25s ;
+	cursor: pointer;
+	box-sizing: border-box;
+	position: absolute;
+	opacity: 0;
+	width: 100px;
+	height: 100px;
+	text-align: center;
+	padding-top: 41px;
+	background-color: rgba(0, 0, 0, 0.4);
+	input {
+		display: block;
+		position: absolute;
+		cursor: pointer;
+		width: 100px;
+		height: 100px;
+		opacity: 0;
+		top: 0;
+		left: 0;
+	}
+	.imgCoverTitle{
+		color: @colorNormal;
+		font-weight: bold;
+		-webkit-transition: all .25s ;
+		-moz-transition: all .25s ;
+		-ms-transition: all .25s ;
+		-o-transition: all .25s ;
+		transition: all .25s ;
+		&:hover {
+			color: @colorWhite !important;
+		}
+	}
+	&:hover {
+		opacity: 1;
+		.imgCoverTitle{
+			color: @colorWhite !important;
+		}
+	}
+}

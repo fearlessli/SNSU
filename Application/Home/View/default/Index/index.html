@@ -1,0 +1,464 @@
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<title>首页 - 向素</title>
+	<link rel="icon" type="image/x-icon" href="__IMG__/favicon.ico">
+
+	<link rel="stylesheet" type="text/css" href="__CSS__/style_index.css"/>
+	<link rel="stylesheet" href="/Public/Home/iconfont/iconfont.css">
+
+</head>
+<body>
+	<div id="container" class="container">
+
+		<!-- <div id="site_show_area" class="site_show_area">
+			<div class="leftbar">
+				<div id="close_site_show" class="close"><span>X</span></div>
+				<div class="words">
+					<h1>凡心所向</h1>
+					<h1>素履所往</h1>
+				</div>
+			</div>	
+			<div class="right_content">
+				<div class="video"> 
+					<div id="video_layer" class="layer"></div>
+					<a id="play_btn" class="play_btn" href="#"></a>
+					<video id="the_video" src="./others/1.mp4" height="100%"></video>
+				</div>
+				<div class="other_content">
+					<div class="title">
+						<h1>向素</h1>
+						<h2>设计师的<br>个人网站</h2>
+					</div>
+					<div class="info">
+						<div class="info_content">
+							<p>作品集</p>
+							<p>作品集</p>
+							<p>作品集</p>
+						</div>
+						<div class="info_content">
+							<p>个人简历</p>
+							<p>个人简历</p>
+							<p>个人简历</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div> -->
+
+		<div class="login_area">
+			<div class="login_area_header">
+				<div class="back"></div>
+				<div class="close">
+					<img src="__IMG__/close.png">
+				</div>
+			</div>	
+			<div id="register_area_form" class="login_area_form">
+				<div class="caption">
+					<h1>注册向素</h1>
+					<div class="step_hint_area">
+						<div class="step_hint hint1 active">
+							<div class="hint_words">注册账户</div>
+						</div>
+						<div class="step_hint hint2">
+							<div class="hint_words">设置用户名</div>
+						</div>
+					</div>
+					<span class="form_switch_area">或 <a id="login_switch" class="form_switch_link" href="">登录</a></span>
+				</div>
+				<div class="forms">
+					<form id="register1" name="registerForm1">
+						<div class="inputBox">
+							<input class="index_text_inp" name="email" id="reg_email" type="text" placeholder="请输入有效的邮箱" />
+							<div class="warning"></div>
+						</div>
+						<div class="inputBox">
+							<input class="index_text_inp" name="pwd" id="reg_password" type="password" placeholder="密码（6-18位数字或字符）" />
+							<div class="warning"></div>
+						</div>
+						<div class="inputBox auth_code_area">
+							<input class="index_text_inp" name="authcode" id="reg_verify_code" type="text" placeholder="输入验证码" />
+							<div class="warning"></div>
+							<div class="auth_code">
+								<img id="captcha" alt="验证码" src="{:U('Home/Common/createVerify',array())}" title="点击刷新">
+							</div>
+						</div>
+						<div class="submit_btn_area">
+							<!-- <div class="submit_btn_arrow">-----</div> -->
+							<input class="submit_btn" id="r_submit1" type="submit" />
+						</div>
+					</form>
+					<form id="register2" class="register_form2" name="registerForm2">
+						<div class="inputBox">
+							<input class="index_text_inp" type="text" id="nickname" name="username" placeholder="请设置用户名（3-15位数字或字符）" />
+							<div class="warning"></div>
+						</div>
+						<div class="inputBox">
+							<input class="index_text_inp" type="text" id="userdesc" name="userdesc" placeholder="请设置个人描述" />
+							<div class="warning"></div>
+						</div>
+						<div class="set_info_tips">
+							<p>简单介绍自己，并告诉我们为什么使用向素，</p>
+							<p>我们审核通过后，以邮件形式告知您是否可以登陆。</p>
+							<p>（产品处于测试阶段，敬请谅解）</p>
+						</div>
+						<div class="submit_btn_area">
+							<!-- <div class="submit_btn_arrow">-----</div> -->
+							<input class="submit_btn" id="r_submit2" type="submit" />
+						</div>
+					</form>
+				</div>
+				
+			</div>
+
+			<div id="login_area_form" class="login_area_form">
+				<div class="caption">
+					<h1>登录向素</h1>
+					<span class="form_switch_area">或 <a id="register_switch" class="form_switch_link" href="">注册</a></span>
+				</div>
+				<div class="forms">
+					<form id="login" name="loginForm">
+						<div class="inputBox">
+							<input class="index_text_inp" id='login_email' name="email" type="text" placeholder="注册邮箱" />
+							<div class="warning"></div>
+						</div>
+						<div class="inputBox">
+							<input class="index_text_inp" id="login_password" name="pwd" type="password" placeholder="密码" />
+							<div class="warning"></div>
+						</div>
+						<a id="forget_pwd_link" class="forget_pwd_link" href="#">忘记密码</a>
+						<div class="submit_btn_area">
+							<!-- <div class="submit_btn_arrow">-----</div> -->
+							<input class="submit_btn" id="l_submit" type="submit" />
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<div class="login_area_form" id="forget_pwd">
+				<div class="caption">
+					<h1>找回密码</h1>
+					<div class="step_hint_area">
+						<div class="step_hint hint1 active">
+							<div class="hint_words">获取验证码</div>
+						</div>
+						<div class="step_hint hint2">
+							<div class="hint_words">输入验证码</div>
+						</div>
+					</div>
+					<span class="form_switch_area">或 <a id="login_switch" class="form_switch_link" href="">登录</a></span>
+				</div>
+				<div class="forms">
+					<form id="get_code" name="getCode">
+						<div class="inputBox">
+							<input class="index_text_inp" name="email" type="text" placeholder="输入注册邮箱，获取验证码" />
+							<div class="warning"></div>
+						</div>
+						<div class="submit_btn_area">
+							<input class="submit_btn" id="f_submit1" type="submit" />
+						</div>
+					</form>
+					<form id="write_code" class="write_code" name="writeCode">
+						<div class="inputBox">
+							<input class="index_text_inp" name="authcode" type="text" placeholder="输入验证码" />
+							<div class="warning"></div>
+						</div>
+						<div class="submit_btn_area">
+							<input class="submit_btn" id="f_submit2" type="submit" />
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<div class="login_area_form" id="change_pwd">
+				<div class="caption">
+					<h1>修改密码</h1>
+					<span class="form_switch_area">或 <a id="login_switch" class="form_switch_link" href="">登录</a></span>
+				</div>
+				<div class="forms">
+					<form id="change_pwd_form" class="change_pwd_form" name="changePwd">
+						<div class="inputBox">
+							<input class="index_text_inp" name="first" type="password" placeholder="新密码" />
+							<div class="warning"></div>
+						</div>
+						<div class="inputBox">
+							<input class="index_text_inp" name="second" type="password" placeholder="确认新密码" />
+							<div class="warning"></div>
+						</div>
+						<div class="submit_btn_area">
+							<input class="submit_btn" id="c_submit" type="submit" />
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div id="siteinfo" class="siteinfo">
+			<div id="sidebar_container" class="sidebar_container">
+				<div id="siteinfo_close" class="close">
+					<img src="__IMG__/close.png">
+				</div>
+				<ul id="nav_content" class="nav_content">
+					<li>
+						<a data-index="0" href="">首页</a>
+						<span></span>
+					</li><br>
+					<li>
+						<a data-index="1" href="">关于向素</a>
+						<span></span>
+					</li><br>
+					<li>
+						<a data-index="2" href="">联系我们</a>
+						<span></span>
+					</li><br>
+					<li>
+						<a data-index="3" href="">意见反馈</a>
+						<span></span>
+					</li><br>
+				</ul>
+				<div class="site_record">
+					<p>(C)2016 蒙ICP备<a href="http://www.miibeian.gov.cn/state/outPortal/loginPortal.action;jsessionid=NhhZXFQZZwZ3zr27jLJtXKqJjHnQln418ZpztBjsJGVrZP09SDKB!-871520504"  target="_blank">15004088号</a></p>
+				</div>
+			</div>
+			<div id="siteinfo_content" class="siteinfo_content">
+				<div data-index="1" class="siteinfo_words about_xiangsu">
+					<h1>关于向素</h1>
+					<p>向素是一个简单、快速建站平台，用户选择喜欢的网站模板后，不需要任何设计和代码基础就可以快速搭建一个属于自己的网站。用户只需要把展示的内容上传到网站不同的模块中，通过使用可视化控件快速的自定义网站风格、样式，真正做到零设计，零代码。同时为用户提供后台托管和维护等服务，极大节省了用户建立个人网站的效率和时间。</p>	
+					<p>我们致力于为艺术从业者和自由职业者，如设计师、艺术家、摄影师等用户提供优质的个人网站模板，使用模板式建站的方式，在不依赖设计师和程序员的情况下，帮助用户可以更低成本，更快，更便捷的完成建立个人网站的工作，用户可以更好的自我推广，并建立自己的品牌和形象。</p>
+					<p>在历时半年的策划、设计、开发和打磨之后，四月下旬开始内测，将于五月份以最简单的方式和大家见面。暂时提供一个网站模板，首页、画廊、博客这三个最基本的功能，以及部分可视化修改控件来调整网站风格。在未来，我们会为用户提供更多优质的个人网站模板，添加更多实用，有效的功能，帮助用户做出更满意的网站。</p>
+					<p>向素</p>
+					<p>2016-4-6</p>
+				</div>
+				<div data-index="2" class="siteinfo_words contact_us">
+					<h1>联系我们</h1>
+					<h2>商务合作</h2>
+					<p>推广宣传合作请联系：</p>
+					<p>market@snsu.me</p>
+
+					<h2>展览合作</h2>
+					<p>毕业展是我们联合高校策划的一个高校艺术类毕业生线上展览的合作，通过毕业展的活动，为高校毕业生提供线上展览的活动，让跟多的学校，更多的学生作品得到曝光的机会，同时为企业找到更合适的毕业生提供更便捷的途径。毕业生也可以把自己的作品以链接的形式分享给用人单位，让毕业季线上展览成为学生步入社会的延伸。</p>
+					<p>诚挚的邀请并欢迎高校加入毕业展，让更多的人足不出户就能看到高校学生的作品。</p>
+					<p>详细合作请联系：</p>
+					<p>exhibition@snsu.me</p>
+					<div class="temp_box">
+						<h2>加入我们</h2>
+						<p>我们也希望更多和我们志同道合的朋友加入我们</p>
+						<p>地址：北京市朝阳区花家地南街8号</p>
+						<p>中央美术学院设计学院/数码媒体（胡兵兵）</p>
+						<p>邮箱：bingo@snsu.me</p>
+						<p>电话：关注微信公众号，回复“胡兵兵”。</p>
+						<img class="code" src="__IMG__/code.png" alt="">
+					</div>
+				</div>
+				<div data-index="3" class="siteinfo_words">
+					<form class="feedback">
+						<input class="index_text_inp" type="text" value="收件人：server@snsu.me" /><br>
+						<input class="index_text_inp" type="text" placeholder="您的联系方式（邮箱）" /><br>
+						<textarea class="index_text_inp" placeholder="请输入您要反馈的内容"></textarea>
+						<div class="submit_btn_area">
+							<!-- <div class="submit_btn_arrow">-----</div> -->
+							<input class="submit_btn" id="submit" type="button" />
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>	
+	
+		<header>
+
+			<div id="login_area_container" class="login_area_container"></div>
+
+			<div id="logo_area" class="logo_area">
+				<div class="logo">
+					<img id="logo_b" class="logo_b" src="__IMG__/svg/snsu_logo.svg">
+					<img id="logo_w" class="logo_w" src="__IMG__/svg/snsu_logo_w.svg">
+				</div>
+			</div>
+			<a href="http://www.chuangkit.com" target="_blank"><div class="other">
+				技术支持<br>创客贴	
+			</div></a>
+		</header>
+		<div class="main">
+			<!-- <div id="title_area" class="title_area">
+				<hgroup>
+					<h3>向素</h3>
+					<h1>毕业展</h1>
+					<h2>中央美院毕业设计</h2>				
+				</hgroup>
+				<div id="title_another_bg" class="another_bg"></div>
+			</div> -->
+			<!-- <div class="work_info">
+				<div class="service_obj">
+					<h1></h1>
+					<p></p>
+					<p></p>
+				</div>
+				<div class="main_fun">
+					<h1></h1>
+					<p></p>
+					<p></p>
+				</div>
+			</div> -->
+			<div class="main_info_area">
+				
+				<div class="main_info">
+					<img class="bigchar" src="__IMG__/svg/svg-bigchar.svg" alt="">
+					<img class="smallchar" src="__IMG__/svg/svg-smallchar.svg" alt="">
+				</div>
+				<div class="zero_area">
+					<?xml version="1.0" encoding="utf-8"?>
+					<!-- Generator: Adobe Illustrator 17.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+					<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+					<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+						 width="448.596px" height="649.438px" viewBox="0 0 448.596 649.438" enable-background="new 0 0 448.596 649.438"
+						 xml:space="preserve">
+					<path  id="zero" class="zero" fill-rule="evenodd" clip-rule="evenodd" fill="#FFFF00" d="M332.328,324.719c0,80.955,10.07,220.377-108.03,220.377
+						S116.269,405.674,116.269,324.719c0-80.955-10.071-220.377,108.029-220.377S332.328,243.764,332.328,324.719z M448.596,324.719
+						c0-102.543-10.07-206.885-75.986-268.95C339.652,24.286,292.961,0,224.298,0C155.635,0,108.945,24.286,75.987,55.769
+						C10.071,117.834,0,222.176,0,324.719s10.071,206.885,75.987,268.95c32.958,31.482,79.648,55.769,148.311,55.769
+						c68.663,0,115.354-24.286,148.312-55.769C438.526,531.603,448.596,427.262,448.596,324.719z"/>
+					</svg>
+				</div>
+			</div>
+
+			<div class="other_info">
+				<!-- <h1>艺术院校毕业展</h1> -->
+				<img src="__IMG__/svg/svg-06.svg" alt=""><br>
+				<p><a target="_blank" href="http://cafa.snsu.me">中央美术学院设计学院</a></p><br>
+				<p><a target="_blank" href="http://cafa.snsu.me">华北理工大学艺术学院</a></p><br>
+				<p><a target="_blank" href="http://cafa.snsu.me">内蒙古师范大学艺术学院</a></p><br>
+				<p><a target="_blank" href="http://cafa.snsu.me">优推设计师个人网页</a></p>
+			</div>
+			<div class="clear"></div>
+		</div>
+
+		<footer>
+			<div class="other_info">
+				<div class="part">
+					<h1>友情链接</h1>
+					<p>
+						<a href="http://www.chuangkit.com/" target="_blank">创客贴</a>
+					</p>
+					<p>
+						<a href="http://www.byfan.cn/" target="_blank">布凡</a>
+					</p>
+					<p>
+						<a href="http://www.cafa.edu.cn/" target="_blank">中央美术学院</a>
+					</p>
+				</div>
+				<div class="part">
+					<h1>展览合作</h1>
+					<p>
+						在线展览免费支持
+					</p>
+					<p>
+						详细请联系
+					</p>
+					<p>
+						exhibition@snsu.me
+					</p>
+				</div>
+				<div class="part">
+					<h1>商务合作</h1>
+					<p>
+						推广宣传合作
+					</p>
+					<p>
+						请联系
+					</p>
+					<p>
+						market@snsu.me
+					</p>
+				</div>
+			</div>
+			<div class="login_register">
+				<a id="login_btn" href="" onclick="return false">
+					<span class="bigger">登 录</span><br>
+					<span>Sign in</span><br>
+					<span class="underline"></span>
+				</a>
+				<a id="register_btn" href="" onclick="return false">
+					<span class="bigger">注 册</span><br>
+					<span>Register</span><br>
+					<span class="underline"></span>
+				</a>
+				<div class="another_bg"></div>
+			</div>
+			<div id="footer_bottom" class="footer_bottom">
+				<div class="footer_content">
+					Copyright (C) 2016 SNSU.ALL Right Reserved.
+					<a href="http://weibo.com/bingbinghuyufan" target="_blank">
+						<i class="iconfont icon-sina"></i>
+					</a>
+					<a href="">
+						<input type="checkbox" class="code_switch" />
+						<i class="iconfont icon-weichat01"></i>
+						<div class="code_area">
+							<img src="__IMG__/code.png" alt="">
+						</div>
+					</a>
+				</div>
+			</div>
+		</footer>
+	</div>
+
+	<script src="__JS__/jquery-2.1.1.min.js"></script>
+	<!-- <script src="./js/less.js"></script> -->
+	
+	<script>
+
+		var captcha_img = $('#captcha');
+		var verifyimg = captcha_img.attr("src");
+		captcha_img.attr('title', '点击刷新');
+		captcha_img.click(function(){
+			if( verifyimg.indexOf('?')>0){
+				$(this).attr("src", verifyimg+'&random='+Math.random());
+			}else{
+				$(this).attr("src", verifyimg.replace(/\?.*$/,'')+'?'+Math.random());
+			}
+		});
+
+		// $('#l_submit').on('click', function () {
+		// 	var email = $('#login_email').val();
+		// 	var password = $('#login_password').val();
+		// 	$.post('/User/doLogin', {email: email, password: password}, function (data) {
+		// 		if (data == 1) {
+		// 			location.href = '/User/index';	
+		// 		}
+		// 	})
+		// })
+
+		// //注册
+		// $('#r_submit1').on('click', function () {
+		// 	var email = $('#reg_email').val();
+		// 	var password = $('#reg_password').val();
+		// 	var verify_code = $('#reg_verify_code').val();
+
+		// 	$.post('/User/doReg', {email: email, password: password, verify_code: verify_code}, function (data) {
+		// 		if (data == 2) {
+		// 			alert('验证码错误');
+		// 		} else if (data == 1) {
+		// 			alert('注册成功');
+		// 		}
+		// 	})
+		// });
+
+		// $('#r_submit2').on('click', function () {
+
+		// 	var nickname = $('#nickname').val();
+
+		// 	$.post('/User/setNickName', {nickname: nickname}, function (data) {
+		// 		console.log(data);
+		// 		if (data == 1) {
+		// 			alert('注册成功');
+		// 		} else if (data == 0) {
+		// 			alert('注册失败');
+		// 		}
+		// 	})
+		// });
+
+	</script>
+	<script src="__JS__/page_contorl.js"></script>
+</body>
+</html>

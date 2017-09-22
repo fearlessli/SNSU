@@ -1,0 +1,126 @@
+<div class="avator">
+	<a class="avatorImg" href="{:U('User/index')}"></a>
+	<div class="avatorArea">
+		<div class="avatorName">用户名</div>
+		<div class="avatorEmail">邮箱</div>
+	</div>
+</div>
+<div class="column">
+	<div class="columnLeft">
+		<ul>
+			<li><a value="Edit" class="columnItem Edit" href="#Edit">网站编辑</a></li>
+			<li><a value="Design" class="columnItem Design" href="#Design">网站设计</a></li>
+			<li><a value="Setting" class="columnItem Setting" href="#Setting">设置</a></li>
+			<li><a value="Data" class="columnItem Data" href="#Data">网站数据</a></li>
+		</ul>
+	</div>
+	<div class="columnRight">
+		<ul>
+			<li><a class="websiteDomain" href="" target="_blank" >查看我的网站</a></li>
+<!-- 			<li><a href="">保存</a></li>
+<li><a href="">发布</a></li> -->
+		</ul>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+	var loadPage = function(pageName) {
+
+		$(".side").empty();
+		$(".sidebar").empty();
+		if (pageName == "Edit") {
+			$(".sidebar").load("designNav.html", function() {
+				$(".designNav").fadeIn();
+				$(".sideNav").animate({
+					left: '0px'
+				});
+			});
+			$(".content").load("designIndex.html", function() {
+				$(".designIndex").fadeIn();
+			});
+			clearContent();
+		};
+
+		if (pageName == "Design") {
+			$(".sidebar").load("designNavDesign.html", function() {
+				$(".designNav").fadeIn();
+				$(".sideNav").animate({
+					left: '0px'
+				});
+			});
+			$(".content").load("designIndexDesign.html", function () {
+				$(".designIndex").fadeIn();
+			});
+		};
+
+		if (pageName == "Setting") {
+			$(".side").fadeIn();
+			$(".side").load("designNavSetting.html", function() {
+				$(".designNav").fadeIn();
+				$(".sideNav").animate({
+					left: '0px'
+				});
+			});
+			$(".content").load("designIndexSetting.html", function() {
+				$(".designIndex").fadeIn();
+			});
+		};
+
+		if (pageName == "Data") {
+			$(".side").fadeIn();
+			$(".side").load("designNavData.html", function() {
+				$(".designNav").fadeIn();
+				$(".sideNav").animate({
+					left: '0px'
+				});
+			});
+			$(".content").load("designIndexData.html", function() {
+				$(".designIndex").fadeIn();
+			});
+		};
+	};
+
+	/*读取url*/
+	var currentUrl = window.location.href;
+	var poundSign = currentUrl.indexOf("#");
+	var urlName = currentUrl.substring(poundSign + 1);
+	/*当页面加载时 默认加载designIndex*/
+	if (urlName == "Edit" || poundSign == -1 ) {
+			
+			$(".sidebar").load("designNav.html", function() {
+				$(".designNav").fadeIn();
+				$(".sideNav").animate({
+					left: '0px'
+				});
+			});
+			$(".content").load('designIndex.html', function() {
+				$(".designIndex").fadeIn(400)
+			});
+		$(".Edit").addClass('active');
+			clearContent();
+	}
+	else {
+		$("." + urlName).addClass('active');
+		loadPage(urlName);
+	}
+	
+
+	/*当点击栏目按钮时*/
+	$(".columnItem").click(function() {
+		var idName = $(this).attr('value');
+		$(".columnItem").removeClass('active');
+		$(this).addClass('active');
+		loadPage(idName);
+	});
+	/*获取用户信息 from cookie*/
+	
+	$(".avatorName").html(getCookie("user_name"));
+	$(".avatorEmail").html(getCookie("user_email"));
+	$(".avatorImg").css('background-image','url(' + getCookie("user_avator_path") + ')' ); 
+	/*获取当前网站信息*/
+	$.post('/Design/getCurWebsiteInfo', function(data) {
+		websiteInfoDomain = data[0]["domain"];
+		$(".websiteDomain").attr('href', 'http://' + websiteInfoDomain + '.snsu.me');
+	});
+</script>

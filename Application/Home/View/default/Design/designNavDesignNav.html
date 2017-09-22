@@ -1,0 +1,88 @@
+<div class="sideNav sideLight designNavNd designNavDesignNav">
+	<div class="sideBack">
+		<span>导航</span>
+	</div>
+	<div id="accordionDesignNav">
+		<div class="group nav ">
+			<h3 class="home"><span class="columnName">字号</span><span class="arrowUp icon"></span></h3>
+
+		</div>
+		<div class="group nav">
+			<h3 class="home"><span class="columnName">间距</span><span class="arrowUp icon"></span></h3>
+
+
+		</div>
+	</div>
+</div>
+
+<script>
+	$(function() {
+		/*侧边栏栏目 accordion*/
+		$("#accordionDesignNav")
+			.accordion({
+				header: "> div > h3",
+				heightStyle: "content",
+				icons: null,
+			});
+		$( ".nav" ).accordion({
+			active: false,
+			collapsible: true, 
+			icons: null, 
+			beforeActivate: function() {
+		        $(this).find('.arrowUp').toggleClass("rightAngle");
+		    },
+		});
+
+		/* 添加模块 addModule */
+		$(".addModule").hover(function() {
+			$(this).addClass('ui-state-hover');
+		}, function() {
+			$(this).removeClass('ui-state-hover');
+		});
+
+		/*置为编辑状态 designNavMenuEdit*/
+		var MenuEdit = function () {
+			$(".buttonConfirm").hide();
+			$(".buttonSave").fadeIn(400);
+			$(".designNavMenuConfirm").hide();
+			$(".designNavMenuEdit").fadeIn(400);
+		};
+
+		/*置为删除确认状态 designNavMenuConfirm*/
+		var MenuConfirm = function () {
+			$(".buttonSave").hide();
+			$(".buttonConfirm").fadeIn(400);
+			$(".designNavMenuEdit").hide();
+			$(".designNavMenuConfirm").fadeIn(400);
+		};
+
+		/*点击返回按钮 sideBack */
+		$(".sideBack").click(function() {
+
+				$(".designNavDesignNav").animate({
+					left: '-200px',
+				},300);
+			
+		});
+
+		/*点击上传区域执行 imgUpload */
+		$(".imgUpload , .imgListEdit").click(function() {
+			$(".designNavModal").fadeIn(400);
+			$(".designNavMenu").animate({
+					left: '200px',
+			},400);
+			MenuEdit();
+		});
+
+		/*点击删除按钮执行 imgListDelete*/
+		$(".imgListDelete").click(function() {
+
+					$(".designNavModal").fadeIn(400);
+					$(".designNavMenu").animate({
+							left: '200px',
+					},400);
+					MenuConfirm();
+			
+		});
+	});
+</script>

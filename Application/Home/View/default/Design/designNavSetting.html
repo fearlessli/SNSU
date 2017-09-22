@@ -1,0 +1,33 @@
+<div class="sideNav sideLight designNavSetting">
+	<div class="columnSide">
+		<li class="designNavSettingSecurity">安全</li>
+		<li class="designNavSettingDomain">域名设置</li>
+	</div>
+</div>
+
+<script type="text/javascript" src="__JS__/ModalResetting.js"></script>
+<script>
+	$(function() {
+	    /*点击安全执行 designNavSettingSecurity */
+	    $(".designNavSettingSecurity").click(function() {
+	        $(".columnSide").find("li").removeClass('active');
+	        $(this).addClass('active');
+	        $(".designNavModal").fadeIn(400);
+	        $(".designNavMenu").animate({
+	            left: '200px',
+	        }, 400);
+	        MenuEdit();
+	    });
+
+	    /*点击域名设置执行 designNavSettingDomain*/
+	    $(".designNavSettingDomain").click(function() {
+	        $(".columnSide").find("li").removeClass('active');
+	        $(this).addClass('active');
+	        $(".designNavModal").fadeIn(400);
+	        $(".designNavMenu").animate({
+	            left: '200px',
+	        }, 400);
+	        MenuConfirm();
+	    });
+	});
+</script>

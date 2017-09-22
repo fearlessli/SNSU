@@ -1,0 +1,684 @@
+
+<div class="designNavMenu">
+	<div class="MenuButton">
+		<div class="buttonCancel">
+			取消
+		</div>
+		<div class="buttonSave">
+			保存
+		</div>
+		<div class="buttonConfirm">
+			确认
+		</div>
+	</div>
+	<div class="designNavMenuEdit blogMenu">
+		<volist name="list" id="vo">
+			<div class="MenuItem blogArticle" name="{$vo.id}">
+				<div class="blogArticleFunction">
+					<div class="blogArticleFunc">
+						<div class="blogArticleEdit" name="{$vo.id}">
+							编辑
+						</div>
+						<div class="blogArticleDelete" name="{$vo.id}">
+							删除
+						</div>
+					</div>
+				</div>
+				<div class="blogArticleItem" name="{$vo.id}">
+				<notempty name="vo['cover']">
+					<div class="blogArticleImg" style="background-image: url({$vo.cover});">
+					</div>
+					<else/>
+					<!-- 如果封面图片为空 -->
+					<div class="blogArticleImg">
+					</div>
+				</notempty>
+
+					<div class="blogArticleTitle">
+						{$vo.title}
+					</div>
+					<div class="blogArticleContent">
+						{$vo.sub_title}
+					</div>
+				</div>
+			</div>
+		</volist>
+		<div class="MenuItem">
+			<div class="blogArticleAdd">
+				新增博客
+			</div>
+		</div>
+<!-- 		<div class="MenuItem MenuItemLink">
+	<div class="MenuTitle">链接信息</div>
+	<input type="url" class="input MenuInput" placeholder="http://">
+	<div class="MenuTips">此链接地址不可更改</div>
+</div> -->
+	</div>
+	<div class="designNavMenuConfirm">
+		<div class="MenuItem">
+			<div class="MenuTitle">确认删除？</div>
+		</div>
+		<div class="MenuText">
+			删除后该项目将不可恢复，
+		</div>
+		<div class="MenuText">
+			确认是否删除。
+		</div>
+	</div>
+</div>
+<div class="designNavModal">
+</div>
+
+<!-- 编辑博客模态框 dialog-edit -->
+<div id="dialog-edit" >
+	<div class="modalBlogEdit">
+		<div class="modalBlogEditContent">
+			<textarea id="editor" class="editTextarea" placeholder="在此输入你的内容"></textarea>
+		</div>
+	</div>
+
+</div>
+
+<!-- 删除博客模态框 dialog-confirm-blog -->
+<div id="dialog-confirm-blog" >
+	<div class="modalConfirm">
+		<div class="textTitleLarge">确认删除博客？</div>
+		<br>
+		<div class="textTitle">删除后博客将不可恢复，是否确认删除。</div>
+		
+	</div>
+</div>
+
+<div class="design designBlog">
+	<div class="websiteHeader">
+		<div class="websiteTitle">
+			<div class="websiteTitleImg">
+				
+			</div>
+			<div class="websiteTitleArea">
+				<div class="websiteTitle1St"></div>
+				<div class="websiteTitle2nd">
+					<div class="websiteSubTitle">还未添加网站简介</div>
+				</div>
+			</div>
+		</div>
+		<div class="columnRight">
+			<ul>
+				<li><a href="" class="rightNavIndex">首页</a></li>
+				<volist name="column" id="vo">
+					<if condition="$vo.visible eq 1 AND $vo.status eq 1">
+						<li><a class="columnLink" typename="{$vo.type}" name="{$vo.id}" href="">{$vo.name}</a></li>
+					<else/>
+					</if>
+				</volist>
+			</ul>
+		</div>
+	</div>
+	<div class="designBlogArea">
+		<div class="article">
+			<div class="articleFrame">
+				<div class="articleCover"></div>
+				<div class="articleTitle"></div>
+				<div class="articleContent"></div>
+			</div>
+			<div class="articlePage">
+				<div class="pageUp">
+					<div class="pageUpFlag">
+						上一篇
+					</div>
+					<div class="pageUpTitle">
+						博客标题
+					</div>
+				</div>
+				<div class="pageDown">
+					<div class="pageDownFlag">
+						下一篇
+					</div>
+					<div class="pageDownTitle">
+						博客标题
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" src="__JS__/ModalResetting.js"></script>
+<script type="text/javascript">
+	$(".designGallery").css('height', height - 180 + "px");
+	$(".carousel-inner").css('max-height', height - 210 + "px");
+	$(".designNavModal").css('height', height - 120 + "px");
+	$(".designNavModal").css('width', width - 185 + "px");
+	$(".designNavMenu").css('height', height - 120 + "px");
+
+	/*编辑博客模态框 */
+	$("#dialog-edit").dialog({
+		resizable: false,
+		draggable: false,
+		dialogClass: "no-close",
+		buttons: {
+			"预览": function () {
+				$(this).dialog("");
+			},
+			"取消": function () {
+				$(this).dialog("close");
+			},
+			"确认": function () {
+				var title = $(this).parents(".ui-dialog").find(".editInput").val();
+				var sub_title = $(this).parents(".ui-dialog").find('.simditor-body').text();
+				var content = editor.getValue();
+				if (title == "") {
+					$.snackbar({content: '标题不能为空'});
+				}
+				else if(content == "") {
+					$.snackbar({content: '内容不能为空'});
+				}
+				else {
+					
+					if (type == "add") {
+						$.post('/Design/addBlog', {
+							title: title,
+							sub_title: sub_title,
+							content: content,
+							column_id: cur_id,
+							cover: coverPath,
+						}, function(data) {
+							if (data) {
+								$.snackbar({content: '添加博客成功'});
+								clearContent();
+								$(".content").load('designBlog.html?cid=' + cur_id, function() {
+									$(".designBlog").fadeIn(0);
+									$(".designNavModal").fadeIn(0);
+									$(".designNavMenu").animate({
+										left: '200px',
+									}, 0);
+								});
+
+							}
+							else {
+								$.snackbar({content: '添加博客失败'});
+							}
+							
+						});
+					}
+					if (type == "edit") {
+						$.post('/Design/editBlog', {
+							title: title,
+							sub_title: sub_title,
+							content: content,
+							column_id: cur_id,
+							bid: bid,
+							cover: coverPath,
+						}, function(data) {
+							if (data) {
+								clearContent();
+								$.snackbar({content: '编辑博客成功'});
+								$(".content").load('designBlog.html?cid=' + cur_id, function() {
+									$(".designBlog").fadeIn(0);
+									$(".designNavModal").fadeIn(0);
+									$(".designNavMenu").animate({
+										left: '200px',
+									}, 0);
+								});
+
+							}
+							else {
+								$.snackbar({content: '编辑博客失败'});
+							}
+							
+						});
+					}
+
+					$(this).dialog("close");
+				}
+			},
+		},
+		autoOpen: false,
+		show: {
+			effect: "fade",
+			duration: 200,
+		},
+		hide: {
+			effect: "fade",
+			duration: 200,
+		},
+		height: 600,
+		width: 820,
+		modal: true,
+	});
+	/*点击添加博客按钮 blogArticleAdd*/
+	$(".blogArticleAdd").click(function () {
+		type = "add";
+		$("#dialog-edit").dialog("open");
+		$(".coverView , .coverPreview").hide();
+		$(".coverUpload").show();
+		$(".modalBlogEdit").show();
+		$(".ui-widget-overlay").click(function () {
+			$("#dialog-edit").dialog("close");
+		});
+		$(".editInput").val("");
+		editor.setValue("");
+		coverPath = null;
+	});
+	/*点击编辑博客按钮 blogArticleEdit*/
+	$(".blogArticleEdit").click(function () {
+		type = "edit";
+		bid = $(this).attr("name");
+		$("#dialog-edit").dialog("open");
+		$(".coverUpload").show();
+		$.post('/Design/ajaxGetOneBlog', {
+			column_id: cur_id,
+			id: bid,
+			btn: 0
+		}, function(data) {
+			$(".editInput").val(data[0]["title"]);
+			editor.setValue(data[0]["content"]);
+			if (data[0]["cover"] != null && data[0]["cover"] != "") {
+				$(".coverView").fadeIn(function() {
+					$(".coverUpload").hide();
+					$(this).css('background-image', 'url('+data[0]["cover"]+')');
+				});
+				coverPath = data[0]["cover"];
+			}
+			else {
+				$(".coverView").hide();
+				coverPath = null;
+			}
+		});
+		$(".coverPreview").hide();
+		$(".modalBlogEdit").show();
+		$(".ui-widget-overlay").click(function () {
+			$("#dialog-edit").dialog("close");
+		});
+	});
+	/* 删除博客模态框 blogArticleDelete */
+	$("#dialog-confirm-blog").dialog({
+		resizable: false,
+		draggable: false,
+		dialogClass: "no-close",
+		buttons: {
+			"取消": function () {
+				$(this).dialog("close");
+			},
+			"确认": function () {
+				$.post('/Design/deleteOneBlog', {
+					id :bid,
+				}, function(data) {
+					if (data) {
+						$.snackbar({content: '删除博客成功'});
+						clearContent();
+						$(".content").load('designBlog.html?cid=' + cur_id, function() {
+							$(".designBlog").fadeIn(0);
+							$(".designNavModal").fadeIn(0);
+							$(".designNavMenu").animate({
+								left: '200px',
+							}, 0);
+						});
+					}
+					else {
+						$.snackbar({content: '删除博客失败'});
+					}
+
+				});
+				$(this).dialog("close");
+			},
+		},
+		autoOpen: false,
+		show: {
+			effect: "fade",
+			duration: 200,
+		},
+		hide: {
+			effect: "fade",
+			duration: 200,
+		},
+		height: 360,
+		width: 540,
+		modal: true,
+	});
+
+	$(".blogArticleDelete").click(function () {
+		bid = $(this).attr("name");
+		$("#dialog-confirm-blog").dialog("open");
+		$(".modalConfirm").show();
+		$(".ui-widget-overlay").click(function () {
+			$("#dialog-confirm-blog").dialog("close");
+		});
+	});
+	/*	文本编辑器*/	
+	var editor = new Simditor({
+		textarea: $('#editor'),
+		pasteImage: true,
+		upload: {
+			url: '/Common/simditorUploadImg',
+			fileKey: 'fileDataFileName',
+			connectionCount: 3,
+		},
+	});
+	$(".ui-dialog-titlebar").append('<input class="editInput" type="text" placeholder="编辑博客名称">');
+	$("[aria-describedby='dialog-edit']").find(".ui-dialog-buttonpane").prepend('<div class="modalBlogEditCover"><div class="coverField"><div class="coverView"><div class="imgCover"><div class="imgCoverTitle">更换图片</div><input type="file" class="upload_image" name="upload_image" multiple></div></div><div class="coverPreview"><div class="imgListUploadCover"><div class="coverPercent">0%</div><div class="coverPercentBar"><div class="coverPercentBarProgress"></div></div></div></div></div><div class="coverUpload"><input type="file" class="upload_image" name="upload_image" multiple> <div class="coverUploadIcon"><img src="__SVG__/add.svg" width="25" height="25" alt=""></div><div class="coverUploadTitle">上传封面</div></div><div class="coverTemplate">选择模板</div></div>');
+	/*滚动条*/
+	$('#dialog-edit').perfectScrollbar({suppressScrollX: true});
+	$('.designNavMenu').perfectScrollbar({suppressScrollX: true});
+	/*获取当前网站信息*/
+    $.post('/Design/getCurWebsiteInfo', function(data) {
+    	if (data[0]["logo_path"]) {
+    		$(".websiteTitleImg").css('background-image', 'url(' + data[0]["logo_path"] +')');
+    	}
+    	if (data[0]["name"]) {
+    		$(".websiteTitle1St").text(data[0]["name"]);
+    	}
+    	if (data[0]["sub_title"]) {
+    		$(".websiteSubTitle").text(data[0]["sub_title"]);
+    	}
+    });
+
+    $(".designBlog").attr('name', cur_id);
+    /*删除当前栏目*/
+    $(".buttonConfirm").click(function() {
+    	$.post('/Design/deleteGallery', {cid: col_id},
+    		function (data) {
+    			if (data) {
+    				$.snackbar({content: '删除博客成功'});
+    			}
+    			else {
+    				$.snackbar({content: '删除博客失败'});
+    			}
+    		});
+    	
+		setTimeout(function() {
+			
+			$(".sidebar").load("designNav.html", function() {
+				$(".designNav").fadeIn();
+				$(".sideNav").animate({
+					left: '0px'
+				},0);
+			});
+			$(".content").load('designIndex.html', function() {
+	            $(".designIndex").fadeIn(400)
+	        });
+		}, 300);
+
+    });
+	/*封面图片上传*/
+	$(function() {  
+		$(".coverUpload").click(function() {
+			
+			$(".coverPreview").fadeIn();
+
+		});
+	    $(".upload_image").fileupload({  
+	            url: '/Common/uploadImg',  
+	            sequentialUploads: true,
+	            autoUpload: true,
+				disableImageResize: false, 
+	            previewMaxWidth: 100,
+	            previewMaxHeight: 100,
+	            previewCrop: true,
+	            add: function (e, data) {
+				    if (data.files && data.files[0]) {
+				        var reader = new FileReader();
+				        reader.onload = function(e) {;
+				            $('.coverPreview').css('background-image', 'url(' + e.target.result +')');
+				        }
+				        reader.readAsDataURL(data.files[0]);
+				        data.submit();
+				    }
+				}
+	        }).bind('fileuploadadd', function (e, data) {
+	        	$(".coverPreview").fadeIn();
+	        }).bind('fileuploadprogress', function (e, data) {
+	            var progress = parseInt(data.loaded / data.total * 100, 10);  
+	            $(".coverPercentBarProgress").css('width',progress + '%'); 
+	            $(".coverPercent").html(progress + '%');  
+	        }).bind('fileuploaddone', function (e, data) {
+				coverPath = data.result;
+				$(".coverView").fadeOut();
+	    });       
+    });
+    /*点击遮罩返回*/
+    $(".designNavModal").click(function() {
+		$(".designNavModal").fadeOut(400);
+		$(".designNavMenu").animate({
+		        left: '-400px',
+		    }, 300);
+    });
+   	/*滚动条*/
+	$('.content').perfectScrollbar({suppressScrollX: true});
+    /*点击文章项目进行预览*/
+    $(".blogArticle").click(function() {
+    	bid = $(this).attr('name');
+    	$.post('/Design/ajaxGetOneBlog', {
+    		column_id: cur_id,
+			id: bid,
+			btn: 0,
+    	}, function(data) {
+    		$(".article").hide();
+    		$(".article").fadeIn();
+    		if(data[0]["cover"] == null || data[0]["cover"] == ""){
+    			$(".articleCover").hide();
+    		}
+    		else{
+    			$(".articleCover").show();
+    			$(".articleCover").css('background-image', 'url('+data[0]["cover"]+')');
+    		}
+			
+			$(".articleTitle").html(data[0]["title"]);
+			$(".articleContent").html(data[0]["content"]);
+			/*更改翻页区*/
+			setTimeout(function() {
+				$.post('/Design/ajaxGetOneBlog', {
+					column_id: cur_id,
+					id: bid,
+					btn: -1,
+				}, function(data) {
+					if(data[0]["id"] == undefined){
+						
+						$(".pageUpTitle").html("无");
+					}
+					else {
+						$(".pageUpTitle").html(data[0]["title"]);
+					}
+				});
+				$.post('/Design/ajaxGetOneBlog', {
+					column_id: cur_id,
+					id: bid,
+					btn: 1
+				}, function(data) {
+					if(data[0]["id"] == undefined){
+						
+						$(".pageDownTitle").html("无");
+					}
+					else {
+						$(".pageDownTitle").html(data[0]["title"]);
+					}
+				});
+			}, 300);
+    	});
+    });
+	/*点击右导航栏进行跳转*/
+	$(".columnLink").click(function() {
+		cur_id = $(this).attr('name');
+		if ($(this).attr('typename') == 1) {
+	        $(".content").load('designGallery.html?cid=' + cur_id, function() {
+	            $(".designGallery").fadeIn(400)
+	        });
+		}
+		else {
+			$(".content").load('designBlog.html?cid=' + cur_id, 
+				function() {
+	            $(".designBlog").fadeIn(400)
+	        });
+		}
+		setTimeout(function() {
+			$(".sidebar").load("designNav.html", function() {
+				$(".designNav").fadeIn();
+				$(".sideNav").animate({
+					left: '0px'
+				},0);
+			});
+		}, 300);
+		return false;
+	});
+
+	/*默认加载最新文章*/
+	$.post('/Design/getLatestBlog', {
+		cid: cur_id
+	}, function(data) {
+		bid = data[0]["id"];
+		if(data){
+    		$(".article").hide();
+    		$(".article").fadeIn();
+    		if(data[0]["cover"] == null || data[0]["cover"] == ""){
+    			$(".articleCover").hide();
+    		}
+    		else{
+    			$(".articleCover").show();
+    			$(".articleCover").css('background-image', 'url('+data[0]["cover"]+')');
+    		}
+			
+			$(".articleTitle").html(data[0]["title"]);
+			$(".articleContent").html(data[0]["content"]);
+		}
+	});
+	/*翻页功能区域*/
+	setTimeout(function() {
+		$.post('/Design/ajaxGetOneBlog', {
+			column_id: cur_id,
+			id: bid,
+			btn: -1,
+		}, function(data) {
+			if(data[0]["id"] == undefined){
+				$(".pageUpTitle").html("无");
+			}
+			else {
+				$(".pageUpTitle").html(data[0]["title"]);
+			}
+		});
+		$.post('/Design/ajaxGetOneBlog', {
+			column_id: cur_id,
+			id: bid,
+			btn: 1,
+		}, function(data) {
+			if(data[0]["id"] == undefined){
+				
+				$(".pageDownTitle").html("无");
+			}
+			else {
+				$(".pageDownTitle").html(data[0]["title"]);
+			}
+		});
+	}, 300);
+	/*点击上一篇*/
+	$(".pageUp").click(function() {
+		if($(this).find('.pageUpTitle').text() != "无"){
+			$.post('/Design/ajaxGetOneBlog', {
+				column_id: cur_id,
+				id: bid,
+				btn: -1,
+			}, function(data) {
+				bid = data[0]["id"];
+				if(data){
+		    		$(".article").hide();
+		    		$(".article").fadeIn();
+		    		if(data[0]["cover"] == null || data[0]["cover"] == ""){
+		    			$(".articleCover").hide();
+		    		}
+		    		else{
+		    			$(".articleCover").show();
+		    			$(".articleCover").css('background-image', 'url('+data[0]["cover"]+')');
+		    		}
+					
+					$(".articleTitle").html(data[0]["title"]);
+					$(".articleContent").html(data[0]["content"]);
+					/*翻页功能区域*/
+					setTimeout(function() {
+						$.post('/Design/ajaxGetOneBlog', {
+							column_id: cur_id,
+							id: bid,
+							btn: -1,
+						}, function(data) {
+							if(data[0]["id"] == undefined){
+								
+								$(".pageUpTitle").html("无");
+							}
+							else {
+								$(".pageUpTitle").html(data[0]["title"]);
+							}
+						});
+						$.post('/Design/ajaxGetOneBlog', {
+							column_id: cur_id,
+							id: bid,
+							btn: 1
+						}, function(data) {
+							if(data[0]["id"] == undefined){
+								
+								$(".pageDownTitle").html("无");
+							}
+							else {
+								$(".pageDownTitle").html(data[0]["title"]);
+							}
+						});
+					}, 300);
+				}
+			});
+		}
+	});
+	/*点击下一篇*/
+	$(".pageDown").click(function() {
+		if($(this).find('.pageDownTitle').text() != "无"){
+			$.post('/Design/ajaxGetOneBlog', {
+				column_id: cur_id,
+				id: bid,
+				btn: 1,
+			}, function(data) {
+				bid = data[0]["id"];
+				if(data){
+		    		$(".article").hide();
+		    		$(".article").fadeIn();
+		    		if(data[0]["cover"] == null || data[0]["cover"] == ""){
+		    			$(".articleCover").hide();
+		    		}
+		    		else{
+		    			$(".articleCover").show();
+		    			$(".articleCover").css('background-image', 'url('+data[0]["cover"]+')');
+		    		}
+					
+					$(".articleTitle").html(data[0]["title"]);
+					$(".articleContent").html(data[0]["content"]);
+					/*翻页功能区域*/
+					setTimeout(function() {
+						$.post('/Design/ajaxGetOneBlog', {
+							column_id: cur_id,
+							id: bid,
+							btn: -1,
+						}, function(data) {
+							if(data[0]["id"] == undefined){
+								
+								$(".pageUpTitle").html("无");
+							}
+							else {
+								$(".pageUpTitle").html(data[0]["title"]);
+							}
+						});
+						$.post('/Design/ajaxGetOneBlog', {
+							column_id: cur_id,
+							id: bid,
+							btn: 1
+						}, function(data) {
+							if(data[0]["id"] == undefined){
+								
+								$(".pageDownTitle").html("无");
+							}
+							else {
+								$(".pageDownTitle").html(data[0]["title"]);
+							}
+						});
+					}, 300);
+				}
+			});
+		}
+	});
+	$(".columnLink[name="+cur_id+"]").addClass('active');
+	
+</script>

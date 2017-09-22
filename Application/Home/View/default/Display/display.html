@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0,maximum-scale=1.0, user-scalable=no">
+	<title>User Index</title>
+
+	<link rel="stylesheet/less" href="./css/style_display.css">
+</head>
+<body>
+	<header>
+		<div class="user_info">
+			<img src="__IMG__/code.png" alt="" class="user_avatar">
+			<div class="word_info">
+				<h1 class="user_name">Sevenskey</h1>	
+				<p class="user_desc">Web Frontend Developer</p>
+			</div>	
+		</div>	
+		<nav id="user_nav" class="user_nav">
+			<a data-page="index" href="#">首页</a>
+			<!-- if you want to use volist, please follow the format below.
+
+			data-page: The number of the kinds of the values is 3: "blog", "images", "index". If the page is a blog, the value of the attribute is "blog", if the page is a images, the value of the attribute is "images", if the page is index, the value of the attribute is "index". 
+
+			href: # + cid
+
+			innerHTML: the name of this page.
+			
+			Example:
+			<a data-page="blog" href="#3">blog</a>
+				
+			 -->
+		</nav>
+	</header>
+
+
+	<div id="layer" class="layer">
+		<div id="warning" class="warning"></div>
+
+		<div id="back" class="back"><----</div>
+
+		<div class="layer_content">
+			<div class="showed_img_box">
+				<img id="showed_img" class="showed_img" src="http://photo2.fanfou.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/z8/gp_308612.jpg@596w_1l.jpg" alt="">
+			</div>
+		</div>
+
+		<div class="img_info">
+			<h1 id="title">dfsklfj</h1>
+			<p id="desc">dsfjlsk</p>
+		</div>
+
+		<div class="btn">
+			<button id="prev_p" class="prev">
+				<svg width="20" height="70" version="1.1" xmlns="http://www.w3.org/2000/svg">
+					<polyline points="20,0 0,35 20,70"/>
+				</svg>
+			</button>
+			<button id="next_p" class="next">
+			<svg width="20" height="70" version="1.1" xmlns="http://www.w3.org/2000/svg">
+					<polyline points="0,0 20,35 0,70"/>
+				</svg>
+			</button>
+		</div>	
+	</div>
+	
+	<div id="index" class="vp_body main_page">
+		<div class="vp_btn_group">
+			<button id="pre" class="vp_pre">
+				<!-- <svg width="20" height="70" version="1.1" xmlns="http://www.w3.org/2000/svg">
+					<polyline points="20,0 0,35 20,70"/>
+				</svg> -->
+			</button>
+			<button id="next" class="vp_next">
+				<!-- <svg width="20" height="70" version="1.1" xmlns="http://www.w3.org/2000/svg">
+					<polyline points="0,0 20,35 0,70"/>
+				</svg> -->
+			</button>
+		</div>
+
+		<div id="item_group" class="vp_item_group">
+
+			<!-- You can add any number of groups of items here -->
+
+			
+		</div> <!-- vp_item_group -->
+
+		<div id="vp_item_btn_group" class="vp_item_btn_group"></div>	
+
+		<div id="show_info_btn" class="show_info_btn btn_towhite">
+			<svg width="30" height="30" version="1.1" xmlns="http://www.w3.org/2000/svg">
+				<polyline points="5,20 15,10 25,20"/>
+			</svg>
+		</div>
+	</div> <!-- vp_body -->
+
+	<div id="images" class="images main_page">
+	<!-- images	 -->
+	</div>
+
+	<div id="blog" class="blog main_page">
+		<div id="warning" class="warning"></div>
+
+		<div id="blog_main" class="blog_main">
+		<!-- blog -->
+		</div>
+
+		<div class="btn_group">
+			<div id="prev_b" class="prev">
+				<h1>prev</h1>
+				<p></p>
+			</div>
+			<div id="next_b" class="next">
+				<h1>next</h1>
+				<p></p>
+			</div>
+		</div>
+	</div>
+	
+	<script src="__JS__/test_data.js"></script>	
+	<script src="__JS__/less.js"></script>
+	<script src="__JS__/jquery-2.1.1.min.js"></script>
+	<script src="__JS__/jquery.viewpager.display.js"></script>
+	<script src="__JS__/masonry.pkgd.min.js"></script>
+	<script src="__JS__/display_control.js"></script>
+
+	<script>
+	
+
+	</script>
+
+</body>
+</html>
